@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  title: Cutter API
+  description: Dokument-Schnitt-Service
+  version: "1.2.1"
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+servers:
+  - url: https://www.europace2.de/v1
+    description: Server A
+paths:
+  /composeMultiplePdfs:
+    post:
+      servers:
+        - url: https://www.europace2.de/v1
+      summary: Zusammenschnitt von Eingangsdokumenten
+      description: Generiert aus den angegebenen Teilen der Eingangsdokumente mehrere Zieldokumente und lädt diese in die Dokumentenverwaltung hoch.
+      operationId: generateAndUploadMultiplePdfs
+      parameters:
+        - name: dokumenteRequestInput
+          in: body
+          description: Daten für die zu erzeugenden Dokumente
+          required: true
+          schema:
+            $ref: '#/definitions/MehrereDokumenteInput'
+      tags:
+        - Dokument
+      responses:
+        200:
+          description: die Daten der erzeugten Dokumente in der Reihenfolge der Dokumentdefinitionen im Request
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErzeugtesDokument'
+        default:
+          description: Unerwarteter Fehler
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  MehrereDokumenteInput:
+    type: object
+    properties:
+      vorgangsNummer:
+        type: string
+        description: |
+          Vorgangsnummer, unter der die Zieldateien in der Dokumenteverwaltung angelegt werden sollen
+      dokumente:
+        type: array
+        items:
+          $ref: '#/definitions/DokumentInput'
+  DokumentInput:
+    type: object
+    properties:
+      zielPfadAmazonS3:
+        type: string
+        description: |
+          unter welchem Pfad das Dokument im Amazon S3 gespeichert werden soll Beispiel "antragsNummer/dokumentId" "AB1234/1/1/3jhjh6g34j6hguh6g23iuh6g23ug"
+      zielBucketAmazonS3:
+        type: string
+        description: |
+          in welchem Amazon S3 bucket das Dokument gespeichert wird.
+      dokumentenTeile:
+        type: array
+        description: |
+          Sortierte Verweise auf Original-Dokumente, die zu einem Ziel-Dokument zusammenzufassen sind.
+        items:
+          $ref: '#/definitions/DokumentenTeil'
+  DokumentenTeil:
+    type: object
+    properties:
+      uri:
+        type: string
+        format: uri
+        description: |
+          Download-URI für das Original-Dokument.
+      s3SourcePath:
+        type: string
+        description: |
+          s3 Bucket Pfad der Queldatei, z.b. AB12345/464654et64e9g4wfw4
+      s3SourceBucket:
+        type: string
+        description: |
+          s3 Bucket name der Quelldatei
+      seiten:
+        type: array
+        description: |
+          Sortierte Seiten im Original-Dokument, die zu verwenden sind.
+        items:
+          $ref: '#/definitions/DokumentenSeite'
+  DokumentenSeite:
+    type: object
+    properties:
+      seitenNummer:
+        type: integer
+        format: int32
+        description: |
+          Seitennummer im Dokument, 1-basiert.
+      orientierung:
+        type: integer
+        format: int32
+        description: |
+          Gewünschte Orientierung der Seite in Grad, bezogen auf das bestehende Dokument. Um diesen Wert wird die Seite für das neue Dokument gedreht. |
+          Sinnvolle Werte sind eigentlich nur 0, 90, 180, 270.
+  ErzeugtesDokument:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          id des erzeugten Dokuments in der Dokumenteverwaltung. null, wenn das Dokument nicht erzeugt werden konnte.
+      oeffentlicherSchluessel:
+        type: string
+        description: |
+          öffentlicher Schlüssel des erzeugten Dokuments in der Dokumenteverwaltung. null, wenn das Dokument nicht erzeugt werden konnte.
+      type:
+        type: string
+        description: |
+          MIME-Typ des erzeugten Dokuments
+      size:
+        type: integer
+        description: Dateigroesse in bytes.
+        format: int64
+      fehlermeldung:
+        type: string
+        description: Fehlermeldung, falls das Dokument nicht erzeugt werden konnte.
+  Error:
+    type: object
+    properties:
+      message:
+        type: string
+      statusCode:
+        type: integer
+        format: int32
+      statusMessage:
+        type: string
+      timestamp:
+        type: string
+        format: date-time
+      traceId:
+        type: string
+    title: Error

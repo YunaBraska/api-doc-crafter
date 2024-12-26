@@ -1,0 +1,42 @@
+openapi: 3.0.1
+info:
+  title: Cutter API
+  description: Dokument-Schnitt-Service
+  version: 1.2.1
+servers:
+- url: https://www.europace2.de/v1
+  description: Server A
+paths:
+  /composeMultiplePdfs:
+    post:
+      tags:
+      - Dokument
+      summary: Zusammenschnitt von Eingangsdokumenten
+      description: Generiert aus den angegebenen Teilen der Eingangsdokumente mehrere
+        Zieldokumente und lädt diese in die Dokumentenverwaltung hoch.
+      operationId: generateAndUploadMultiplePdfs
+      parameters: []
+      responses:
+        "200":
+          description: die Daten der erzeugten Dokumente in der Reihenfolge der Dokumentdefinitionen
+            im Request
+        default:
+          description: Unerwarteter Fehler
+      servers:
+      - url: https://www.europace2.de/v1
+  /composeMultiplePdfs2:
+    post:
+      tags:
+      - Dokument
+      - Dokument2
+      summary: Zusammenschnitt von Eingangsdokumenten
+      description: Generiert aus den angegebenen Teilen der Eingangsdokumente mehrere
+        Zieldokumente und lädt diese in die Dokumentenverwaltung hoch.
+      operationId: generateAndUploadMultiplePdfs
+      parameters: []
+      responses:
+        "200":
+          description: die Daten der erzeugten Dokumente in der Reihenfolge der Dokumentdefinitionen
+            im Request
+        default:
+          description: Unerwarteter Fehler

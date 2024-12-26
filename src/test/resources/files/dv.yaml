@@ -1,0 +1,568 @@
+openapi: 3.0.3
+info:
+  title: Dokumentenverwaltung
+  description: Upload, retrieve and delete documents. Adapt metadata to corresponding documents
+  version: 1.0.0
+servers:
+  - url: https://www.europace2.de/dokumentenverwaltung
+    description: Production (PS)
+  - url: https://mtp.europace2.de/dokumentenverwaltung
+    description: Internal staging server for testing (MTP)
+paths:
+  /dokumente/: ## DokumenteByOeffentlicherSchluesselRestController
+    post:
+      summary: Upload a file to the Dokumentenverwaltung
+      parameters:
+        - in: query
+          name: file
+          required: true
+          schema:
+            type: string
+            format: binary
+        - in: query
+          name: dokumentBezeichnung
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: vorgangId
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: logMessage
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: pin
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: tagDokumentenBibliothek
+          required: false
+          schema:
+            type: string
+      responses:
+        201:
+          description: CREATED
+    get:
+      summary: Retrieve all metadata for a set of OeffentlicherSchluessel and DokumentId
+      deprecated: true
+      parameters:
+        - in: query
+          name: schluessel
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: id
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        200:
+          description: OK
+  /dokumente/metadaten: ## DokumenteByOeffentlicherSchluesselRestController
+    post:
+      summary: Retrieve all metadata for a set of OeffentlicherSchluessel and DokumentId
+      requestBody:
+        description: Collection of OeffentlicherSchluessel and DokumentId
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DokumentMetadatenAnfrage'
+      responses:
+        200:
+          description: OK
+  /dokumenteapischluessel/{dokumenteId}: ## DokumenteApiSchluesselRestController
+    put:
+      summary: Create a DokumenteApiSchluessel
+      parameters:
+        - in: path
+          name: dokumenteId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Application for creation of a new DokumenteApiSchluessel
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref:  '#/components/schemas/DokumenteApiSchluesselErstellenAnfrage'
+      responses:
+        200:
+          description: OK
+    delete:
+      summary:  Delete DokumenteApiSchluessel
+      parameters:
+        - in: path
+          name: dokumenteId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+  /unterlageKopieren/{dokumenteApiSchluessel}: ## DokumenteApiUnterlagenKopierenHttpController
+    post:
+      summary: creates a copy of a document
+      parameters:
+        - in: path
+          name: dokumenteApiSchluessel
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OeffentlicherDokumentenSchluessel'
+        204:
+          description: no document found
+  /unterlageKopierenFuerId/{dokumentId}: ## DokumenteApiUnterlagenKopierenHttpController
+    post:
+      summary: creates a copy of a document
+      parameters:
+        - in: path
+          name: dokumentId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DokumentId'
+        204:
+          description: no document found
+  /dokumente/{schluessel}: ## DokumenteByOeffentlicherSchluesselRestController
+    get:
+      summary: Retrieve metadata of a document by OeffentlicherSchluessel
+      parameters:
+        - in: path
+          name: schluessel
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+    head:
+      summary: Check if metadata for a document exist
+      parameters:
+        - in: path
+          name: schluessel
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+        404:
+          description: NOT FOUND
+    delete:
+      summary: Delete a document so that it's no longer accessible
+      parameters:
+        - in: path
+          name: schluessel
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+  /dokumente/{dokumentId}/verfallsdatum: ## DokumenteVerfallsDatumRestController
+    delete:
+      summary: Remove VerfallsDatum for specific document
+      parameters:
+        - in: path
+          name: dokumentId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+  /dokumente: ## DokumentMetadatenRestController
+    get:
+      summary: Retrieve metadata that belongs to a list of documents
+      parameters:
+        - in: query
+          name: dokumentids
+          schema:
+            type: string
+        ## get:
+        ## summary: Retrieve metadata that belongs to a Vorgang
+        ## parameters:
+        - in: query
+          name: vorgangId
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+  /dokumenten-metadaten/ids: ## DokumentMetadatenController
+    get:
+      summary: Get a list of metadata
+      parameters:
+        - in: query
+          name: id
+          required: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/DokumentId'
+      responses:
+        200:
+          description: OK
+  /dokumentBezeichnungAendern/ids: ## DokumentBezeichnerAendernHttpController
+    post:
+      summary: Change Bezeichner for a specific document
+      requestBody:
+        description: Map including `dokumentId` and `bezeichner`
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dokumentId:
+                  type: string
+                bezeichner:
+                  type: string
+              example:
+                dokumentId: abbshh20012834ß8as
+                bezeichner: new-file-name
+      responses:
+        204:
+          description: NO CONTENT
+  /import-from-dokstore: ## DokStoreDokumentenUebernahmeController
+    post:
+      summary: Hand over document from DokStore to Dokumentenverwaltung
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentFromDokStoreDto'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DokumentId'
+  /download: ## DokumenteDownloadHttpController
+    post:
+      summary: Frontend redirect by usage without filename
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Should include redirect
+    get:
+      summary: Frontend redirect by usage without filename
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Should include redirect
+    head:
+      summary: Frontend redirect by usage without filename
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Should include redirect
+  /download/*: ## DokumenteDownloadHttpController
+    post:
+      summary: Frontend redirect by usage without filename
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Should include redirect
+    get:
+      summary: Frontend redirect by usage without filename
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Should include redirect
+    head:
+      summary: Frontend redirect by usage without filename
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Should include redirect
+  /dokument/*: ## DokumenteDownloadHttpController
+    get:
+      summary: Download document
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: d
+          required: false
+          description: externerAbruf as Date
+          schema:
+            type: string
+      responses:
+        200:
+          description: TBD
+    head:
+      summary: Check for document and retrieve full download URL
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: TBD
+  /downloadwithpin: ## DokumentDownloadLoginJwtController
+    get:
+      summary: Redirect to document download when using a PIN
+      tags:
+        [frontend]
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: pin
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: TBD
+  /login: ## DokumentDownloadLoginJwtController
+    get:
+      summary: opens one of the two login pages
+      tags:
+        [frontend]
+      parameters:
+        - in: query
+          name: oeffne
+          description: parameter to decide which login page to open
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: TBD
+    post:
+      summary: Redirect to document download when using a VorgangID
+      tags:
+        [frontend]
+      parameters:
+        - in: query
+          name: oeffne
+          description: Download URL of the wanted document
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: pin
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: TBD
+  /upload: ## DokumentUploadHttpController
+    post:
+      summary: Upload a file to the Dokumentenverwaltung
+      deprecated: true
+      parameters:
+        - in: query
+          name: file
+          required: true
+          schema:
+            type: string
+            format: binary
+        - in: query
+          name: dokumentBezeichnung
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: vorgangId
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: pin
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: tagDokumentenBibliothek
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DokumentSpeichernResponse'
+  /zip: ## DokumenteZipDownloadHttpController
+    post:
+      summary: Download multiple files as a ZIP archive
+      parameters:
+        - in: query
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: name
+          description: File name of the ZIP archive - default is `dokumente`
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/zip:
+              example:
+    get:
+      summary: Download multiple files as a ZIP archive
+      parameters:
+        - in: query
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: name
+          description: File name of the ZIP archive - default is `dokumente`
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/zip:
+              example:
+components:
+  schemas:
+    OeffentlicherDokumentenSchluessel:
+      type: object
+      properties:
+        value:
+          type: string
+    DokumentId:
+      type: object
+      properties:
+        value:
+          type: string
+    DokumentSpeichernResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/DokumentId'
+        oeffentlicherDokumentenSchluessel:
+          $ref: '#/components/schemas/OeffentlicherDokumentenSchluessel'
+    DokumentMetadatenAnfrage:
+      type: object
+      properties:
+        oeffentlicheSchluessel:
+          type: array
+          items:
+            type: string
+        dokumentIds:
+          type: array
+          items:
+            type: string
+    DokumenteApiSchluesselErstellenAnfrage:
+      description: Atleast one of the fields (antragId, vorgangId) is needed in order to create a new DokumenteApiSchluessel
+      type: object
+      properties:
+        antragId:
+          type: array
+          items:
+            type: string
+        vorgangId:
+          type: array
+          items:
+            type: string
+    DocumentFromDokStoreDto:
+      type: object
+      properties:
+        dokStoreDokumentMetadaten:
+          $ref: '#/components/schemas/DokStoreDokumentMetadaten'
+        verfallsDatum:
+          type: string
+          format: date
+          pattern: "YYYY-MM-DD"
+        vorgangId:
+          type: string
+    DokStoreDokumentMetadaten:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/DokStoreId'
+        name:
+          type: string
+        mimeType:
+          type: string
+        url:
+          type: string
+    DokStoreId:
+      type: object
+      properties:
+        value:
+          type: string
+

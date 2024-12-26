@@ -1,0 +1,2101 @@
+openapi: 3.0.1
+info:
+  title: Unterlagen API
+  description: Europace API around uploaded documents and released proofs.
+  termsOfService: https://docs.api.europace.de/terms/
+  version: 2.0.17
+servers:
+- url: https://api.europace2.de/v1
+paths:
+  /dokumente:
+    get:
+      tags:
+      - Dokument
+      summary: get metadata for all documents of a case
+      operationId: getDocuments
+      parameters:
+      - name: vorgangsNummer
+        in: query
+        description: Vorgangsnummer (case-id) which contains the documents
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: documents list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dokument'
+        "401":
+          description: authentication failed due to e.g. missing/invalid Authorization
+            Header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:lesen
+    post:
+      tags:
+      - Dokument
+      summary: upload document
+      description: |
+        Upload a document including metadata via url (up to 100 MB). After uploading, the document must be categorized so that it is available in the document file and can ultimately be shared to the loan provider. For this purpose, the request parameter can preferably be set mitKategorisierung =true.
+      operationId: uploadDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DokumentUpload'
+          multipart/form-data:
+            schema:
+              required:
+              - file
+              - vorgangsNummer
+              type: object
+              properties:
+                anzeigename:
+                  type: string
+                  description: name to display on frontend
+                file:
+                  type: string
+                  description: content of file
+                  format: binary
+                mitKategorisierung:
+                  type: boolean
+                  description: Setting this field to true causes the categorization
+                    to be started automatically after the document has been successfully
+                    uploaded.
+                vorgangsNummer:
+                  type: string
+                  description: "Vorgangsnummer, where the document is to add"
+      responses:
+        "201":
+          description: document uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dokument'
+        "401":
+          description: authentication failed due to e.g. missing/invalid Authorization
+            Header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: Authorization failed due to e.g. missing authorization for
+            the case or wrong Vorgangsnummer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:schreiben
+    delete:
+      tags:
+      - Vorgang
+      summary: delete all resources for this Vorgang
+      description: |
+        delete documents and pages for this case
+      operationId: deleteCaseResources
+      parameters:
+      - name: vorgangsNummer
+        in: query
+        description: Vorgangsnummer at which all documents are to be deleted
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: documents successfully deleted
+        "401":
+          description: authentication failed due to e.g. missing/invalid Authorization
+            Header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: Authorization failed due to e.g. missing authorization for
+            the Vorgang or wrong Vorgangsnummer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:schreiben
+  /dokumente/anforderungen:
+    get:
+      tags:
+      - Seiten
+      summary: "For BaufiSmart only. List of all document requirements received for\
+        \ a financing proposal. The result includes both the requirements of the product\
+        \ loan and the requirements of the advisor. For example, the FinanzierungsvorschlagId\
+        \ can be get from the [Vorgaenge-API](https://docs.api.europace.de/baufinanzierung/vorgaenge/vorgang-auslesen-api/)"
+      operationId: getAnforderungen
+      parameters:
+      - name: finanzierungsvorschlagsId
+        in: query
+        description: unique identifier of a financing proposal
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: vorgangsNummer
+        in: query
+        description: unique identifier of a case
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Unterlagenanforderung'
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: case not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:lesen
+  /dokumente/antrag/anforderungen:
+    get:
+      tags:
+      - Seiten
+      summary: For mortgage loans (BaufiSmart) only. List of all needed proof received
+        for an application. The result includes the requirements of the bank for this
+        application.
+      operationId: getAnforderungenByAntragsNummer
+      parameters:
+      - name: antragsNummer
+        in: query
+        description: unique identifier of an application
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Unterlagenanforderung'
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: case not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:freigabe:lesen
+  /dokumente/archiv:
+    put:
+      tags:
+      - Seiten
+      summary: move pages to or from the archive
+      description: archive flag will be set
+      operationId: setArchiv
+      parameters:
+      - name: archiviert
+        in: query
+        description: pages should be moved to the archive (true) or taken out of the
+          archive (false)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: true
+      requestBody:
+        description: page references of the pages to be moved to or from the archive
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SeitenReferenz'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:schreiben
+  /dokumente/freigabe:
+    get:
+      tags:
+      - Freigabe
+      summary: |
+        load metadata of all shared documents (in a time period).  The list contains both successful and failed shares.  For this purpose, please check the retrieval status of the shared document.
+      operationId: getFreigaben
+      parameters:
+      - name: antragsNummer
+        in: query
+        description: unique identifier of an application
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: bis
+        in: query
+        description: to
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: von
+        in: query
+        description: from
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: list of shared documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FreigegebeneUnterlage'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the application or wrong Antragsnummer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:freigabe:lesen
+    post:
+      tags:
+      - Freigabe
+      summary: share pages with a product provider
+      description: "the assignments (category/reference) are used, which were determined\
+        \ on the pages determined or set manually"
+      operationId: createShare
+      requestBody:
+        description: pages to be shared for an application and loan provider
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Freigabe'
+        required: true
+      responses:
+        "201":
+          description: share created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FreigegebeneUnterlage'
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case oder falsche Vorgangsnummer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:freigeben
+  /dokumente/freigabe/{id}:
+    get:
+      tags:
+      - Freigabe
+      summary: get metadata of a shared document
+      description: provide a shared document
+      operationId: getShare
+      parameters:
+      - name: id
+        in: path
+        description: unique identifier of a shared document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: shared document
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreigegebeneUnterlage'
+        "404":
+          description: shared document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:freigabe:lesen
+  /dokumente/freigabe/{id}/content:
+    get:
+      tags:
+      - Freigabe
+      summary: get the content of a shared document
+      operationId: downloadSharedDocument
+      parameters:
+      - name: id
+        in: path
+        description: unique identifier of the shared document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: document not found
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:freigabe:lesen
+  /dokumente/freigabe/{id}/status:
+    get:
+      tags:
+      - Freigabe
+      summary: get retrieval status of a shared document
+      operationId: getSharedDocumentState
+      parameters:
+      - name: id
+        in: path
+        description: unique identifier of a shared document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: state of a shared document
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Abrufstatus'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: shared document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:freigabe:lesen
+    post:
+      tags:
+      - Freigabe
+      summary: set retrieval state of a shared document
+      operationId: setSharedDocumentState
+      parameters:
+      - name: id
+        in: path
+        description: unique identifier of a shared document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Abrufstatus'
+        required: true
+      responses:
+        "201":
+          description: state set
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: shared document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:freigabe:schreiben
+  /dokumente/freigaben/content:
+    get:
+      tags:
+      - Freigabe
+      summary: contents of all successfully shared documents as a ZIP archive download
+      operationId: downloadFreigaben
+      parameters:
+      - name: antragsNummer
+        in: query
+        description: unique identifier of an application
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A ZIP archive with all the documents successfully shared for
+            the application documents as PDF files
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the application or wrong Antragsnummer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/zip:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:freigabe:lesen
+  /dokumente/geprueft:
+    put:
+      tags:
+      - Seiten
+      summary: mark pages as 'checked' or remove 'checked' marker
+      description: "Pages are marked as 'checked' (with current timestamp). For pages\
+        \ that have already been checked, the timestamp will be updated. If the checked\
+        \ parameter is set to false, the marker is removed and the pages appear unchecked.\
+        \ With checked set to false and pages without 'checked' marker nothing changes."
+      operationId: setChecked
+      parameters:
+      - name: geprueft
+        in: query
+        description: pages should be marked as 'checked' (true) or the 'checked' mark
+          should be removed (false)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: true
+      requestBody:
+        description: The page references of the pages that should be marked as 'checked'
+          or whose 'checked' mark should be removed.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SeitenReferenz'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:schreiben
+  /dokumente/moeglichezuordnungen:
+    get:
+      tags:
+      - Seiten
+      summary: list of all possible assignments (category and reference) of pages
+        get
+      description: which assignments are available for pages in this operation/application
+      operationId: getAvailableAssignments
+      parameters:
+      - name: antragsNummer
+        in: query
+        description: unique identifier of an application - more specific allocations
+          - e.g. the data at the time of application acceptance are used instead of
+          the current transaction data
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: vorgangsNummer
+        in: query
+        description: unique identifier of a case
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MoeglicheZuordnung'
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: case not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:lesen
+  /dokumente/revision:
+    get:
+      tags:
+      - Revision
+      summary: revision numbers of the data for the case
+      description: |
+        returns the current revision of the resources for the case. Each change of a resource changes its revision.
+      operationId: getRevision
+      parameters:
+      - name: vorgangsNummer
+        in: query
+        description: unique identifier of a case
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: revision numbers of the different resources of a case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2: []
+  /dokumente/seiten:
+    get:
+      tags:
+      - Seiten
+      summary: get metadata for all pages of a case
+      operationId: getSeiten
+      parameters:
+      - name: antragsNummer
+        in: query
+        description: "in some cases, the information on the page refers to information\
+          \ in the process at the time when the application was created"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: finanzierungsvorschlagsId
+        in: query
+        description: "For Baufismart only. Id of a financing proposal from the related\
+          \ transaction. If available, the document requirements of the financing\
+          \ proposal are supplied. Furthermore, the reference of a page can be changed\
+          \ be returned if the document requests expect the page in a different reference.\
+          \ For example, the financing proposal Id can be read from the [Vorgaenge-API](https://docs.api.europace.de/baufinanzierung/vorgaenge/vorgang-auslesen-api/)."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: vorgangsNummer
+        in: query
+        description: "unique identifier of a case, e.g. KX64LP"
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: list of pages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Seiten'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case/Antrag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: case not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:lesen
+    put:
+      tags:
+      - Seiten
+      summary: change sorting position of pages
+      description: "Pages are saved in the specified order. The list of all pages\
+        \ or a partial list of them can be passed. In case of a partial list, the\
+        \ position in the total list is determined by the first page of the partial\
+        \ list."
+      operationId: setSortingPosition
+      requestBody:
+        description: page references of the pages to be saved in this order
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SeitenReferenz'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:schreiben
+  /dokumente/transferspeicher:
+    post:
+      tags:
+      - Dokumente
+      summary: use cloud storage for a document
+      description: |
+        Use a cloud storage for a document from which the document can be uploaded via signed URL (AWS Pre-Signed POST). See the readme for an example.
+      operationId: cloudStorage
+      responses:
+        "201":
+          description: cloud storage created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transferspeicher'
+          links:
+            UploadWithUrl:
+              operationId: uploadDocument
+              parameters:
+                url: $response.body#/downloadUrl
+              description: |
+                The `downloadUrl` can be used as `url` in `POST /dokumente`. Before that, the document must be transferred to the url in `UploadData.url` with `POST`.
+        "401":
+          description: authentication failed due to e.g. missing/invalid Authorization
+            Header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:schreiben
+  /dokumente/zuordnung/{kategorie}:
+    put:
+      tags:
+      - Seiten
+      summary: set assignment (category and reference) for multiple pages
+      operationId: setAssignment
+      parameters:
+      - name: bezug
+        in: query
+        description: the reference to be assigned to the pages
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: kategorie
+        in: path
+        description: the category to be assigned to the pages
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: the page references of the pages whose category and reference
+          are to be changed
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SeitenReferenz'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: category/reference not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:schreiben
+  /dokumente/zuordnungen:
+    get:
+      tags:
+      - Seiten
+      summary: deprecated - please use  /dokumente/moeglichezuordnungen
+      operationId: getMoeglicheZuordnungenAlt
+      parameters:
+      - name: antragsNummer
+        in: query
+        description: unique identifier of an application - more specific allocations
+          - e.g. the data at the time of application acceptance are used instead of
+          the current transaction data
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: vorgangsNummer
+        in: query
+        description: unique identifier of a case
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MoeglicheZuordnungAlt'
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: case not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      deprecated: true
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:lesen
+  /dokumente/{dokumentId}:
+    get:
+      tags:
+      - Dokumente
+      summary: get metadata for a document
+      operationId: getDocument
+      parameters:
+      - name: dokumentId
+        in: path
+        description: unique identifier of a Document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: document metadata
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Dokument'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: Authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: document not found
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:lesen
+    put:
+      tags:
+      - Dokumente
+      summary: update metadata of a document
+      operationId: updateDocument
+      parameters:
+      - name: dokumentId
+        in: path
+        description: unique identifier of a Document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AenderbareDokumentMetadaten'
+      responses:
+        "200":
+          description: document metadata successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dokument'
+        "401":
+          description: authentication failed due to e.g. missing/invalid Authorization
+            Header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: Authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:schreiben
+    delete:
+      tags:
+      - Dokumente
+      summary: delete metadata and content of a document
+      operationId: deleteDocument
+      parameters:
+      - name: dokumentId
+        in: path
+        description: unique identifier of a Document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: document successfully deleted
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: Authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:schreiben
+  /dokumente/{dokumentId}/content:
+    get:
+      tags:
+      - Dokumente
+      summary: get content of a document
+      operationId: downloadDocument
+      parameters:
+      - name: dokumentId
+        in: path
+        description: unique identifier of a document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: document not found
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:lesen
+  /dokumente/{dokumentId}/kategorisierung:
+    get:
+      tags:
+      - Dokumente
+      summary: get categorization status of a document
+      operationId: getKategorisierung
+      parameters:
+      - name: dokumentId
+        in: path
+        description: unique identifier of a Document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: |
+            the categorization of a document is completed, the pages can be loaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KategorisierungsStatus'
+        "202":
+          description: the categorization has not yet been completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KategorisierungsStatus'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: document not found oder Kategorisierung noch nicht gestartet.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:schreiben
+  /dokumente/{dokumentId}/preview:
+    get:
+      tags:
+      - Dokumente
+      summary: get preview image of a page of a document
+      operationId: getPreview
+      parameters:
+      - name: dokumentId
+        in: path
+        description: unique identifier of a Document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: int32
+          default: small
+          enum:
+          - large
+          - small
+      - name: page
+        in: query
+        description: "page to be displayed, 1-based"
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: "Image size: small or large"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: small
+          enum:
+          - large
+          - small
+      responses:
+        "200":
+          description: Preview image in JPEG
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: error in the input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: document not found
+          content:
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:dokument:lesen
+  /dokumente/{dokumentId}/seiten:
+    get:
+      tags:
+      - Seiten
+      summary: get metadata for all pages of a document
+      operationId: getDokumentSeiten
+      parameters:
+      - name: antragsNummer
+        in: query
+        description: "In some cases, the information on the page refers to information\
+          \ in the process at the time when the application was created"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: dokumentId
+        in: path
+        description: unique identifier of a Document
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: list of pages of the document
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Seite'
+        "401":
+          description: authentication failed due to e.g. missing/invalid authorization
+            header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: authorization failed due to e.g. missing authorization for
+            the case
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - europace_oauth2:
+        - unterlagen:unterlage:lesen
+components:
+  schemas:
+    Abrufstatus:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+          - CREATED
+          - DELIVERED
+          - FAILED
+          - IN_PROGRESS
+      description: retrieval state for loan provider
+    AenderbareDokumentMetadaten:
+      type: object
+      properties:
+        anzeigename:
+          type: string
+          description: name of the document in the frontend
+      description: metadata that can be changed for a document
+    Bezugskategorie:
+      type: object
+      properties:
+        id:
+          type: string
+          description: unique identifier of assignment (z.B. immobilie:4711) (technisch)
+        name:
+          type: string
+          description: name of the category in the frontend
+        rolle:
+          type: object
+          properties:
+            name:
+              type: string
+              description: name of this role in the frontend
+            typ:
+              type: string
+              description: "assignment type of role (e.g. finanzierungsobjekt, bestandsobjekt,\
+                \ zusatzsicherheit wenn bezugsTyp=immobilie) (technical)"
+          description: optional assignement role - a role groups assignement objects
+            of the same assignement type (e.g. for assignement type immobilie)
+        typ:
+          type: string
+          description: "type of assignment (e.g. immobilie, antragsteller, vorhaben,\
+            \ ratenkredit) (technical)."
+    Bezugsobjekt:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "unique identifier of assignment object in a case, unique inside\
+            \ the case"
+          example: immobilie:4711
+        name:
+          type: string
+          description: name of assignment object
+          example: Finanzierungsobjekt Feldweg 17
+        typ:
+          type: string
+          description: type of assignment object
+          example: immobilie
+      description: assignement object in a case
+    BezugsobjektAlt:
+      type: object
+      properties:
+        bezeichnung:
+          type: string
+          description: name of related object
+          example: Finanzierungsobjekt Feldweg 17
+          deprecated: true
+        id:
+          type: string
+          description: unique identifier of assignment (technical)
+          example: Immobilie:4711
+        name:
+          type: string
+          description: name of related object
+          example: Finanzierungsobjekt Feldweg 17
+        typ:
+          type: string
+          description: type of assignment (technical).
+          example: Immobilie
+      description: deprecated - please use property zuordnung instead of bezug
+      deprecated: true
+    Dokument:
+      type: object
+      properties:
+        _links:
+          type: object
+          properties:
+            download:
+              $ref: '#/components/schemas/Relation'
+            kategorisierung:
+              $ref: '#/components/schemas/Relation'
+            preview:
+              $ref: '#/components/schemas/Relation'
+            publicDownload:
+              $ref: '#/components/schemas/Relation'
+            seiten:
+              $ref: '#/components/schemas/Relation'
+            self:
+              $ref: '#/components/schemas/Relation'
+        anzeigename:
+          type: string
+          description: name of the document in the frontend
+        erstellungsdatum:
+          type: string
+          description: "upload date, creation date in europace"
+          format: date-time
+        filename:
+          type: string
+          description: filename of the uploaded file
+        id:
+          type: string
+          description: unique identifier of a document
+        kategorisierungsStatus:
+          $ref: '#/components/schemas/KategorisierungsStatus'
+        schluessel:
+          type: string
+          description: public key of the document management
+        size:
+          type: integer
+          description: size of the contents of the document in bytes
+          format: int64
+        type:
+          type: string
+          description: media type referenced by https://tools.ietf.org/html/rfc6838.
+        verschluesselt:
+          type: boolean
+          description: with encryption
+        vorgangsNummer:
+          type: string
+          description: unique identifier of a case
+      description: A document is an uploaded file and can consist of one or several
+        - e.g. scanned - documents.
+    DokumentefreigabeSeiten:
+      type: object
+      properties:
+        dokumentId:
+          type: string
+          description: unique identifier of a document
+        seite:
+          type: integer
+          description: "page in document, 1-based"
+          format: int32
+      description: page number of a document to be shared
+    DokumentUpload:
+      required:
+      - url
+      - vorgangsNummer
+      type: object
+      properties:
+        anzeigename:
+          type: string
+          description: name of the document in the frontend
+        mitKategorisierung:
+          type: boolean
+          description: "if true, categorization process will start after upload"
+        url:
+          type: string
+          description: |
+            freely accessible URL to the document  You can use 'POST /dokumente/transferspeicher' to create one.
+        vorgangsNummer:
+          type: string
+          description: unique identifier of a case
+    Error:
+      title: Error
+      type: object
+      properties:
+        message:
+          type: string
+        statusCode:
+          type: integer
+          format: int32
+        statusMessage:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        traceId:
+          type: string
+    Freigabe:
+      type: object
+      properties:
+        antragsNummer:
+          type: string
+          description: unique identifier of an application
+        finanzierungsvorschlagsId:
+          type: string
+          description: "optional - Can be specified for Baufismart cases. Id of the\
+            \ financing proposal for which the share is to be made. By entering this\
+            \ FinanzierungsvorschlagId, the share reference of the pages can change\
+            \ during the share, if the needed proofs expect pages with a different\
+            \ reference. For example, the FinanzierungsvorschlagId can be get from\
+            \ the [Vorgaenge-API](https://docs.api.europace.de/baufinanzierung/vorgaenge/vorgang-auslesen-api/)."
+        seiten:
+          type: array
+          items:
+            $ref: '#/components/schemas/DokumentefreigabeSeiten'
+      description: pages to be shared for an application and loan provider
+    FreigegebeneUnterlage:
+      type: object
+      properties:
+        _links:
+          type: object
+          properties:
+            abrufstatus:
+              $ref: '#/components/schemas/Relation'
+            download:
+              $ref: '#/components/schemas/Relation'
+            publicDownload:
+              $ref: '#/components/schemas/Relation'
+            self:
+              $ref: '#/components/schemas/Relation'
+        abrufstatus:
+          $ref: '#/components/schemas/Abrufstatus'
+        antragsNummer:
+          type: string
+          description: unique identifier of an application
+        anzeigename:
+          type: string
+          description: name of the document in the frontend.
+        bezug:
+          $ref: '#/components/schemas/BezugsobjektAlt'
+        filename:
+          type: string
+          description: name of the uploaded file
+        freigabedatum:
+          type: string
+          description: shared date
+          format: date-time
+        freigebender:
+          $ref: '#/components/schemas/Partner'
+        id:
+          type: string
+          description: unique identifier of the shared document
+        kategorie:
+          type: string
+          description: deprecated - please use zuordnung --- the category of the share
+          deprecated: true
+        mediaType:
+          type: string
+          description: media-type referenced by https://tools.ietf.org/html/rfc6838.
+        schluessel:
+          type: string
+          description: public key of the document management system
+        size:
+          type: integer
+          description: size of the file in bytes
+          format: int64
+        zuordnung:
+          $ref: '#/components/schemas/ZuordnungInUnterlage'
+      description: Multi-page document shared by the advisor for the loan provider.
+        The document has a category and a assignment.
+    KategorisierungsStatus:
+      type: object
+      properties:
+        meldung:
+          type: string
+          description: A message for the user that describes the reason for the state
+            or provides more detailed information. (nullable)
+        status:
+          type: string
+          enum:
+          - DONE
+          - ERROR
+          - IN_PROGRESS
+          - NEW
+      description: |
+        If the categorization is still running, the state of the categorization can be requested.
+    MoeglicheZuordnung:
+      type: object
+      properties:
+        bezuege:
+          type: array
+          description: possible assignments
+          items:
+            $ref: '#/components/schemas/Bezugskategorie'
+        kategorie:
+          type: object
+          properties:
+            beschreibung:
+              type: string
+              description: description of category
+            id:
+              type: string
+              description: unique identifier of categories (technical)
+            name:
+              type: string
+              description: category name
+    MoeglicheZuordnungAlt:
+      type: object
+      properties:
+        beschreibung:
+          type: string
+          description: description of category (optional).
+        bezuege:
+          type: array
+          items:
+            type: object
+            properties:
+              bezug:
+                type: string
+                description: unique identifier of assignment (technical)
+                example: immobilie:4711
+              label:
+                type: string
+                description: the name of the role and the name of the assignment
+                example: Immobilie - Feldweg 17
+              oberkategorie:
+                type: string
+                description: the name of the role of this assignement
+                example: Immobilie
+              oberkategorieZusatz:
+                type: string
+                description: name of assignment object
+                example: Feldweg 17
+            description: possible assignments
+        hinweistext:
+          type: string
+          description: "additional hints, cann contain markdown formatted text"
+        kategorie:
+          type: string
+          description: unique identifier of categories (technical)
+        label:
+          type: string
+          description: category name
+      deprecated: true
+    Partner:
+      type: object
+      properties:
+        partnerId:
+          type: string
+          description: unique identifier of a europace partner
+          example: ABC45
+    Produktanbieter:
+      type: object
+      properties:
+        bezeichnung:
+          type: string
+          description: name of loan provider (z.B. DSL Bank)
+        id:
+          type: string
+          description: unique identifier from europace for loan providers (z.B. DSL_BANK)
+            (technical)
+      description: loan provider
+    Relation:
+      type: object
+      properties:
+        href:
+          type: string
+          description: a HAL Ref
+          format: uri
+        type:
+          type: string
+          description: media-type referenced by https://tools.ietf.org/html/rfc6838.
+    Revision:
+      type: object
+      properties:
+        dokumenteRevision:
+          type: string
+          description: revision number of the documents in the case
+        seitenRevision:
+          type: string
+          description: revision number of the document pages in the case
+    Seite:
+      type: object
+      properties:
+        _links:
+          type: object
+          properties:
+            preview:
+              $ref: '#/components/schemas/Relation'
+        anforderungen:
+          type: array
+          description:  currently only implemented in a few constellations. Ids of
+            fulfilled Unterlagenanforderungen. The IDs can be determined with the
+            following endpoint /documents/requirements
+          items:
+            type: string
+            example: pe.dsl.azv.finanzierungsloesung.rente.gesetzlich:antragsteller:1
+        archiviert:
+          type: boolean
+          description: archive state of the page
+        dokumentId:
+          type: string
+          description: unique identifier of a document
+        drehung:
+          type: integer
+          description: |
+            Angle in degrees by which the page must be rotated relative to the original document to show it correctly. If the specification is zero or not present, then this angle is not known and the page will not be rotated.
+          format: int32
+          enum:
+          - 0
+          - 180
+          - 270
+          - 90
+        freigaben:
+          type: array
+          description: shares of this page
+          items:
+            $ref: '#/components/schemas/SeitenFreigabe'
+        geprueftAm:
+          type: string
+          description: Timestamp at which the page was checked. zero if the page has
+            not yet been checked for content.
+          format: date-time
+        klassifizierung:
+          type: object
+          properties:
+            kategorien:
+              type: array
+              description: |
+                Categories of the page sorted by relevance.
+                The first element contains the highest relevance.
+              items:
+                type: string
+                example: Personalausweis
+        seite:
+          type: integer
+          description: "page in document, 1-based"
+          format: int32
+        zuordnung:
+          $ref: '#/components/schemas/ZuordnungInSeite'
+      description: a page of a document
+    Seiten:
+      type: object
+      properties:
+        seiten:
+          type: array
+          items:
+            $ref: '#/components/schemas/Seite'
+    SeitenFreigabe:
+      type: object
+      properties:
+        abrufStatus:
+          $ref: '#/components/schemas/Abrufstatus'
+        antragsNummer:
+          type: string
+          description: application in which this page has already been shared
+        datum:
+          type: string
+          description: date of sharing the document
+          format: date-time
+        zuordnung:
+          $ref: '#/components/schemas/ZuordnungInSeite'
+      description: shares of this page
+    SeitenReferenz:
+      type: object
+      properties:
+        dokumentId:
+          type: string
+          description: unique identifier of a document
+        seite:
+          type: integer
+          description: "page in document, 1-based"
+          format: int32
+      description: references a page of a document
+    Transferspeicher:
+      type: object
+      properties:
+        downloadUrl:
+          type: string
+          description: url to retrieve the document from the cloud storage
+        uploadData:
+          $ref: '#/components/schemas/UploadData'
+    Unterlagenanforderung:
+      type: object
+      properties:
+        ausgeblendet:
+          type: boolean
+          description: is true if the needed proof is hided by the advisor.
+        bezug:
+          $ref: '#/components/schemas/Bezugskategorie'
+        code:
+          type: string
+          description: loan providers specific code for needed proof
+        erfuellungskategorien:
+          type: array
+          items:
+            type: string
+            description: list of categories which fulfill the needed proof. Currently
+              only implemented in a few constellations.
+        id:
+          type: string
+          description: unique identifier of a needed proof
+        kurzbezeichnung:
+          type: string
+          description: short description of the needed proof
+        liegtVor:
+          type: boolean
+          description: is true if this needed proof is set to be available by the
+            advisor.
+        produktanbieter:
+          $ref: '#/components/schemas/Produktanbieter'
+        text:
+          type: string
+          description: loan providers specific name for needed proof
+      description: needed proof
+    UploadData:
+      type: object
+      properties:
+        fields:
+          type: object
+          additionalProperties:
+            type: string
+          description: AWS-fields
+        url:
+          type: string
+          description: url to upload the document to the cloud storage
+    ZuordnungInSeite:
+      type: object
+      properties:
+        bezug:
+          type: string
+          description: assignment object in case
+          example: antragsteller:1
+        kategorie:
+          type: string
+          description: predicted category
+          example: Krankenversicherungsnachweis
+        status:
+          type: string
+          description: prediction state
+          enum:
+          - BEZUG_FEHLT
+          - BEZUG_UNGUELTIG
+          - KATEGORIE_FEHLT
+          - KATEGORIE_UNGUELTIG
+          - VOLLSTAENDIG
+      description: predicted category of a page
+    ZuordnungInUnterlage:
+      type: object
+      properties:
+        bezug:
+          $ref: '#/components/schemas/Bezugsobjekt'
+        kategorie:
+          type: string
+          description: predicted category
+          example: Krankenversicherungsnachweis
+  securitySchemes:
+    europace_oauth2:
+      $ref: https://raw.githubusercontent.com/europace/authorization-api/master/europace_security.yaml

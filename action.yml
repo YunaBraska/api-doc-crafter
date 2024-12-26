@@ -1,0 +1,37 @@
+name: "Api Doc Crafter"
+description: "Clean, Merge, Group, Remove and generate OpenAPI documentation."
+inputs:
+  work_dir:
+    description: "Working directory for the input files."
+    required: true
+    default: "."
+  output_dir:
+    description: "Directory to save the output files."
+    required: false
+    default: "./swagger_output"
+  file_includes:
+    description: "File patterns to include."
+    required: false
+  file_excludes:
+    description: "File patterns to exclude."
+    required: false
+  max_deep:
+    description: "Max directory depth to search."
+    required: false
+    default: "100"
+outputs:
+  output_path:
+    description: "Path of the generated files."
+runs:
+  using: "docker"
+  image: "ghcr.io/YunaBraska/<your-repo>/api-doc-crafter:latest"
+  args:
+    - "${{ inputs.work_dir }}"
+    - "${{ inputs.output_dir }}"
+    - "${{ inputs.file_includes }}"
+    - "${{ inputs.file_excludes }}"
+    - "${{ inputs.max_deep }}"
+author: "Yuna Morgenstern"
+branding:
+  color: "green"
+  icon: "code"
