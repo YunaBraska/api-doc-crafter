@@ -1,0 +1,72 @@
+openapi: "3.0.0"
+info:
+  title: "Health Metrics API"
+  version: "1.0.0"
+  description: "API for tracking user health metrics."
+servers:
+  - url: "https://api.healthmetrics.example.com/v1"
+paths:
+  /metrics:
+    get:
+      summary: "Retrieve all health metrics"
+      responses:
+        '200':
+          description: "List of health metrics"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Metric"
+    post:
+      summary: "Add a new metric"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Metric"
+      responses:
+        '201':
+          description: "Metric added"
+  /metrics/{id}:
+    get:
+      summary: "Retrieve a specific metric"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Metric details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Metric"
+    delete:
+      summary: "Delete a metric"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '204':
+          description: "Metric deleted"
+components:
+  schemas:
+    Metric:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        type:
+          type: "string"
+          enum: ["weight", "heart_rate", "steps"]
+        value:
+          type: "number"
+        timestamp:
+          type: "string"
+          format: "date-time"

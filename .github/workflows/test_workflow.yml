@@ -1,0 +1,23 @@
+name: "Test Api Doc Crafter"
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test-api-doc-crafter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "🧑‍💻 Checkout"
+        uses: actions/checkout@v3
+      - name: "Run Api Doc Crafter"
+        uses: YunaBraska/api-doc-crafter@main
+      - name: "Validate Output"
+        run: |
+          echo "pwd [$(pwd)]"
+          ls -lah
+          ls -lah swagger_output
+          ls -lah swagger_output/index.html

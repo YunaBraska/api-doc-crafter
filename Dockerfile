@@ -1,51 +1,29 @@
-# Stage 1: Build Custom JRE and Package the App
-FROM eclipse-temurin:21-jdk-noble AS builder
+# Base image for fetching and preparing the binary
+FROM debian:stable-slim AS fetcher
 
-# Install Maven
-RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
+# Install required tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl ca-certificates && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copy the project files and build the application
-COPY pom.xml .
-COPY src ./src
+# Determine the architecture and fetch the latest release
+ARG ARCH
+RUN ARCH=$(if [ "$(uname -m)" = "aarch64" ]; then echo "arm64"; else echo "amd64"; fi) && \
+    echo "Fetching release for ARCH: ${ARCH}" && \
+    curl -s "https://api.github.com/repos/YunaBraska/api-doc-crafter/releases/latest" \
+    | grep "browser_download_url.*api-doc-crafter-${ARCH}-.*.native" \
+    | cut -d '"' -f 4 \
+    | xargs curl -L -o /api-doc-crafter.native && \
+    chmod +x api-doc-crafter.native
 
-# Run Maven to build the application
-RUN mvn clean package -DskipTests=true
-
-# Copy the compiled application to the container
-COPY target/api-doc-crafter.jar service.jar
-
-# Create minimal JRE
-RUN MODULES=$(jdeps --print-module-deps --ignore-missing-deps --class-path service.jar service.jar | tail -n1) && \
-    jlink \
-      --add-modules ${MODULES} \
-      --strip-native-commands \
-      --strip-debug \
-      --no-man-pages \
-      --no-header-files \
-      --output /custom-jre
-
-# Create executable
-RUN mkdir -p jp_tmp && cp service.jar jp_tmp/ && \
-    jpackage \
-      --input jp_tmp \
-      --name service \
-      --main-jar service.jar \
-      --runtime-image /custom-jre \
-      --type app-image
-
-# USED TO EXPORT THE JAR FILE
-# [SYSTEM] docker build --target export . --output target
-FROM scratch AS export
-COPY --from=builder /service /service
-
-# Final Stage: Minimal Runtime Image
+# Minimal runtime image
 FROM debian:stable-slim
 
-# Copy packaged app and additional files
-COPY --from=builder /service /service
+# Copy the fetched binary from the build stage
+COPY --from=fetcher /api-doc-crafter.native /usr/local/bin/api-doc-crafter.native
 
-# Expose the necessary port
-EXPOSE 8080
+# Ensure the binary is executable
+RUN chmod +x /usr/local/bin/api-doc-crafter.native
 
-# Use bash for variable substitution and proper PID management
-ENTRYPOINT ["/bin/bash", "-c", "exec /service/bin/service"]
+# Default entrypoint
+ENTRYPOINT ["api-doc-crafter.native"]

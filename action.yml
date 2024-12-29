@@ -1,6 +1,28 @@
 name: "Api Doc Crafter"
 description: "Clean, Merge, Group, Remove and generate OpenAPI documentation."
+author: "Yuna Morgenstern"
 inputs:
+  swagger_js:
+    description: "[UI] (local=no external resource) Path to the Swagger JS file."
+    required: false
+  swagger_bundle_js:
+    description: "[UI] (local=no external resource) Path to the Swagger JS file."
+    required: false
+  swagger_css:
+    description: "[UI] (local=no external resource) Path to the Swagger CSS file."
+    required: false
+  swagger_favicon:
+    description: "[UI] (local=no external resource) Path to the Swagger favicon png file."
+    required: false
+  swagger_logo:
+    description: "[UI] (local=no external resource) Path to the Swagger logo file."
+    required: false
+  swagger_nav:
+    description: "[UI] Generate navigation"
+    required: false
+  swagger_links:
+    description: "[UI] download source links"
+    required: false
   work_dir:
     description: "Working directory for the input files."
     required: true
@@ -10,28 +32,110 @@ inputs:
     required: false
     default: "./swagger_output"
   file_includes:
-    description: "File patterns to include."
+    description: "File patterns to include. GLOB patterns separated by '::' or '|'."
     required: false
   file_excludes:
-    description: "File patterns to exclude."
+    description: "File patterns to exclude. GLOB patterns separated by '::' or '|'."
     required: false
   max_deep:
-    description: "Max directory depth to search."
+    description: "Maximum directory depth to search."
     required: false
     default: "100"
+  sort_extensions:
+    description: "Sort OpenAPI extensions alphabetically."
+    required: false
+  sort_servers:
+    description: "Sort OpenAPI servers alphabetically."
+    required: false
+  sort_security:
+    description: "Sort OpenAPI security schemes alphabetically."
+    required: false
+  sort_tags:
+    description: "Sort OpenAPI tags alphabetically."
+    required: false
+  sort_paths:
+    description: "Sort OpenAPI paths alphabetically."
+    required: false
+  sort_schemas:
+    description: "Sort OpenAPI schemas alphabetically."
+    required: false
+  sort_parameters:
+    description: "Sort OpenAPI parameters alphabetically."
+    required: false
+  sort_responses:
+    description: "Sort OpenAPI responses alphabetically."
+    required: false
+  sort_examples:
+    description: "Sort OpenAPI examples alphabetically."
+    required: false
+  sort_webhooks:
+    description: "Sort OpenAPI webhooks alphabetically."
+    required: false
+  sort_headers:
+    description: "Sort OpenAPI headers alphabetically."
+    required: false
+  sort_scopes:
+    description: "Sort OpenAPI scopes alphabetically."
+    required: false
+  sort_requests:
+    description: "Sort OpenAPI requests alphabetically."
+    required: false
+  sort_content:
+    description: "Sort OpenAPI content alphabetically."
+    required: false
+  sort_encoding:
+    description: "Sort OpenAPI encodings alphabetically."
+    required: false
+  remove_key:
+    description: "Keys or fields to remove from OpenAPI files."
+    required: false
+  group_tags:
+    description: "Group OpenAPI files by tags. Separate tags with '::', '|', or ','."
+    required: false
+  group_servers:
+    description: "Group OpenAPI files by servers. Separate servers with '::' or '|'."
+    required: false
+  create_nav:
+    description: "Generate navigation HTML for OpenAPI output."
+    required: false
 outputs:
   output_path:
     description: "Path of the generated files."
 runs:
   using: "docker"
-  image: "ghcr.io/YunaBraska/<your-repo>/api-doc-crafter:latest"
-  args:
-    - "${{ inputs.work_dir }}"
-    - "${{ inputs.output_dir }}"
-    - "${{ inputs.file_includes }}"
-    - "${{ inputs.file_excludes }}"
-    - "${{ inputs.max_deep }}"
-author: "Yuna Morgenstern"
+  image: "docker://ghcr.io/yunabraska/api-doc-crafter:latest"
+  env:
+    ADC_SWAGGER_JS: ${{ inputs.swagger_js }}
+    ADC_SWAGGER_BUNDLE_JS: ${{ inputs.swagger_bundle_js }}
+    ADC_SWAGGER_CSS: ${{ inputs.swagger_css }}
+    ADC_SWAGGER_FAVICON: ${{ inputs.swagger_favicon }}
+    ADC_SWAGGER_LOGO: ${{ inputs.swagger_logo }}
+    ADC_SWAGGER_NAV: ${{ inputs.swagger_nav }}
+    ADC_SWAGGER_LINKS: ${{ inputs.swagger_links }}
+    ADC_OUTPUT_DIR: ${{ inputs.output_dir }}
+    ADC_WORK_DIR: ${{ inputs.work_dir }}
+    ADC_FILE_INCLUDES: ${{ inputs.file_includes }}
+    ADC_FILE_EXCLUDES: ${{ inputs.file_excludes }}
+    ADC_MAX_DEEP: ${{ inputs.max_deep }}
+    ADC_SORT_EXTENSIONS: ${{ inputs.sort_extensions }}
+    ADC_SORT_SERVERS: ${{ inputs.sort_servers }}
+    ADC_SORT_SECURITY: ${{ inputs.sort_security }}
+    ADC_SORT_TAGS: ${{ inputs.sort_tags }}
+    ADC_SORT_PATHS: ${{ inputs.sort_paths }}
+    ADC_SORT_SCHEMAS: ${{ inputs.sort_schemas }}
+    ADC_SORT_PARAMETERS: ${{ inputs.sort_parameters }}
+    ADC_SORT_RESPONSES: ${{ inputs.sort_responses }}
+    ADC_SORT_EXAMPLES: ${{ inputs.sort_examples }}
+    ADC_SORT_WEBHOOKS: ${{ inputs.sort_webhooks }}
+    ADC_SORT_HEADERS: ${{ inputs.sort_headers }}
+    ADC_SORT_SCOPES: ${{ inputs.sort_scopes }}
+    ADC_SORT_REQUESTS: ${{ inputs.sort_requests }}
+    ADC_SORT_CONTENT: ${{ inputs.sort_content }}
+    ADC_SORT_ENCODING: ${{ inputs.sort_encoding }}
+    ADC_REMOVE_KEY: ${{ inputs.remove_key }}
+    ADC_GROUP_TAGS: ${{ inputs.group_tags }}
+    ADC_GROUP_SERVERS: ${{ inputs.group_servers }}
+    ADC_CREATE_NAV: ${{ inputs.create_nav }}
 branding:
   color: "green"
   icon: "code"

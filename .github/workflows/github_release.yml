@@ -1,0 +1,96 @@
+name: "Release"
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "[ref] e.g. branch, tag or commit to checkout [default: github_ref_name || github_head_ref ]"
+        required: false
+      version:
+        description: "[version] e.g. 1.0.0"
+        required: false
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        description: "[ref] e.g. branch, tag or commit to checkout [default: github_ref_name || github_head_ref ]"
+        required: false
+      version:
+        type: string
+        description: "[version] e.g. 1.0.0"
+        required: false
+
+concurrency:
+  group: "release-${{ github.event.repository.name }}"
+
+jobs:
+  build:
+    name: "Build"
+    timeout-minutes: 60
+    runs-on: Ubuntu-latest
+    strategy:
+      matrix:
+        # Available amd64, amd64/v2 amd64/v3, arm64, riscv64, ppc64le, s390x, 386, arm/v7, arm/v6
+        # GraalVM only knows about amd64, arm64
+        arch: [ amd64, arm64 ]
+    steps:
+      - name: "🧑‍💻 Checkout [${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}]"
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          ref: ${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
+          token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: "🕹️ Set up QEMU"
+        uses: docker/setup-qemu-action@v3
+      - name: "🐳 Set up Docker"
+        uses: docker/setup-buildx-action@v3
+      - name: "🏗️ Build [linux/${{matrix.arch}}]"
+        id: "artifact"
+        run: |
+          echo "########## DIR     ##########"
+          rm -rf target && mkdir -p target
+          echo "########## LIST    ##########"
+          docker buildx ls
+          echo "########## INSPECT ##########"
+          docker buildx inspect --bootstrap | grep Platforms | while read -r line; do echo "${line#*:}"; done | tr -d '[:space:]' || true
+          echo "########## BUILD   ##########"
+          docker buildx build --platform linux/${{matrix.arch}} -f Dockerfile_Native --target export . --output target
+          echo "########## SAVE    ##########"
+          filename="${{ github.event.repository.name }}-${{ matrix.arch }}-${{ inputs.version || github.run_number }}"
+          echo "filename [${filename}]"
+          echo "filename=${filename}" >> $GITHUB_OUTPUT
+          mv target/app.native target/${filename}.native
+          chmod +x target/${filename}.native
+          ls -lah target
+        env:
+          GITHUB_USER: 'GithubBot'
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: "💼 Save [${{ github.event.repository.name }}-${{ matrix.arch }}-${{ inputs.version || github.run_number }}.native] Artifacts"
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.artifact.outputs.filename }}.native
+          path: target/${{ steps.artifact.outputs.filename }}.native
+          if-no-files-found: 'error'
+  release:
+    name: "Release"
+    timeout-minutes: 5
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: "💾 Download Artifacts"
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          path: target
+      - name: "🏷️ Release"
+        uses: ncipollo/release-action@v1
+        with:
+          draft: false
+          prerelease: false
+          allowUpdates: true
+          removeArtifacts: true
+          token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          tag: ${{ inputs.version || github.run_number }}
+          name: "Release ${{ inputs.version || github.run_number }}"
+          artifacts: target/${{ github.event.repository.name }}-*.native
+

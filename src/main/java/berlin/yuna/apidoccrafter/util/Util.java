@@ -5,6 +5,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,8 +16,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static berlin.yuna.typemap.logic.ArgsDecoder.hasText;
 import static berlin.yuna.apidoccrafter.config.Config.getRemovePattern;
+import static berlin.yuna.typemap.logic.ArgsDecoder.hasText;
 import static java.util.Optional.ofNullable;
 
 // java:S106 - Standard outputs should not be used directly to log anything
@@ -147,21 +148,29 @@ public class Util {
     public static String displayName(final Path path, final OpenAPI openAPI) {
         return ofNullable(openAPI)
             .map(OpenAPI::getInfo)
-            .map(Info::getTitle).orElseGet(() -> filenameHtml(path, openAPI).replace(".html", ""));
+            .map(Info::getTitle).orElseGet(() -> filename(path, openAPI, ""));
     }
 
     public static String filenameHtml(final Path path, final OpenAPI openAPI) {
-        return filenameYaml(path, openAPI).replace(".yaml", ".html").replace(".json", ".html");
+        return filename(path, openAPI, ".html");
     }
 
     public static String filenameYaml(final Path path, final OpenAPI openAPI) {
-        return ofNullable(openAPI)
+        return filename(path, openAPI, ".yaml");
+    }
+
+    public static String filenameJson(final Path path, final OpenAPI openAPI) {
+        return filename(path, openAPI, ".json");
+    }
+
+    public static String filename(final Path path, final OpenAPI openAPI, final String extension) {
+        final String result = ofNullable(openAPI)
             .map(OpenAPI::getInfo)
             .map(Info::getTitle)
-            .map(title -> title + (path.getFileName().toString().endsWith(".json") ? ".json" : ".yaml"))
             .orElse(path.getFileName().toString().toLowerCase())
             .toLowerCase()
             .replaceAll("[^\\p{L}\\p{Nd}_.]+", "_").replaceAll("_+", "_").trim();
+        return result.contains(".") ? result.substring(0, result.indexOf(".")) : result + extension;
     }
 
     public static void writeFile(final Path path, final String content) {
@@ -176,10 +185,10 @@ public class Util {
     /**
      * Sorts a map based on a string extracted from each entry.
      *
-     * @param map          The map to sort.
+     * @param map       The map to sort.
      * @param extractor A function to extract a string from a map entry for comparison.
-     * @param <K>          The type of the map's keys.
-     * @param <V>          The type of the map's values.
+     * @param <K>       The type of the map's keys.
+     * @param <V>       The type of the map's values.
      * @return A new LinkedHashMap with entries sorted by the extracted string.
      */
     public static <K, V> Map<K, V> sortByString(final Map<K, V> map, final Function<Map.Entry<K, V>, String> extractor) {
@@ -191,6 +200,34 @@ public class Util {
                 (existing, replacement) -> existing,
                 LinkedHashMap::new
             ));
+    }
+
+    public static void copyResourceToOutput(final String resourceName, final Path outputDir) {
+        try (InputStream resourceStream = Util.class.getClassLoader().getResourceAsStream(resourceName)) {
+            if (resourceStream == null) {
+                System.err.println("[ERROR] Resource [" + resourceName + "] not found in the resources folder.");
+                return;
+            }
+            Path targetPath = outputDir.resolve(resourceName.contains("/") ? resourceName.substring(resourceName.lastIndexOf("/") + 1) : resourceName);
+            Files.createDirectories(targetPath.getParent());
+            Files.copy(resourceStream, targetPath);
+            System.out.println("[INFO] Created [" + targetPath + "]");
+        } catch (IOException e) {
+            System.err.println("[ERROR] Failed to copy resource [" + resourceName + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
+        }
+    }
+
+    public static String readResource(final String resourceName) {
+        try (InputStream resourceStream = Util.class.getClassLoader().getResourceAsStream(resourceName)) {
+            if (resourceStream == null) {
+                System.err.println("[ERROR] Resource [" + resourceName + "] not found in the resources folder.");
+                return null;
+            }
+            return new String(resourceStream.readAllBytes());
+        } catch (IOException e) {
+            System.err.println("[ERROR] Failed to copy resource [" + resourceName + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
+            return null;
+        }
     }
 
     private Util() {

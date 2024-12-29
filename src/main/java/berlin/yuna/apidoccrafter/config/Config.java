@@ -26,8 +26,15 @@ import static berlin.yuna.typemap.logic.TypeConverter.convertObj;
 @SuppressWarnings("java:S106")
 public class Config {
 
-
     public static final String CONFIG_PREFIX = "adc_";
+    public static final String SWAGGER_JS = CONFIG_PREFIX + "swagger_js";
+    public static final String SWAGGER_BUNDLE_JS = CONFIG_PREFIX + "swagger_bundle_js";
+    public static final String SWAGGER_FAVICON = CONFIG_PREFIX + "swagger_favicon";
+    public static final String SWAGGER_CSS = CONFIG_PREFIX + "swagger_css";
+    public static final String SWAGGER_NAV_CSS = CONFIG_PREFIX + "swagger_nav_css";
+    public static final String SWAGGER_LOGO = CONFIG_PREFIX + "swagger_logo";
+    public static final String SWAGGER_NAV = CONFIG_PREFIX + "swagger_nav";
+    public static final String SWAGGER_LINKS = CONFIG_PREFIX + "swagger_links";
     public static final String SORT_EXTENSIONS = CONFIG_PREFIX + "adc_sort_extensions";
     public static final String SORT_SERVERS = CONFIG_PREFIX + "sort_servers";
     public static final String SORT_SECURITY = CONFIG_PREFIX + "sort_security";
@@ -55,11 +62,17 @@ public class Config {
     public static final String OUTPUT_DIR = CONFIG_PREFIX + "output_dir";
     public static final String WORK_DIR = CONFIG_PREFIX + "work_dir";
     public static final String MAX_DEEP = CONFIG_PREFIX + "max_deep";
-    public static final String CREATE_NAV = CONFIG_PREFIX + "create_nav";
-    private static final TypeMap CONFIG_ITEMS = readConfigs();
+    // Swagger configs
+    public static final String LOCAL_PATTERN = "local";
+    public static final String STATIC_SWAGGER_STANDALONE_JS = "https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-standalone-preset.js";
+    public static final String STATIC_SWAGGER_BUNDLE_JS = "https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js";
+    public static final String STATIC_SWAGGER_FAVICON = "https://petstore.swagger.io/favicon-32x32.png";
+    public static final String STATIC_SWAGGER_LOGO = "https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg";
+    public static final String STATIC_SWAGGER_CSS = "https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css";
+    private static final TypeMap CONFIG_ITEMS = new TypeMap();
 
     public static Boolean sortBy(final String key) {
-        return CONFIG_ITEMS.asStringOpt(key).map(String::toLowerCase).map(cfg -> ("none".equals(cfg) || "false".equals(cfg) || "null".equals(cfg)) ? null : "asc".equals(cfg)).orElse(true);
+        return CONFIG_ITEMS.asStringOpt(key).map(String::toLowerCase).filter(cfg -> ("none".equals(cfg) || "null".equals(cfg))).isPresent()? null : CONFIG_ITEMS.asBooleanOpt(key).orElse(true);
     }
 
     public static String getRemovePattern() {
@@ -76,7 +89,7 @@ public class Config {
      * @param args Optional arguments to parse.
      * @return A TypeMap containing the configuration.
      */
-    private static TypeMap readConfigs(final String... args) {
+    public static TypeMap readConfigs(final String... args) {
         final TypeMap result = new TypeMap();
         System.getenv().forEach((key, value) -> addConfig(result, key, value));
         System.getProperties().forEach((key, value) -> addConfig(result, key, value));

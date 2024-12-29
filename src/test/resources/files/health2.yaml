@@ -1,0 +1,131 @@
+openapi: "3.0.0"
+info:
+  title: "Health Metrics API - Part 2"
+  version: "1.0.1"
+  description: "Extended API for advanced user health metrics tracking."
+servers:
+  - url: "https://api.healthmetrics.example.com/v1"
+paths:
+  /users:
+    get:
+      summary: "Retrieve all users"
+      responses:
+        '200':
+          description: "List of users"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/User"
+  /users/{id}:
+    get:
+      summary: "Retrieve a specific user"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "User details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    patch:
+      summary: "Update user information"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        '200':
+          description: "User updated"
+  /metrics/{id}/trend:
+    get:
+      summary: "Retrieve metric trends over time"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Metric trends"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trend"
+  /metrics/sync:
+    post:
+      summary: "Synchronize metrics with an external device"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                deviceId:
+                  type: "string"
+                metrics:
+                  type: "array"
+                  items:
+                    $ref: "#/components/schemas/Metric"
+      responses:
+        '200':
+          description: "Synchronization successful"
+components:
+  schemas:
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        email:
+          type: "string"
+          format: "email"
+        age:
+          type: "integer"
+        gender:
+          type: "string"
+          enum: ["male", "female", "other"]
+    Metric:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        type:
+          type: "string"
+          enum: ["weight", "heart_rate", "steps", "calories"]
+        value:
+          type: "number"
+        timestamp:
+          type: "string"
+          format: "date-time"
+    Trend:
+      type: "object"
+      properties:
+        metricId:
+          type: "string"
+        dataPoints:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              value:
+                type: "number"
+              timestamp:
+                type: "string"
+                format: "date-time"

@@ -1,6 +1,7 @@
 package berlin.yuna.apidoccrafter.logic;
 
 import berlin.yuna.typemap.logic.ArgsDecoder;
+import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.tags.Tag;
@@ -9,6 +10,7 @@ import io.swagger.v3.parser.OpenAPIV3Parser;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -54,7 +56,7 @@ public class Processor {
         final Map<Path, OpenAPI> result = new HashMap<>();
         try (final Stream<Path> files = Files.walk(inputDir, maxDeep)) {
             files.filter(Files::isRegularFile)
-                .filter(path -> path.toString().endsWith(".yaml") || path.toString().endsWith(".json"))
+                .filter(path -> path.toString().endsWith(".yml") || path.toString().endsWith(".yaml") || path.toString().endsWith(".json"))
                 .filter(path -> includePattern == null || matchesGlob(path, includePattern))
                 .filter(path -> excludePattern == null || !matchesGlob(path, excludePattern))
                 .map(Processor::toOpenAPIFile)
@@ -63,6 +65,7 @@ public class Processor {
                 .forEach(oaf -> result.put(oaf.getKey(), oaf.getValue()));
         } catch (final Exception e) {
             System.err.println("[FATAL] Failed to read OpenAPI files: " + e.getMessage());
+            e.printStackTrace();
         }
         return result;
     }
@@ -74,8 +77,19 @@ public class Processor {
      * @return An optional containing the file path and OpenAPI object.
      */
     public static Optional<Map.Entry<Path, OpenAPI>> toOpenAPIFile(final Path filePath) {
-        return ofNullable(new OpenAPIV3Parser().readLocation(filePath.toString(), null, null).getOpenAPI())
+        return parse(filePath, path -> new OpenAPIV3Parser().readLocation(path.toString(), null, null).getOpenAPI())
+            .or(() -> parse(filePath, path -> new OpenAPIParser().readLocation(path.toString(), null, null).getOpenAPI()))
             .map(api -> new AbstractMap.SimpleImmutableEntry<>(filePath, api));
+    }
+
+    public static Optional<OpenAPI> parse(final Path filePath, final Function<Path, OpenAPI> parser) {
+        try {
+            return ofNullable(parser.apply(filePath));
+        } catch (final Exception e) {
+            System.err.println("[ERROR] Failed to parse OpenAPI file [" + filePath + "]: " + e.getMessage());
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 
     /**

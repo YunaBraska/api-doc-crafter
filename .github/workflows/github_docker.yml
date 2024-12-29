@@ -1,0 +1,70 @@
+name: "Docker"
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "[ref] e.g. branch, tag or commit to checkout [default: github_ref_name || github_head_ref ]"
+        required: false
+      version:
+        description: "[version] e.g. 1.0.0"
+        required: false
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        description: "[ref] e.g. branch, tag or commit to checkout [default: github_ref_name || github_head_ref ]"
+        required: false
+      version:
+        type: string
+        description: "[version] e.g. 1.0.0"
+        required: false
+
+concurrency:
+  group: "docker-${{ github.event.repository.name }}"
+
+jobs:
+  docker-build:
+    name: "Docker Build"
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: "🧑‍💻 Checkout [${{ github.event.release.tag_name || inputs.ref || github.ref || github.ref_name || github.head_ref }}]"
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          ref: ${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
+      - name: "🕹️ Set up QEMU"
+        uses: docker/setup-qemu-action@v3
+      - name: "🐳 Set up Docker Buildx"
+        uses: docker/setup-buildx-action@v3
+      - name: "Log in to the Container registry"
+        uses: docker/login-action@v3
+        with:
+          registry: "ghcr.io"
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Get prefix"
+        run: |
+          tag_prefix=$(echo "ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+          echo "tag_prefix=${tag_prefix}" >> $GITHUB_ENV
+      - name: "Release build [${{ github.event.release.tag_name || inputs.version || github.run_number }}]"
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          outputs: "type=registry,push=true"
+          platforms: linux/amd64,linux/arm64
+          file: Dockerfile
+          no-cache: true
+          tags: |
+            ${{ env.tag_prefix }}:${{ github.sha }}
+            ${{ env.tag_prefix }}:${{ github.event.release.tag_name || inputs.version || github.run_number }}
+            ${{ env.tag_prefix }}:latest
+

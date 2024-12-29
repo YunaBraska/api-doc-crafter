@@ -1,6 +1,7 @@
 package berlin.yuna.apidoccrafter;
 
 import berlin.yuna.apidoccrafter.logic.HtmlGenerator;
+import io.swagger.v3.core.util.Json;
 import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
 
@@ -21,7 +22,8 @@ import static java.util.Optional.ofNullable;
 @SuppressWarnings("java:S106")
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
+        config().putAll(readConfigs()); // can't be done in static block because native executable will freeze it
         final Path inputDir = parseWorkDir(config().asString(WORK_DIR));
         final Path outputDir = parseOutputDir(config().asString(OUTPUT_DIR), inputDir);
         final String fileIncludes = config().asString(FILE_INCLUDES);
@@ -40,7 +42,8 @@ public class App {
         final Map<Path, OpenAPI> mergedApis = mergeApis(groupedApis);
 
         // Save files
-        mergedApis.forEach((path, openAPI) -> saveMergedApi(openAPI, outputDir.resolve(filenameYaml(path, openAPI))));
+        mergedApis.forEach((path, openAPI) -> saveYaml(openAPI, outputDir.resolve(filenameYaml(path, openAPI))));
+        mergedApis.forEach((path, openAPI) -> saveJson(openAPI, outputDir.resolve(filenameJson(path, openAPI))));
 
         HtmlGenerator.generateHtml(sortByString(mergedApis, pathOpenAPIEntry -> displayName(pathOpenAPIEntry.getKey(), pathOpenAPIEntry.getValue())), outputDir);
     }
@@ -72,14 +75,22 @@ public class App {
         return result;
     }
 
-    private static void saveMergedApi(final OpenAPI mergedApi, final Path outputPath) {
+    private static void saveYaml(final OpenAPI mergedApi, final Path outputPath) {
         try (FileWriter writer = new FileWriter(outputPath.toFile())) {
             writer.write(Yaml.mapper().writeValueAsString(mergedApi));
+            writer.write(Json.mapper().writeValueAsString(mergedApi));
             System.out.println("[INFO] Generated [" + outputPath + "]");
         } catch (IOException e) {
             System.err.println("[ERROR] Failed to save [" + outputPath + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
         }
     }
 
-
+    private static void saveJson(final OpenAPI mergedApi, final Path outputPath) {
+        try (FileWriter writer = new FileWriter(outputPath.toFile())) {
+            writer.write(Json.mapper().writeValueAsString(mergedApi));
+            System.out.println("[INFO] Generated [" + outputPath + "]");
+        } catch (IOException e) {
+            System.err.println("[ERROR] Failed to save [" + outputPath + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
+        }
+    }
 }

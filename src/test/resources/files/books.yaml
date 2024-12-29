@@ -1,0 +1,172 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Books API"
+  description: "API to manage books, authors, and their relationships."
+  termsOfService: "https://api.books.example.com/terms"
+  contact:
+    name: "API Support"
+    url: "https://api.books.example.com/support"
+    email: "support@books.example.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "api.books.example.com"
+basePath: "/v1"
+schemes:
+  - https
+tags:
+  - name: "Books"
+    description: "Operations related to books"
+  - name: "Authors"
+    description: "Operations related to authors"
+  - name: "Management"
+    description: "Administrative operations"
+paths:
+  /books:
+    get:
+      tags:
+        - "Books"
+      summary: "Retrieve all books"
+      description: "Returns a list of all books available in the system."
+      responses:
+        200:
+          description: "A list of books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+    post:
+      tags:
+        - "Books"
+      summary: "Add a new book"
+      description: "Adds a new book to the library."
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Book"
+      responses:
+        201:
+          description: "Book created successfully"
+  /books/{id}:
+    get:
+      tags:
+        - "Books"
+      summary: "Retrieve a specific book"
+      description: "Fetch details of a book by its unique ID."
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Book details retrieved"
+          schema:
+            $ref: "#/definitions/Book"
+        404:
+          description: "Book not found"
+    put:
+      tags:
+        - "Books"
+      summary: "Update a book"
+      description: "Updates information for a specific book."
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Book"
+      responses:
+        200:
+          description: "Book updated successfully"
+    delete:
+      tags:
+        - "Books"
+      summary: "Delete a book"
+      description: "Deletes a specific book by its ID."
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
+      responses:
+        204:
+          description: "Book deleted successfully"
+  /authors:
+    get:
+      tags:
+        - "Authors"
+      summary: "Retrieve all authors"
+      description: "Fetch a list of all authors."
+      responses:
+        200:
+          description: "A list of authors"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+    post:
+      tags:
+        - "Authors"
+      summary: "Add a new author"
+      description: "Adds a new author to the system."
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Author"
+      responses:
+        201:
+          description: "Author added successfully"
+definitions:
+  Book:
+    type: "object"
+    required:
+      - id
+      - title
+    properties:
+      id:
+        type: "string"
+      title:
+        type: "string"
+      author:
+        type: "string"
+      publishedDate:
+        type: "string"
+        format: "date"
+      genre:
+        type: "string"
+        description: "Genre of the book"
+  Author:
+    type: "object"
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      biography:
+        type: "string"
+        description: "A brief biography of the author"
+      birthDate:
+        type: "string"
+        format: "date"
+        description: "Author's date of birth"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "X-API-KEY"
+    in: "header"
+externalDocs:
+  description: "Find more info here"
+  url: "https://api.books.example.com/docs"
