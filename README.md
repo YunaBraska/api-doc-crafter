@@ -7,7 +7,7 @@ This makes it particularly useful for generating documentation from code and exc
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/YunaBraska)
 
 [![Build][build_shield]][build_link]
-![c_java_version](https://img.shields.io/badge/java_version-17-97CA00?style=flat-square)
+![c_java_version](https://img.shields.io/badge/java_version-21-97CA00?style=flat-square)
 ![c_builder_name](https://img.shields.io/badge/builder_name-Maven-97CA00?style=flat-square)
 [![Issues][issues_shield]][issues_link]
 [![Commit][commit_shield]][commit_link]
@@ -17,9 +17,9 @@ This makes it particularly useful for generating documentation from code and exc
 ![Label][label_shield]
 ![Label][node_version]
 [![Licenses](https://img.shields.io/badge/Licenses-065d7c?style=flat-square)](https://github.com/YunaBraska/api-doc-crafter/blob/main/dist/licenses.txt)
-[![c_license_count](https://img.shields.io/badge/licenses-14-a4a61d?style=flat-square)](docs/licenses/licenses.csv)
-[![c_license_count_limited](https://img.shields.io/badge/licenses_limited-5-97CA00?style=flat-square)](docs/licenses/licenses.csv)
-[![c_dependency_count](https://img.shields.io/badge/dependencies-83-e05d44?style=flat-square)](docs/licenses/dependencies.csv)
+[![c_license_count](https://img.shields.io/badge/licenses-0-4c1?style=flat-square)](docs/licenses/licenses.csv)
+[![c_license_count_limited](https://img.shields.io/badge/licenses_limited-0-4c1?style=flat-square)](docs/licenses/licenses.csv)
+[![c_dependency_count](https://img.shields.io/badge/dependencies-0-4c1?style=flat-square)](docs/licenses/dependencies.csv)
 
 ### Features
 
