@@ -45,6 +45,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/Game"
     delete:
+      tags:
+        - "Games"
+        - "Internal"
       summary: "Delete a game"
       parameters:
         - name: "id"

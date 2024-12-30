@@ -29,15 +29,14 @@ import io.swagger.v3.oas.models.tags.Tag;
 
 import java.time.temporal.TemporalAccessor;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static berlin.yuna.apidoccrafter.config.Config.*;
 import static berlin.yuna.apidoccrafter.config.Identifier.isEqual;
-import static berlin.yuna.apidoccrafter.util.Util.matchesStringGlob;
 import static berlin.yuna.apidoccrafter.util.Util.nothing;
-import static java.util.Collections.emptyList;
 import static java.util.Optional.ofNullable;
 
 /**
@@ -289,6 +288,9 @@ public class Merger {
                 merge(oldEx::getExtensions, newEx::getExtensions, oldEx::setExtensions, SORT_EXTENSIONS);
             }
             case Operation oldOp when newItem instanceof final Operation newOp -> {
+                final AtomicBoolean remove = new AtomicBoolean(false);
+                filterAndRemoveOp(() -> oldOp, op -> remove.compareAndSet(false, op == null));
+                filterAndRemoveOp(() -> newOp, op -> remove.compareAndSet(false, op == null));
                 merge(oldOp::getTags, newOp::getTags, oldOp::setTags, SORT_TAGS);
                 merge(oldOp::getSummary, newOp::getSummary, oldOp::setSummary);
                 merge(oldOp::getDescription, newOp::getDescription, oldOp::setDescription);
@@ -302,6 +304,8 @@ public class Merger {
                 merge(oldOp::getSecurity, newOp::getSecurity, oldOp::setSecurity, SORT_SECURITY);
                 merge(oldOp::getServers, newOp::getServers, oldOp::setServers, SORT_SERVERS);
                 merge(oldOp::getExtensions, newOp::getExtensions, oldOp::setExtensions, SORT_EXTENSIONS);
+                if (remove.get())
+                    return null;
             }
             case PathItem oldPathItem when newItem instanceof final PathItem newPathItem -> {
                 merge(oldPathItem::getSummary, newPathItem::getSummary, oldPathItem::setSummary);
@@ -404,7 +408,8 @@ public class Merger {
             }
             case Paths oldPaths when newItem instanceof final Paths newPaths -> {
                 // Complex path filtering
-                oldPaths.entrySet().removeIf(entry -> matchesStringGlob(entry.getKey()) || ofNullable(entry.getValue()).map(PathItem::readOperations).orElse(emptyList()).stream().anyMatch(item -> ofNullable(item.getTags()).orElse(emptyList()).stream().anyMatch(Util::matchesStringGlob)));
+                filterAndRemoveOp(oldPaths);
+                filterAndRemoveOp(newPaths);
                 mergeMap(oldPaths, newPaths, sortBy(ascending));
                 merge(oldPaths::getExtensions, newPaths::getExtensions, oldPaths::setExtensions, SORT_EXTENSIONS);
             }
@@ -435,8 +440,32 @@ public class Merger {
         return oldItem;
     }
 
+    private static void filterAndRemoveOp(final Paths paths) {
+        if (paths != null) {
+            paths.values().forEach(item -> ofNullable(item).ifPresent(pathItem -> {
+                filterAndRemoveOp(pathItem::getGet, pathItem::setGet);
+                filterAndRemoveOp(pathItem::getPut, pathItem::setPut);
+                filterAndRemoveOp(pathItem::getHead, pathItem::setHead);
+                filterAndRemoveOp(pathItem::getPost, pathItem::setPost);
+                filterAndRemoveOp(pathItem::getDelete, pathItem::setDelete);
+                filterAndRemoveOp(pathItem::getPatch, pathItem::setPatch);
+                filterAndRemoveOp(pathItem::getOptions, pathItem::setOptions);
+                filterAndRemoveOp(pathItem::getTrace, pathItem::setTrace);
+            }));
+            // Remove empty and glob paths
+            paths.entrySet().removeIf(entry ->
+                ofNullable(entry.getValue()).filter(item -> item.readOperations() == null || item.readOperations().isEmpty()).isPresent()
+                    || ofNullable(entry.getValue()).map(Identifier::getKeys).filter(item -> Arrays.stream(item).anyMatch(Util::matchesRemoveGlob)).isPresent()
+            );
+        }
+    }
+
+    private static void filterAndRemoveOp(final Supplier<Operation> getOp, final Consumer<Operation> setOp) {
+        ofNullable(getOp).map(Supplier::get).filter(op -> ofNullable(op.getTags()).map(tags -> tags.stream().anyMatch(Util::matchesRemoveGlob)).orElse(false)).ifPresent(op -> setOp.accept(null));
+    }
+
     private static boolean shouldRemove(final Object item) {
-        return ofNullable(Identifier.getKeys(item)).map(keys -> Arrays.stream(keys).anyMatch(Util::matchesStringGlob)).orElse(false);
+        return ofNullable(Identifier.getKeys(item)).map(keys -> Arrays.stream(keys).anyMatch(Util::matchesRemoveGlob)).orElse(false);
     }
 
     private static void sort(final Collection<Object> list, final boolean ascending) {

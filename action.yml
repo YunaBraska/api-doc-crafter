@@ -3,100 +3,97 @@ description: "Clean, Merge, Group, Remove and generate OpenAPI documentation."
 author: "Yuna Morgenstern"
 inputs:
   swagger_js:
-    description: "[UI] (local=no external resource) Path to the Swagger JS file."
+    description: "[PATH] (local=no external resource) Path to the Swagger JS file."
     required: false
   swagger_bundle_js:
-    description: "[UI] (local=no external resource) Path to the Swagger JS file."
+    description: "[PATH] (local=no external resource) Path to the Swagger JS file."
     required: false
   swagger_css:
-    description: "[UI] (local=no external resource) Path to the Swagger CSS file."
+    description: "[PATH] (local=no external resource) Path to the Swagger CSS file."
     required: false
   swagger_favicon:
-    description: "[UI] (local=no external resource) Path to the Swagger favicon png file."
+    description: "[PATH] (local=no external resource) Path to the Swagger favicon png file."
     required: false
   swagger_logo:
-    description: "[UI] (local=no external resource) Path to the Swagger logo file."
+    description: "[PATH] (local=no external resource) Path to the Swagger logo file."
     required: false
   swagger_nav:
-    description: "[UI] Generate navigation"
+    description: "[BOOL] Generate navigation"
     required: false
   swagger_links:
-    description: "[UI] download source links"
+    description: "[BOOL] Generate download source links"
     required: false
   work_dir:
-    description: "Working directory for the input files."
+    description: "[PATH] Working directory for the input files."
     required: true
     default: "."
   output_dir:
-    description: "Directory to save the output files."
+    description: "[PATH] Directory to save the output files."
     required: false
     default: "./swagger_output"
   file_includes:
-    description: "File patterns to include. GLOB patterns separated by '::' or '|'."
+    description: "[GLOB] File patterns to include. GLOB patterns separated by '::' or '|'."
     required: false
   file_excludes:
-    description: "File patterns to exclude. GLOB patterns separated by '::' or '|'."
+    description: "[GLOB] File patterns to exclude. GLOB patterns separated by '::' or '|'."
     required: false
   max_deep:
-    description: "Maximum directory depth to search."
+    description: "[INT] Maximum directory depth to search."
     required: false
     default: "100"
   sort_extensions:
-    description: "Sort OpenAPI extensions alphabetically."
+    description: "[BOOL] Sort OpenAPI extensions alphabetically."
     required: false
   sort_servers:
-    description: "Sort OpenAPI servers alphabetically."
+    description: "[BOOL] Sort OpenAPI servers alphabetically."
     required: false
   sort_security:
-    description: "Sort OpenAPI security schemes alphabetically."
+    description: "[BOOL] Sort OpenAPI security schemes alphabetically."
     required: false
   sort_tags:
-    description: "Sort OpenAPI tags alphabetically."
+    description: "[BOOL] Sort OpenAPI tags alphabetically."
     required: false
   sort_paths:
-    description: "Sort OpenAPI paths alphabetically."
+    description: "[BOOL] Sort OpenAPI paths alphabetically."
     required: false
   sort_schemas:
-    description: "Sort OpenAPI schemas alphabetically."
+    description: "[BOOL] Sort OpenAPI schemas alphabetically."
     required: false
   sort_parameters:
-    description: "Sort OpenAPI parameters alphabetically."
+    description: "[BOOL] Sort OpenAPI parameters alphabetically."
     required: false
   sort_responses:
-    description: "Sort OpenAPI responses alphabetically."
+    description: "[BOOL] Sort OpenAPI responses alphabetically."
     required: false
   sort_examples:
-    description: "Sort OpenAPI examples alphabetically."
+    description: "[BOOL] Sort OpenAPI examples alphabetically."
     required: false
   sort_webhooks:
-    description: "Sort OpenAPI webhooks alphabetically."
+    description: "[BOOL] Sort OpenAPI webhooks alphabetically."
     required: false
   sort_headers:
-    description: "Sort OpenAPI headers alphabetically."
+    description: "[BOOL] Sort OpenAPI headers alphabetically."
     required: false
   sort_scopes:
-    description: "Sort OpenAPI scopes alphabetically."
+    description: "[BOOL] Sort OpenAPI scopes alphabetically."
     required: false
   sort_requests:
-    description: "Sort OpenAPI requests alphabetically."
+    description: "[BOOL] Sort OpenAPI requests alphabetically."
     required: false
   sort_content:
-    description: "Sort OpenAPI content alphabetically."
+    description: "[BOOL] Sort OpenAPI content alphabetically."
     required: false
   sort_encoding:
-    description: "Sort OpenAPI encodings alphabetically."
+    description: "[BOOL] Sort OpenAPI encodings alphabetically."
     required: false
-  remove_key:
-    description: "Keys or fields to remove from OpenAPI files."
+  remove_patterns:
+    description: "[GLOB] Keys or fields to remove from OpenAPI files. Separate servers with '::' or '|'."
     required: false
   group_tags:
-    description: "Group OpenAPI files by tags. Separate tags with '::', '|', or ','."
+    description: "[GLOB] Group OpenAPI files by tags. Separate tags with '::', '|', or ','."
     required: false
   group_servers:
-    description: "Group OpenAPI files by servers. Separate servers with '::' or '|'."
-    required: false
-  create_nav:
-    description: "Generate navigation HTML for OpenAPI output."
+    description: "[GLOB] Group OpenAPI files by servers. Separate servers with '::' or '|'."
     required: false
 outputs:
   output_path:
@@ -132,10 +129,9 @@ runs:
     ADC_SORT_REQUESTS: ${{ inputs.sort_requests }}
     ADC_SORT_CONTENT: ${{ inputs.sort_content }}
     ADC_SORT_ENCODING: ${{ inputs.sort_encoding }}
-    ADC_REMOVE_KEY: ${{ inputs.remove_key }}
+    ADC_REMOVE_PATTERNS: ${{ inputs.remove_patterns }}
     ADC_GROUP_TAGS: ${{ inputs.group_tags }}
     ADC_GROUP_SERVERS: ${{ inputs.group_servers }}
-    ADC_CREATE_NAV: ${{ inputs.create_nav }}
 branding:
   color: "green"
   icon: "code"

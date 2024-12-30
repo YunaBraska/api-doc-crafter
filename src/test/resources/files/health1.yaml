@@ -5,6 +5,9 @@ info:
   description: "API for tracking user health metrics."
 servers:
   - url: "https://api.healthmetrics.example.com/v1"
+    description: "Original version of the API"
+  - url: "https://api-internal.healthmetrics.example.com/v2"
+    description: "Internal version of the API"
 paths:
   /metrics:
     get:

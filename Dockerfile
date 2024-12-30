@@ -11,7 +11,7 @@ ARG ARCH
 RUN ARCH=$(if [ "$(uname -m)" = "aarch64" ]; then echo "arm64"; else echo "amd64"; fi) && \
     echo "Fetching release for ARCH: ${ARCH}" && \
     curl -s "https://api.github.com/repos/YunaBraska/api-doc-crafter/releases/latest" \
-    | grep "browser_download_url.*api-doc-crafter-${ARCH}-.*.native" \
+    | grep "browser_download_url.*api-doc-crafter-linux-${ARCH}-.*.native" \
     | cut -d '"' -f 4 \
     | xargs curl -L -o /api-doc-crafter.native && \
     chmod +x api-doc-crafter.native

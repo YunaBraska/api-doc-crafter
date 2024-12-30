@@ -83,17 +83,19 @@ public class HtmlGenerator {
     private static String generateNavigation(final Map<Path, OpenAPI> mergedApis, final String selected) {
         final StringBuilder navigation = new StringBuilder();
         if (config().asBooleanOpt(SWAGGER_NAV).orElse(true)) {
-            navigation
-                .append("  <nav class=\"swagger-ui sidebar\">").append(LS)
-                .append("    <div><img src=\"").append(getLocation(SWAGGER_LOGO, "logo.png", STATIC_SWAGGER_LOGO)).append("\" alt=\"Logo\"/></div>").append(LS)
-                .append("    <h2>Docs</h2>").append(LS)
-                .append("    <ul>").append(LS);
+            navigation.append("  <nav class=\"swagger-ui sidebar\">").append(LS);
+            config().asStringOpt(SWAGGER_LOGO).filter(ArgsDecoder::hasText).ifPresent(logo -> {
+                navigation.append("    <div>").append(LS);
+                config().asStringOpt(SWAGGER_LOGO_LINK).filter(ArgsDecoder::hasText).ifPresentOrElse(
+                    logoLink -> navigation.append("    <a class=\"link\" href='").append(logoLink).append("'><img src=\"").append(getLocation(SWAGGER_LOGO, "logo.png", STATIC_SWAGGER_LOGO)).append("\" alt=\"Logo\"/></a>").append(LS),
+                    () -> navigation.append("    <img src=\"").append(getLocation(SWAGGER_LOGO, "logo.png", STATIC_SWAGGER_LOGO)).append("\" alt=\"Logo\"/>").append(LS)
+                );
+                navigation.append("    </div>").append(LS);
+            });
+            navigation.append("    <h2>Docs</h2>").append(LS).append("    <ul>").append(LS);
             mergedApis.forEach((path, openAPI) -> {
                 final String displayName = displayName(path, openAPI);
-                navigation
-                    .append("      <li><a class=\"link\" href='").append(filenameHtml(path, openAPI)).append("'>")
-                    .append(displayName.equals(selected) ? "<strong>" + displayName + "</strong>" : displayName)
-                    .append("</a></li>").append(LS);
+                navigation.append("      <li><a class=\"link\" href='").append(filenameHtml(path, openAPI)).append("'>").append(displayName.equals(selected) ? "<strong>" + displayName + "</strong>" : displayName).append("</a></li>").append(LS);
             });
             navigation.append("    </ul>").append(LS)
                 .append("  </nav>").append(LS);

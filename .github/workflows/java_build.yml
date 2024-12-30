@@ -48,20 +48,15 @@ jobs:
           fetch-depth: 1
           ref: ${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
-      - name: "♻️ Restore cache [${{ runner.os }}-build-${{ hashFiles('**/pom.xml', '**/build.gradle*', '**/package-lock.json') }}]"
+      - name: "♻️ Restore cache [unix-build-${{ hashFiles('**/pom.xml', '**/build.gradle*') }}]"
         uses: actions/cache@v4
         with:
           path: |
             ~/.m2
             ~/.gradle/caches
             ~/.gradle/wrapper
-            **/node_modules/*
-            ~/.npm/ms-playwright
-            ~/.cache/playwright
-            ~/.cache/ms-playwright
-            ~/.npm/ms-playwright
-          key: ${{ runner.os }}-build-${{ hashFiles('**/pom.xml', '**/build.gradle*', '**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-build-${{ hashFiles('**/pom.xml', '**/build.gradle*', '**/package-lock.json') }}
+          key: unix-build-${{ hashFiles('**/pom.xml', '**/build.gradle*') }}
+          restore-keys: unix-build-${{ hashFiles('**/pom.xml', '**/build.gradle*') }}
       - name: "🔍 Read Java Info"
         id: "java_info"
         uses: YunaBraska/java-info-action@main
@@ -70,7 +65,7 @@ jobs:
         with:
           java-version: ${{ steps.java_info.outputs.java_version }}
           distribution: 'temurin'
-      - name: "Maven License Info"
+      - name: "🗒️ Maven License Info"
         id: "license_info"
         uses: YunaBraska/maven-license-info-action@main
         with:

@@ -1,6 +1,7 @@
 # Api-Doc-Crafter
+_GitHub Action & Docker & CLI_
 
-Api-Doc-Merger is a standalone tool designed to merge multiple API files and generate Swagger HTML documentation. It
+Api-Doc-Merger is a standalone cli tool designed to merge multiple API files and generate Swagger HTML documentation. It
 also cleans and filters API files by ignoring invalid entries and removing servers and paths based on glob patterns.
 This makes it particularly useful for generating documentation from code and excluding endpoints tagged as internal.
 
@@ -15,11 +16,12 @@ This makes it particularly useful for generating documentation from code and exc
 [![Tag][tag_shield]][tag_link]
 [![Size][size_shield]][size_shield]
 ![Label][label_shield]
-![Label][node_version]
-[![Licenses](https://img.shields.io/badge/Licenses-065d7c?style=flat-square)](https://github.com/YunaBraska/api-doc-crafter/blob/main/dist/licenses.txt)
+
 [![c_license_count](https://img.shields.io/badge/licenses-0-4c1?style=flat-square)](docs/licenses/licenses.csv)
 [![c_license_count_limited](https://img.shields.io/badge/licenses_limited-0-4c1?style=flat-square)](docs/licenses/licenses.csv)
 [![c_dependency_count](https://img.shields.io/badge/dependencies-0-4c1?style=flat-square)](docs/licenses/dependencies.csv)
+
+![Example](src/test/resources/example_01.png)
 
 ### Features
 
@@ -39,56 +41,60 @@ This makes it particularly useful for generating documentation from code and exc
 
     # CONFIGS (Optional)
     with:
-        deep: '-1'
-        work-dir: '.'
+        file_includes: "**/files/**"
+        swagger_logo: "https://example.com/logo.png"
+        swagger_logo_link: "index.html"
+        remove_patterns: "admin|management|**internal**"
 ```
 
 _GitHub mounts the current workdir as `/github/workspace` and the output directory is `/github/workspace/swagger_output`
 to the docker image.
-All inputs are parsed as environment variables which are mapped in the [action.yml](action.yml) file. The App reads envs and args._
+All inputs are parsed as environment variables which are mapped in the [action.yml](action.yml) file. The App reads envs
+and args._
 
 ## Inputs
 
 _for NON GitHub Action usage: use prefix `adc_` for all input parameters_
 
-| Parameter           | type    | Default                                                                   | Description                                                                                                         |
-|---------------------|---------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| `swagger_js`        | Path    | https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-standalone-preset.js  | \[UI] (local=no external resource) Path to the Swagger JS file.                                                     |
-| `swagger_bundle_js` | Path    | https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js             | \[UI] (local=no external resource) Path to the Swagger JS file.                                                     |
-| `swagger_css`       | Path    | https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css                   | \[UI] (local=no external resource) Path to the Swagger CSS file.                                                    |
-| `swagger_nav_css`   | Path    | none                                                                      | \[UI] (local=no external resource) Path to the Swagger CSS file.                                                    |
-| `swagger_favicon`   | Path    | https://petstore.swagger.io/favicon-32x32.png                             | \[UI] (local=no external resource) Path to the Swagger favicon png file.                                            |
-| `swagger_logo`      | Path    | https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg | \[UI] (local=no external resource) Path to the Swagger logo file.                                                   |
-| `swagger_nav`       | Boolean | true                                                                      | \[UI] Generate navigation                                                                                           |
-| `swagger_links`     | Boolean | true                                                                      | \[UI] Generate download source links                                                                                |
-| `work_dir`          | Path    | `.`                                                                       | Working directory for the input files.                                                                              |
-| `output_dir`        | Path    | `./swagger_output`                                                        | Directory to save the output files.                                                                                 |
-| `file_includes`     | Glob    |                                                                           | File patterns to include. GLOB patterns separated by '::' or '\|'.                                                  |
-| `file_excludes`     | Glob    |                                                                           | File patterns to exclude. GLOB patterns separated by '::' or '\|'.                                                  |
-| `max_deep`          | Integer | `100`                                                                     | Maximum directory depth to search.                                                                                  |
-| `sort_extensions`   | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI extensions.                                                    |
-| `sort_servers`      | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI servers.                                                       |
-| `sort_security`     | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI security schemes.                                              |
-| `sort_tags`         | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI tags.                                                          |
-| `sort_paths`        | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI paths.                                                         |
-| `sort_schemas`      | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI schemas.                                                       |
-| `sort_parameters`   | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI parameters.                                                    |
-| `sort_responses`    | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI responses.                                                     |
-| `sort_examples`     | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI examples.                                                      |
-| `sort_webhooks`     | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI webhooks.                                                      |
-| `sort_headers`      | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI headers.                                                       |
-| `sort_scopes`       | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI scopes.                                                        |
-| `sort_requests`     | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI requests.                                                      |
-| `sort_content`      | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI content.                                                       |
-| `sort_encoding`     | Boolean | true                                                                      | \[Sort] (none=disable, true=asc, false=desc) OpenAPI encodings.                                                     |
-| `remove_key`        | Glob    | null                                                                      | Keys or fields to remove from OpenAPI files. Removes also servers or paths by their identifiers e.g. url, tags,...  |
-| `group_tags`        | Glob    | null                                                                      | Group OpenAPI files by tags. Separate tags with '::', '\|', or ','.  (disabling can be done by non matching values) |
-| `group_servers`     | Glob    | null                                                                      | Group OpenAPI files by servers. Separate servers with '::' or '\|'.  (disabling can be done by non matching values) |
+| Parameter           | type    | Description                                                                                                                                         | Default                                                                  |
+|---------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `swagger_js`        | Path    | \[UI] (local=no external resource) Path to the Swagger JS file.                                                                                     | https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-standalone-preset.js |
+| `swagger_bundle_js` | Path    | \[UI] (local=no external resource) Path to the Swagger JS file.                                                                                     | https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js            |
+| `swagger_css`       | Path    | \[UI] (local=no external resource) Path to the Swagger CSS file.                                                                                    | https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css                  |
+| `swagger_nav_css`   | Path    | \[UI] (local=no external resource) Path to the Navigation CSS file.                                                                                 | none                                                                     |
+| `swagger_favicon`   | Path    | \[UI] (local=no external resource) Path to the Swagger favicon png file.                                                                            | https://petstore.swagger.io/favicon-32x32.png                            |
+| `swagger_logo`      | Path    | \[UI] (local=no external resource) Path to the Swagger logo file.                                                                                   | none                                                                     |
+| `swagger_logo_link` | Path    | \[UI] (local=no external resource) Path to URL like `index.html`.                                                                                   | none                                                                     |
+| `swagger_nav`       | Boolean | \[UI] Generate navigation                                                                                                                           | true                                                                     |
+| `swagger_links`     | Boolean | \[UI] Generate download source links                                                                                                                | true                                                                     |
+| `work_dir`          | Path    | Working directory for the input files.                                                                                                              | `.`                                                                      |
+| `output_dir`        | Path    | Directory to save the output files.                                                                                                                 | `./swagger_output`                                                       |
+| `file_includes`     | Glob    | File patterns to include. GLOB patterns separated by `::` or `\|`.                                                                                  |                                                                          |
+| `file_excludes`     | Glob    | File patterns to exclude. GLOB patterns separated by `::` or `\|`.                                                                                  |                                                                          |
+| `max_deep`          | Integer | Maximum directory depth to search.                                                                                                                  | `100`                                                                    |
+| `sort_extensions`   | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI extensions.                                                                                    | true                                                                     |
+| `sort_servers`      | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI servers.                                                                                       | true                                                                     |
+| `sort_security`     | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI security schemes.                                                                              | true                                                                     |
+| `sort_tags`         | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI tags.                                                                                          | true                                                                     |
+| `sort_paths`        | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI paths.                                                                                         | true                                                                     |
+| `sort_schemas`      | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI schemas.                                                                                       | true                                                                     |
+| `sort_parameters`   | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI parameters.                                                                                    | true                                                                     |
+| `sort_responses`    | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI responses.                                                                                     | true                                                                     |
+| `sort_examples`     | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI examples.                                                                                      | true                                                                     |
+| `sort_webhooks`     | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI webhooks.                                                                                      | true                                                                     |
+| `sort_headers`      | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI headers.                                                                                       | true                                                                     |
+| `sort_scopes`       | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI scopes.                                                                                        | true                                                                     |
+| `sort_requests`     | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI requests.                                                                                      | true                                                                     |
+| `sort_content`      | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI content.                                                                                       | true                                                                     |
+| `sort_encoding`     | Boolean | \[Sort] (none=disable, true=asc, false=desc) OpenAPI encodings.                                                                                     | true                                                                     |
+| `remove_patterns`   | Glob    | Keys or fields to remove from OpenAPI files. Separate servers by `::` or `\|` Removes also servers or paths by their identifiers e.g. url, tags,... | null                                                                     |
+| `group_tags`        | Glob    | Group OpenAPI files by tags. Separate tags by `::` or `\|` or `,`.  (disabling can be done by non matching values)                                  | null                                                                     |
+| `group_servers`     | Glob    | Group OpenAPI files by servers. Separate servers by `::` or `\|`.  (disabling can be done by non matching values)                                   | null                                                                     |
 
 ## Known Issues
 
 * Parsing files without `"openapi":"3.0.1"` property could be ignored by the parser when running as binary in
-  docker/github action. Reason=unkown
+  docker or github action. Reason=unkown
 
 ## \[DEV] Setup Environment
 
@@ -104,6 +110,9 @@ _for NON GitHub Action usage: use prefix `adc_` for all input parameters_
 
 ### Docker files
 
+* Complete Image:
+  * Description: Used in GitHub action
+  * `ghcr.io/yunabraska/api-doc-crafter:latest`
 * Dockerfile:
     * Description: Used as executable in `action.yml` to build the application from the releases
     * Build `docker build -t app -f Dockerfile .`
@@ -119,9 +128,10 @@ _for NON GitHub Action usage: use prefix `adc_` for all input parameters_
     * Build Arch: `docker buildx build --platform linux/amd64 -f Dockerfile_Native .`
     * Extract file: `docker buildx build --platform linux/amd64 -f Dockerfile_Native --target export . --output target`
 
-### Deployment
+### Deployment & Releases
 
 Everything is automated using GitHub Actions
+Released files pattern: `api-doc-crafter-<os>-<arch>-<version>.native` (api-doc-crafter-linux-amd64-2025.0.1.native)
 
 * [java_build.yml](.github/workflows/java_build.yml) updates versions &
   triggers [github_release.yml](.github/workflows/github_release.yml)

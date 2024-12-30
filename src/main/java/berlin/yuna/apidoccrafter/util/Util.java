@@ -33,7 +33,7 @@ public class Util {
      * @param input The string to match.
      * @return true if the string matches the glob pattern, false otherwise.
      */
-    public static boolean matchesStringGlob(final String input) {
+    public static boolean matchesRemoveGlob(final String input) {
         return matchesStringGlob(input, getRemovePattern());
     }
 

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Metrics API</title>
+  <link href="https://petstore.swagger.io/favicon-32x32.png" type="image/png" rel="shortcut icon">
+  <link href="https://petstore.swagger.io/favicon-32x32.png" type="image/png" rel="icon">
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css" />
+<style>body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+nav {
+    width: 250px;
+    background: rgba(0, 0, 0, .05);
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav li {
+    padding: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #3b4151;
+}
+
+nav a:hover {
+    color: #7d8492;
+}
+
+#swagger-ui {
+    flex: 1;
+    overflow-y: auto;
+}
+
+nav .swagger-ui .sidebar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav .swagger-ui .sidebar img {
+    max-width: 80%;
+    height: auto;
+}
+
+.source-links {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 8%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #49cc90;
+}
+
+.source-links .link {
+    color: #4990e2;
+    font-size: 12px;
+    padding: 5px;
+    display: block;
+}
+
+.source-links a:hover {
+    color: #1f69c0;
+}
+</style>
+</head>
+<body>
+  <nav class="swagger-ui sidebar">
+    <div>
+    <a class="link" href='index.html'><img src="https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg" alt="Logo"/></a>
+    </div>
+    <h2>Docs</h2>
+    <ul>
+      <li><a class="link" href='books_api.html'>Books API</a></li>
+      <li><a class="link" href='games_api.html'>Games API</a></li>
+      <li><a class="link" href='health_metrics_api.html'><strong>Health Metrics API</strong></a></li>
+      <li><a class="link" href='swagger_petstore.html'>Swagger Petstore</a></li>
+    </ul>
+  </nav>
+<div class="swagger-ui source-links">
+  <a href='health_metrics_api.json' rel="noopener noreferrer" class="link" target="health_metrics_api.json">JSON</a>
+  <a href='health_metrics_api.yaml' rel="noopener noreferrer" class="link" target="health_metrics_api.yaml">YAML</a>
+</div>
+<div id="swagger-ui"></div>
+<script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-standalone-preset.js" crossorigin></script>
+<script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js" crossorigin></script>
+<script>
+  SwaggerUIBundle(
+    {
+      spec: {"openapi":"3.0.1","info":{"title":"Health Metrics API","description":"API for tracking user health metrics.","version":"1.0.0"},"servers":[{"url":"https://api.healthmetrics.example.com/v1","description":"Original version of the API"}],"paths":{"/metrics":{"get":{"summary":"Retrieve all health metrics","responses":{"200":{"description":"List of health metrics","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Metric"}}}}}}},"post":{"summary":"Add a new metric","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Metric"}}}},"responses":{"201":{"description":"Metric added"}}}},"/metrics/sync":{"post":{"summary":"Synchronize metrics with an external device","requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"deviceId":{"type":"string"},"metrics":{"type":"array","items":{"$ref":"#/components/schemas/Metric"}}}}}}},"responses":{"200":{"description":"Synchronization successful"}}}},"/metrics/{id}":{"get":{"summary":"Retrieve a specific metric","parameters":[{"name":"id","in":"path","required":true,"style":"simple","explode":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"Metric details","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Metric"}}}}}},"delete":{"summary":"Delete a metric","parameters":[{"name":"id","in":"path","required":true,"style":"simple","explode":false,"schema":{"type":"string"}}],"responses":{"204":{"description":"Metric deleted"}}}},"/metrics/{id}/trend":{"get":{"summary":"Retrieve metric trends over time","parameters":[{"name":"id","in":"path","required":true,"style":"simple","explode":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"Metric trends","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Trend"}}}}}}},"/users":{"get":{"summary":"Retrieve all users","responses":{"200":{"description":"List of users","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/User"}}}}}}}},"/users/{id}":{"get":{"summary":"Retrieve a specific user","parameters":[{"name":"id","in":"path","required":true,"style":"simple","explode":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"User details","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}}},"patch":{"summary":"Update user information","parameters":[{"name":"id","in":"path","required":true,"style":"simple","explode":false,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}},"responses":{"200":{"description":"User updated"}}}}},"components":{"schemas":{"Metric":{"type":"object","properties":{"id":{"type":"string"},"timestamp":{"type":"string","format":"date-time"},"type":{"type":"string","enum":["calories","heart_rate","steps","weight"]},"value":{"type":"number"}}},"Trend":{"type":"object","properties":{"dataPoints":{"type":"array","items":{"type":"object","properties":{"timestamp":{"type":"string","format":"date-time"},"value":{"type":"number"}}}},"metricId":{"type":"string"}}},"User":{"type":"object","properties":{"age":{"type":"integer"},"email":{"type":"string","format":"email"},"gender":{"type":"string","enum":["female","male","other"]},"id":{"type":"string"},"name":{"type":"string"}}}}}},
+      tagsSorter: (a, b) => a.toLowerCase() < b.toLowerCase() ? 1 : -1,
+      operationsSorter: 'alpha',
+      dom_id:'#swagger-ui',
+      deepLinking:true,
+      presets:[SwaggerUIBundle.presets.apis,SwaggerUIStandalonePreset],
+      layout:'BaseLayout'
+    }
+  );
+</script>
+</body></html>

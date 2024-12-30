@@ -21,3 +21,17 @@ jobs:
           ls -lah
           ls -lah swagger_output
           ls -lah swagger_output/index.html
+      - name: "🔍 Read Java Info"
+        id: "java_info"
+        uses: YunaBraska/java-info-action@main
+      - name: "☕ Setup Java [${{ steps.java_info.outputs.java_version }}] Builder [${{ steps.java_info.outputs.builder_name }}] [${{ steps.java_info.outputs.builder_version }}]"
+        uses: actions/setup-java@main
+        with:
+          java-version: ${{ steps.java_info.outputs.java_version }}
+          distribution: 'temurin'
+      - name: "🗒️ Maven License Info"
+        id: "license_info"
+        uses: YunaBraska/maven-license-info-action@main
+        with:
+          exclude-scopes: 'test,provided,system'
+          output-dir: 'docs/licenses'

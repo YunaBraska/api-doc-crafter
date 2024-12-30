@@ -84,7 +84,7 @@ public class Identifier {
         registerIdentifiers(result, SecurityRequirement.class, item -> toIds(item, SecurityRequirement::getName));
         registerIdentifiers(result, Example.class, item -> toIds(item, Example::get$ref, Example::getSummary, Example::getDescription));
         registerIdentifiers(result, Operation.class, Identifier::toIds);
-        registerIdentifiers(result, PathItem.class, Identifier::toIds);
+        registerIdentifiers(result, PathItem.class, item -> toIds(item, PathItem::get$ref));
         registerIdentifiers(result, Schema.class, item -> toIds(item, Schema::get$id, Schema::get$ref, Schema::getName, Schema::getTitle, Schema::getDescription));
         registerIdentifiers(result, XML.class, item -> toIds(item, XML::getName, XML::getNamespace));
         registerIdentifiers(result, OffsetDateTime.class, item -> new String[]{String.valueOf(item.getNano())});
@@ -191,19 +191,6 @@ public class Identifier {
     }
 
     /**
-     * Converts an PathItem object to its identifiers.
-     *
-     * @param item The PathItem object.
-     * @return An array of identifiers for the object.
-     */
-    private static String[] toIds(final PathItem item) {
-        return item == null ? new String[0] : Stream.of(item.getGet(), item.getPut(), item.getPost(), item.getDelete(), item.getOptions(), item.getHead(), item.getPatch(), item.getTrace(), item.get$ref())
-            .map(Identifier::toIds)
-            .flatMap(Stream::of)
-            .toArray(String[]::new);
-    }
-
-    /**
      * Converts an Operation object to its identifiers.
      *
      * @param op The Operation object.
@@ -217,7 +204,7 @@ public class Identifier {
     private static <T> String[] toIds(final T item, final Function<T, String>... conversions) {
         if (conversions == null || conversions.length == 0)
             throw new IllegalArgumentException("Mighty be a bug, please report this issue, that no conversion is provided for item: " + item.getClass().getCanonicalName());
-        return item == null ? null : stream(conversions).map(conversion -> conversion.apply(item)).map(s -> s == null ? null : s.toLowerCase()).toArray(String[]::new);
+        return item == null || conversions == null || conversions.length == 0? null : stream(conversions).map(conversion -> conversion.apply(item)).map(s -> s == null ? null : s.toLowerCase()).toArray(String[]::new);
     }
 
     // DX function to register identifiers for deep merge

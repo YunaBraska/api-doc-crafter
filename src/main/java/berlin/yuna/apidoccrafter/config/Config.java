@@ -33,8 +33,10 @@ public class Config {
     public static final String SWAGGER_CSS = CONFIG_PREFIX + "swagger_css";
     public static final String SWAGGER_NAV_CSS = CONFIG_PREFIX + "swagger_nav_css";
     public static final String SWAGGER_LOGO = CONFIG_PREFIX + "swagger_logo";
+    public static final String SWAGGER_LOGO_LINK = CONFIG_PREFIX + "swagger_logo_link";
     public static final String SWAGGER_NAV = CONFIG_PREFIX + "swagger_nav";
     public static final String SWAGGER_LINKS = CONFIG_PREFIX + "swagger_links";
+
     public static final String SORT_EXTENSIONS = CONFIG_PREFIX + "adc_sort_extensions";
     public static final String SORT_SERVERS = CONFIG_PREFIX + "sort_servers";
     public static final String SORT_SECURITY = CONFIG_PREFIX + "sort_security";
@@ -50,7 +52,8 @@ public class Config {
     public static final String SORT_REQUESTS = CONFIG_PREFIX + "sort_requests";
     public static final String SORT_CONTENT = CONFIG_PREFIX + "sort_content";
     public static final String SORT_ENCODING = CONFIG_PREFIX + "sort_encoding";
-    public static final String REMOVE_KEY = CONFIG_PREFIX + "remove";
+
+    public static final String REMOVE_PATTERNS = CONFIG_PREFIX + "remove_patterns";
     // GLOB patterns separated by "::" or "|"
     public static final String FILE_INCLUDES = CONFIG_PREFIX + "file_includes";
     // GLOB patterns separated by "::" or "|"
@@ -76,7 +79,7 @@ public class Config {
     }
 
     public static String getRemovePattern() {
-        return CONFIG_ITEMS.asStringOpt(REMOVE_KEY).map(String::trim).map(String::toLowerCase).orElse(null);
+        return CONFIG_ITEMS.asStringOpt(REMOVE_PATTERNS).map(String::trim).map(String::toLowerCase).orElse(null);
     }
 
     public static TypeMap config() {
