@@ -1,6 +1,6 @@
 
-Lists of 51 third-party dependencies.
-     (The Apache License, Version 2.0) type-map (berlin.yuna:type-map:2.1.24 - https://github.com/YunaBraska/type-map)
+Lists of 50 third-party dependencies.
+     (The Apache License, Version 2.0) type-map (berlin.yuna:type-map:2.1.26 - https://github.com/YunaBraska/type-map)
      (The Apache Software License, Version 2.0) Jackson-annotations (com.fasterxml.jackson.core:jackson-annotations:2.16.2 - https://github.com/FasterXML/jackson)
      (The Apache Software License, Version 2.0) Jackson-core (com.fasterxml.jackson.core:jackson-core:2.16.2 - https://github.com/FasterXML/jackson-core)
      (The Apache Software License, Version 2.0) jackson-databind (com.fasterxml.jackson.core:jackson-databind:2.16.2 - https://github.com/FasterXML/jackson)
@@ -21,8 +21,7 @@ Lists of 51 third-party dependencies.
      (The Apache Software License, Version 2.0) Guava ListenableFuture only (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava - https://github.com/google/guava/listenablefuture)
      (Apache License, Version 2.0) J2ObjC Annotations (com.google.j2objc:j2objc-annotations:2.8 - https://github.com/google/j2objc/)
      (The Apache Software License, Version 2.0) libphonenumber (com.googlecode.libphonenumber:libphonenumber:8.11.1 - https://github.com/google/libphonenumber/)
-     (EDL 1.0) Jakarta Activation (com.sun.activation:jakarta.activation:2.0.1 - https://github.com/eclipse-ee4j/jaf/jakarta.activation)
-     (Eclipse Distribution License - v 1.0) istack common utility code runtime (com.sun.istack:istack-commons-runtime:4.0.1 - https://projects.eclipse.org/projects/ee4j/istack-commons/istack-commons-runtime)
+     (Eclipse Distribution License - v 1.0) istack common utility code runtime (com.sun.istack:istack-commons-runtime:4.1.2 - https://projects.eclipse.org/projects/ee4j/istack-commons/istack-commons-runtime)
      (Apache-2.0) Apache Commons IO (commons-io:commons-io:2.17.0 - https://commons.apache.org/proper/commons-io/)
      (Apache License 2.0) swagger-annotations (io.swagger:swagger-annotations:1.6.14 - https://github.com/swagger-api/swagger-core/modules/swagger-annotations)
      (Apache License 2.0) swagger-compat-spec-parser (io.swagger:swagger-compat-spec-parser:1.0.72 - http://nexus.sonatype.org/oss-repository-hosting.html/swagger-parser-project/modules/swagger-compat-spec-parser)
@@ -45,9 +44,9 @@ Lists of 51 third-party dependencies.
      (The MIT License) JOpt Simple (net.sf.jopt-simple:jopt-simple:5.0.4 - http://jopt-simple.github.io/jopt-simple)
      (Apache-2.0) Apache Commons Lang (org.apache.commons:commons-lang3:3.14.0 - https://commons.apache.org/proper/commons-lang/)
      (The MIT License) Checker Qual (org.checkerframework:checker-qual:3.37.0 - https://checkerframework.org/)
-     (Eclipse Distribution License - v 1.0) JAXB Core (org.glassfish.jaxb:jaxb-core:3.0.2 - https://eclipse-ee4j.github.io/jaxb-ri/)
-     (Eclipse Distribution License - v 1.0) JAXB Runtime (org.glassfish.jaxb:jaxb-runtime:3.0.2 - https://eclipse-ee4j.github.io/jaxb-ri/)
-     (Eclipse Distribution License - v 1.0) TXW2 Runtime (org.glassfish.jaxb:txw2:3.0.2 - https://eclipse-ee4j.github.io/jaxb-ri/)
+     (Eclipse Distribution License - v 1.0) JAXB Core (org.glassfish.jaxb:jaxb-core:4.0.5 - https://eclipse-ee4j.github.io/jaxb-ri/)
+     (Eclipse Distribution License - v 1.0) JAXB Runtime (org.glassfish.jaxb:jaxb-runtime:4.0.5 - https://eclipse-ee4j.github.io/jaxb-ri/)
+     (Eclipse Distribution License - v 1.0) TXW2 Runtime (org.glassfish.jaxb:txw2:4.0.5 - https://eclipse-ee4j.github.io/jaxb-ri/)
      (Mozilla Public License, Version 2.0) Mozilla Rhino (org.mozilla:rhino:1.7.7.2 - https://developer.mozilla.org/en/Rhino)
      (MIT License) SLF4J API Module (org.slf4j:slf4j-api:2.0.9 - http://www.slf4j.org)
      (Apache License, Version 2.0) SnakeYAML (org.yaml:snakeyaml:2.3 - https://bitbucket.org/snakeyaml/snakeyaml)

@@ -1,1 +1,44 @@
-[]
+[
+    {
+        "name": "Apache License",
+        "version": "2.0",
+        "scope": "compile",
+        "isLimited": false
+    },
+    {
+        "name": "Apache",
+        "version": "2.0",
+        "scope": "compile",
+        "isLimited": false
+    },
+    {
+        "name": "EDL",
+        "version": "1.0",
+        "scope": "compile",
+        "isLimited": false
+    },
+    {
+        "name": "LGPL",
+        "version": "3",
+        "scope": "compile",
+        "isLimited": true
+    },
+    {
+        "name": "MIT",
+        "version": "1",
+        "scope": "compile",
+        "isLimited": false
+    },
+    {
+        "name": "MPL",
+        "version": "2.0",
+        "scope": "compile",
+        "isLimited": true
+    },
+    {
+        "name": "EDL",
+        "version": "1.0",
+        "scope": "runtime",
+        "isLimited": false
+    }
+]

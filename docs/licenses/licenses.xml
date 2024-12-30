@@ -1,3 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <licenses>
+    <license>
+        <name>Apache License</name>
+        <version>2.0</version>
+        <version>compile</version>
+        <limited>false</limited>
+    </license>
+    <license>
+        <name>Apache</name>
+        <version>2.0</version>
+        <version>compile</version>
+        <limited>false</limited>
+    </license>
+    <license>
+        <name>EDL</name>
+        <version>1.0</version>
+        <version>compile</version>
+        <limited>false</limited>
+    </license>
+    <license>
+        <name>LGPL</name>
+        <version>3</version>
+        <version>compile</version>
+        <limited>true</limited>
+    </license>
+    <license>
+        <name>MIT</name>
+        <version>1</version>
+        <version>compile</version>
+        <limited>false</limited>
+    </license>
+    <license>
+        <name>MPL</name>
+        <version>2.0</version>
+        <version>compile</version>
+        <limited>true</limited>
+    </license>
+    <license>
+        <name>EDL</name>
+        <version>1.0</version>
+        <version>runtime</version>
+        <limited>false</limited>
+    </license>
 </licenses>

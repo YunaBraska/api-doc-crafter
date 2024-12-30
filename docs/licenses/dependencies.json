@@ -1,1 +1,866 @@
-[]
+[
+    {
+        "line": "berlin.yuna:typemap:2.1.26",
+        "group": "berlin.yuna",
+        "artifact": "typemap",
+        "version": "2.1.26",
+        "scope": "compile",
+        "url": "https://github.com/YunaBraska/typemap",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.fasterxml.jackson.core:jacksonannotations:2.16.2",
+        "group": "com.fasterxml.jackson.core",
+        "artifact": "jacksonannotations",
+        "version": "2.16.2",
+        "scope": "compile",
+        "url": "https://github.com/FasterXML/jackson",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.fasterxml.jackson.core:jacksoncore:2.16.2",
+        "group": "com.fasterxml.jackson.core",
+        "artifact": "jacksoncore",
+        "version": "2.16.2",
+        "scope": "compile",
+        "url": "https://github.com/FasterXML/jacksoncore",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.fasterxml.jackson.core:jacksondatabind:2.16.2",
+        "group": "com.fasterxml.jackson.core",
+        "artifact": "jacksondatabind",
+        "version": "2.16.2",
+        "scope": "compile",
+        "url": "https://github.com/FasterXML/jackson",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.fasterxml.jackson.dataformat:jacksondataformat-yaml:2.16.2",
+        "group": "com.fasterxml.jackson.dataformat",
+        "artifact": "jacksondataformatyaml",
+        "version": "2.16.2",
+        "scope": "compile",
+        "url": "https://github.com/FasterXML/jacksondataformats-text",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.fasterxml.jackson.datatype:jacksondatatype-jsr310:2.16.2",
+        "group": "com.fasterxml.jackson.datatype",
+        "artifact": "jacksondatatypejsr310",
+        "version": "2.16.2",
+        "scope": "compile",
+        "url": "https://github.com/FasterXML/jacksonmodules-java8/jackson-datatype-jsr310",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.github.javajson-tools:btf:1.3",
+        "group": "com.github.javajsontools",
+        "artifact": "btf",
+        "version": "1.3",
+        "scope": "compile",
+        "url": "https://github.com/javajson-tools/btf",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            },
+            {
+                "name": "LGPL",
+                "version": "3",
+                "scope": "compile",
+                "isLimited": true
+            }
+        ]
+    },
+    {
+        "line": "com.github.javajson-tools:jackson-coreutils:2.0",
+        "group": "com.github.javajsontools",
+        "artifact": "jacksoncoreutils",
+        "version": "2.0",
+        "scope": "compile",
+        "url": "https://github.com/javajson-tools/jackson-coreutils",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            },
+            {
+                "name": "LGPL",
+                "version": "3",
+                "scope": "compile",
+                "isLimited": true
+            }
+        ]
+    },
+    {
+        "line": "com.github.javajson-tools:jackson-coreutils-equivalence:1.0",
+        "group": "com.github.javajsontools",
+        "artifact": "jacksoncoreutils-equivalence",
+        "version": "1.0",
+        "scope": "compile",
+        "url": "https://github.com/javajson-tools/jackson-coreutils",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            },
+            {
+                "name": "LGPL",
+                "version": "3",
+                "scope": "compile",
+                "isLimited": true
+            }
+        ]
+    },
+    {
+        "line": "com.github.javajson-tools:json-patch:1.13",
+        "group": "com.github.javajsontools",
+        "artifact": "jsonpatch",
+        "version": "1.13",
+        "scope": "compile",
+        "url": "https://github.com/javajson-tools/json-patch",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            },
+            {
+                "name": "LGPL",
+                "version": "3",
+                "scope": "compile",
+                "isLimited": true
+            }
+        ]
+    },
+    {
+        "line": "com.github.javajson-tools:json-schema-core:1.2.14",
+        "group": "com.github.javajsontools",
+        "artifact": "jsonschema-core",
+        "version": "1.2.14",
+        "scope": "compile",
+        "url": "https://github.com/javajson-tools/json-schema-core",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            },
+            {
+                "name": "LGPL",
+                "version": "3",
+                "scope": "compile",
+                "isLimited": true
+            }
+        ]
+    },
+    {
+        "line": "com.github.javajson-tools:json-schema-validator:2.2.14",
+        "group": "com.github.javajsontools",
+        "artifact": "jsonschema-validator",
+        "version": "2.2.14",
+        "scope": "compile",
+        "url": "https://github.com/javajson-tools/json-schema-validator",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            },
+            {
+                "name": "LGPL",
+                "version": "3",
+                "scope": "compile",
+                "isLimited": true
+            }
+        ]
+    },
+    {
+        "line": "com.github.javajson-tools:msg-simple:1.2",
+        "group": "com.github.javajsontools",
+        "artifact": "msgsimple",
+        "version": "1.2",
+        "scope": "compile",
+        "url": "https://github.com/javajson-tools/msg-simple",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            },
+            {
+                "name": "LGPL",
+                "version": "3",
+                "scope": "compile",
+                "isLimited": true
+            }
+        ]
+    },
+    {
+        "line": "com.github.javajson-tools:uri-template:0.10",
+        "group": "com.github.javajsontools",
+        "artifact": "uritemplate",
+        "version": "0.10",
+        "scope": "compile",
+        "url": "https://github.com/javajson-tools/uri-template",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            },
+            {
+                "name": "LGPL",
+                "version": "3",
+                "scope": "compile",
+                "isLimited": true
+            }
+        ]
+    },
+    {
+        "line": "com.google.code.findbugs:jsr305:3.0.2",
+        "group": "com.google.code.findbugs",
+        "artifact": "jsr305",
+        "version": "3.0.2",
+        "scope": "compile",
+        "url": "http://findbugs.sourceforge.net/",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.google.errorprone:error_prone_annotations:2.21.1",
+        "group": "com.google.errorprone",
+        "artifact": "error_prone_annotations",
+        "version": "2.21.1",
+        "scope": "compile",
+        "url": "https://errorprone.info/error_prone_annotations",
+        "licenses": [
+            {
+                "name": "Apache",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.google.guava:failureaccess:1.0.1",
+        "group": "com.google.guava",
+        "artifact": "failureaccess",
+        "version": "1.0.1",
+        "scope": "compile",
+        "url": "https://github.com/google/guava/failureaccess",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.google.guava:guava:32.1.3android",
+        "group": "com.google.guava",
+        "artifact": "guava",
+        "version": "32.1.3android",
+        "scope": "compile",
+        "url": "https://github.com/google/guava",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.google.guava:listenablefuture:9999.0empty-to-avoid-conflict-with-guava",
+        "group": "com.google.guava",
+        "artifact": "listenablefuture",
+        "version": "9999.0emptyto-avoid-conflict-with-guava",
+        "scope": "compile",
+        "url": "https://github.com/google/guava/listenablefuture",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.google.j2objc:j2objcannotations:2.8",
+        "group": "com.google.j2objc",
+        "artifact": "j2objcannotations",
+        "version": "2.8",
+        "scope": "compile",
+        "url": "https://github.com/google/j2objc/",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.googlecode.libphonenumber:libphonenumber:8.11.1",
+        "group": "com.googlecode.libphonenumber",
+        "artifact": "libphonenumber",
+        "version": "8.11.1",
+        "scope": "compile",
+        "url": "https://github.com/google/libphonenumber/",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "com.sun.istack:istackcommons-runtime:4.1.2",
+        "group": "com.sun.istack",
+        "artifact": "istackcommonsruntime",
+        "version": "4.1.2",
+        "scope": "compile",
+        "url": "https://projects.eclipse.org/projects/ee4j/istackcommons/istack-commons-runtime",
+        "licenses": [
+            {
+                "name": "EDL",
+                "version": "1.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "commonsio:commons-io:2.17.0",
+        "group": "commonsio",
+        "artifact": "commonsio",
+        "version": "2.17.0",
+        "scope": "compile",
+        "url": "https://commons.apache.org/proper/commonsio/",
+        "licenses": [
+            {
+                "name": "Apache",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger:swaggerannotations:1.6.14",
+        "group": "io.swagger",
+        "artifact": "swaggerannotations",
+        "version": "1.6.14",
+        "scope": "compile",
+        "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-annotations",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger:swaggercompat-spec-parser:1.0.72",
+        "group": "io.swagger",
+        "artifact": "swaggercompatspec-parser",
+        "version": "1.0.72",
+        "scope": "compile",
+        "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-compat-spec-parser",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger:swaggercore:1.6.14",
+        "group": "io.swagger",
+        "artifact": "swaggercore",
+        "version": "1.6.14",
+        "scope": "compile",
+        "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-core",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger:swaggermodels:1.6.14",
+        "group": "io.swagger",
+        "artifact": "swaggermodels",
+        "version": "1.6.14",
+        "scope": "compile",
+        "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-models",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger:swaggerparser:1.0.72",
+        "group": "io.swagger",
+        "artifact": "swaggerparser",
+        "version": "1.0.72",
+        "scope": "compile",
+        "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger:swaggerparser-safe-url-resolver:1.0.72",
+        "group": "io.swagger",
+        "artifact": "swaggerparsersafe-url-resolver",
+        "version": "1.0.72",
+        "scope": "compile",
+        "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger.core.v3:swaggerannotations:2.2.26",
+        "group": "io.swagger.core.v3",
+        "artifact": "swaggerannotations",
+        "version": "2.2.26",
+        "scope": "compile",
+        "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-annotations",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger.core.v3:swaggercore:2.2.26",
+        "group": "io.swagger.core.v3",
+        "artifact": "swaggercore",
+        "version": "2.2.26",
+        "scope": "compile",
+        "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-core",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger.core.v3:swaggermodels:2.2.26",
+        "group": "io.swagger.core.v3",
+        "artifact": "swaggermodels",
+        "version": "2.2.26",
+        "scope": "compile",
+        "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-models",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger.parser.v3:swaggerparser:2.1.24",
+        "group": "io.swagger.parser.v3",
+        "artifact": "swaggerparser",
+        "version": "2.1.24",
+        "scope": "compile",
+        "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger.parser.v3:swaggerparser-core:2.1.24",
+        "group": "io.swagger.parser.v3",
+        "artifact": "swaggerparsercore",
+        "version": "2.1.24",
+        "scope": "compile",
+        "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-core",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger.parser.v3:swaggerparser-safe-url-resolver:2.1.24",
+        "group": "io.swagger.parser.v3",
+        "artifact": "swaggerparsersafe-url-resolver",
+        "version": "2.1.24",
+        "scope": "compile",
+        "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger.parser.v3:swaggerparser-v2-converter:2.1.24",
+        "group": "io.swagger.parser.v3",
+        "artifact": "swaggerparserv2-converter",
+        "version": "2.1.24",
+        "scope": "compile",
+        "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v2-converter",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "io.swagger.parser.v3:swaggerparser-v3:2.1.24",
+        "group": "io.swagger.parser.v3",
+        "artifact": "swaggerparserv3",
+        "version": "2.1.24",
+        "scope": "compile",
+        "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v3",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "jakarta.activation:jakarta.activationapi:2.1.3",
+        "group": "jakarta.activation",
+        "artifact": "jakarta.activationapi",
+        "version": "2.1.3",
+        "scope": "compile",
+        "url": "https://github.com/jakartaee/jafapi",
+        "licenses": [
+            {
+                "name": "EDL",
+                "version": "1.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "jakarta.validation:jakarta.validationapi:2.0.2",
+        "group": "jakarta.validation",
+        "artifact": "jakarta.validationapi",
+        "version": "2.0.2",
+        "scope": "compile",
+        "url": "https://beanvalidation.org",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "jakarta.xml.bind:jakarta.xml.bindapi:4.0.2",
+        "group": "jakarta.xml.bind",
+        "artifact": "jakarta.xml.bindapi",
+        "version": "4.0.2",
+        "scope": "compile",
+        "url": "https://github.com/jakartaee/jaxbapi/jakarta.xml.bind-api",
+        "licenses": [
+            {
+                "name": "EDL",
+                "version": "1.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "jodatime:joda-time:2.10.5",
+        "group": "jodatime",
+        "artifact": "jodatime",
+        "version": "2.10.5",
+        "scope": "compile",
+        "url": "https://www.joda.org/jodatime/",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "net.sf.joptsimple:jopt-simple:5.0.4",
+        "group": "net.sf.joptsimple",
+        "artifact": "joptsimple",
+        "version": "5.0.4",
+        "scope": "compile",
+        "url": "http://joptsimple.github.io/jopt-simple",
+        "licenses": [
+            {
+                "name": "MIT",
+                "version": "1",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "org.apache.commons:commonslang3:3.14.0",
+        "group": "org.apache.commons",
+        "artifact": "commonslang3",
+        "version": "3.14.0",
+        "scope": "compile",
+        "url": "https://commons.apache.org/proper/commonslang/",
+        "licenses": [
+            {
+                "name": "Apache",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "org.checkerframework:checkerqual:3.37.0",
+        "group": "org.checkerframework",
+        "artifact": "checkerqual",
+        "version": "3.37.0",
+        "scope": "compile",
+        "url": "https://checkerframework.org/",
+        "licenses": [
+            {
+                "name": "MIT",
+                "version": "1",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "org.glassfish.jaxb:jaxbcore:4.0.5",
+        "group": "org.glassfish.jaxb",
+        "artifact": "jaxbcore",
+        "version": "4.0.5",
+        "scope": "compile",
+        "url": "https://eclipseee4j.github.io/jaxb-ri/",
+        "licenses": [
+            {
+                "name": "EDL",
+                "version": "1.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "org.glassfish.jaxb:jaxbruntime:4.0.5",
+        "group": "org.glassfish.jaxb",
+        "artifact": "jaxbruntime",
+        "version": "4.0.5",
+        "scope": "compile",
+        "url": "https://eclipseee4j.github.io/jaxb-ri/",
+        "licenses": [
+            {
+                "name": "EDL",
+                "version": "1.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "org.glassfish.jaxb:txw2:4.0.5",
+        "group": "org.glassfish.jaxb",
+        "artifact": "txw2",
+        "version": "4.0.5",
+        "scope": "compile",
+        "url": "https://eclipseee4j.github.io/jaxb-ri/",
+        "licenses": [
+            {
+                "name": "EDL",
+                "version": "1.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "org.mozilla:rhino:1.7.7.2",
+        "group": "org.mozilla",
+        "artifact": "rhino",
+        "version": "1.7.7.2",
+        "scope": "compile",
+        "url": "https://developer.mozilla.org/en/Rhino",
+        "licenses": [
+            {
+                "name": "MPL",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": true
+            }
+        ]
+    },
+    {
+        "line": "org.slf4j:slf4japi:2.0.9",
+        "group": "org.slf4j",
+        "artifact": "slf4japi",
+        "version": "2.0.9",
+        "scope": "compile",
+        "url": "http://www.slf4j.org",
+        "licenses": [
+            {
+                "name": "MIT",
+                "version": "1",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "org.yaml:snakeyaml:2.3",
+        "group": "org.yaml",
+        "artifact": "snakeyaml",
+        "version": "2.3",
+        "scope": "compile",
+        "url": "https://bitbucket.org/snakeyaml/snakeyaml",
+        "licenses": [
+            {
+                "name": "Apache License",
+                "version": "2.0",
+                "scope": "compile",
+                "isLimited": false
+            }
+        ]
+    },
+    {
+        "line": "org.eclipse.angus:angusactivation:2.0.2",
+        "group": "org.eclipse.angus",
+        "artifact": "angusactivation",
+        "version": "2.0.2",
+        "scope": "runtime",
+        "url": "https://github.com/eclipseee4j/angus-activation/angus-activation",
+        "licenses": [
+            {
+                "name": "EDL",
+                "version": "1.0",
+                "scope": "runtime",
+                "isLimited": false
+            }
+        ]
+    }
+]
