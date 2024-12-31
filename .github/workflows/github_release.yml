@@ -55,6 +55,10 @@ jobs:
           platforms: linux/${{matrix.arch}}
           cache-to: type=gha,mode=max
           provenance: false
+        env:
+          DOCKER_BUILD_CHECKS_ANNOTATIONS: false
+          DOCKER_BUILD_RECORD_UPLOAD: false
+          DOCKER_BUILD_SUMMARY: true
       - name: "📤 Prepare upload"
         id: "artifact"
         run: |
@@ -66,15 +70,15 @@ jobs:
           filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ matrix.arch }}-${{ inputs.version || github.run_number }}.native" | tr '[:upper:]' '[:lower:]')
           echo "filename [${filename}]"
           echo "filename=${filename}" >> $GITHUB_OUTPUT
-          ls -lah target
-          mv target/app.native target/${filename}
-          chmod +x target/${filename}
-          ls -lah target
+          ls -lah
+          mv target/app.native ${filename}
+          chmod +x ${filename}
+          ls -lah
       - name: "💼 Save [${{ steps.artifact.outputs.filename }}] Artifact"
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.artifact.outputs.filename }}
-          path: target/${{ steps.artifact.outputs.filename }}
+          path: ${{ steps.artifact.outputs.filename }}
           if-no-files-found: 'error'
   macos:
     name: "MacOs"
@@ -111,15 +115,15 @@ jobs:
           echo "filename [${filename}]"
           echo "filename=${filename}" >> $GITHUB_OUTPUT
           ${{ steps.java_info.outputs.cmd_build }} -Pnative
-          ls -lah target
-          mv target/${{ github.event.repository.name }}.native target/${filename}
-          chmod +x target/${filename}
-          ls -lah target
+          ls -lah
+          mv target/${{ github.event.repository.name }}.native ${filename}
+          chmod +x ${filename}
+          ls -lah
       - name: "💼 Save [${{ steps.artifact.outputs.filename }}] Artifact"
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.artifact.outputs.filename }}
-          path: target/${{ steps.artifact.outputs.filename }}
+          path: ${{ steps.artifact.outputs.filename }}
           if-no-files-found: 'error'
   windows:
     name: "Windows"
@@ -150,22 +154,24 @@ jobs:
           java-version: ${{ steps.java_info.outputs.java_version }}
           distribution: 'graalvm'
       - name: "🏗️ Build [${{runner.os}}/${{runner.arch}}]"
+        shell: cmd
+        run: |
+          ${{ steps.java_info.outputs.cmd_build }} -Pnative
+      - name: "📝 Set filename"
         id: "artifact"
         shell: sh
         run: |
-          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ runner.arch }}-${{ inputs.version || github.run_number }}.native" | tr '[:upper:]' '[:lower:]')
+          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ runner.arch }}-${{ inputs.version || github.run_number }}.exe" | tr '[:upper:]' '[:lower:]')
           echo "filename [${filename}]"
           echo "filename=${filename}" >> $GITHUB_OUTPUT
-          ${{ steps.java_info.outputs.cmd_build }} -Pnative
-          ls -lah target
-          mv target/${{ github.event.repository.name }}.native target/${filename}
-          chmod +x target/${filename}
-          ls -lah target
+          ls -lah
+          mv "target/${{ github.event.repository.name }}.native.exe" "${filename}"
+          ls -lah
       - name: "💼 Save [${{ steps.artifact.outputs.filename }}] Artifact"
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.artifact.outputs.filename }}
-          path: target\${{ steps.artifact.outputs.filename }}
+          path: ${{ steps.artifact.outputs.filename }}
           if-no-files-found: 'error'
   release:
     name: "Release"
@@ -177,7 +183,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
-          path: target
+          pattern: ${{ github.event.repository.name }}-*.{native,exe}
       - name: "🏷️ Release"
         uses: ncipollo/release-action@v1
         with:
@@ -188,5 +194,5 @@ jobs:
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
           tag: ${{ inputs.version || github.run_number }}
           name: "Release ${{ inputs.version || github.run_number }}"
-          artifacts: target/${{ github.event.repository.name }}-*.native
+          artifacts: ${{ github.event.repository.name }}-*.native,${{ github.event.repository.name }}-*.exe
 

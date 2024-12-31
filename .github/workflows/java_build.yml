@@ -99,7 +99,7 @@ jobs:
         env:
           GITHUB_USER: 'GithubBot'
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
-      - name: "📝 Read Version [${{ steps.java_info.outputs.project_version }}]"
+      - name: "📝 Read Version [${{ steps.java_info.outputs.project_version }}] deploy [${{ github.event.inputs.run_deploy == 'true' || steps.update.outputs.has_changes == 'true' }}]"
         if: ${{ steps.update.outputs.has_changes == 'true' }}
         uses: YunaBraska/semver-info-action@main
         id: "semver_info"
@@ -117,7 +117,7 @@ jobs:
           # git push origin ${{ steps.semver_info.outputs.clean_semver }}
   release:
     needs: deploy
-    if: ${{ github.event.inputs.run_deploy || needs.deploy.outputs.has_changes == 'true' }}
+    if: ${{ github.event.inputs.run_deploy == 'true' || needs.deploy.outputs.has_changes == 'true' }}
     name: "Trigger Release"
     uses: YunaBraska/api-doc-crafter/.github/workflows/github_release.yml@main
     secrets: inherit
