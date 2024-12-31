@@ -39,7 +39,6 @@ jobs:
       # update deploy status
       deployments: write
     outputs:
-      version: ${{ steps.semver_info.outputs.clean_semver }}
       has_changes: ${{ steps.update.outputs.has_changes }}
     steps:
       - name: "🧑‍💻 Checkout [${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}]"
@@ -119,6 +118,3 @@ jobs:
     name: "Trigger Release"
     uses: YunaBraska/api-doc-crafter/.github/workflows/github_release.yml@main
     secrets: inherit
-    with:
-      ref: ${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
-      version: ${{ needs.deploy.outputs.version }}

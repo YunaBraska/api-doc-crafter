@@ -46,6 +46,8 @@ _sorry for so many third party libs, it comes all from the swagger parser ðŸ¤·â€
         swagger_logo: "https://example.com/logo.png"
         swagger_logo_link: "index.html"
         remove_patterns: "admin|management|**internal**"
+        file_download: "https://petstore.swagger.io/v2/swagger.json||https://example.com/swagger.json"
+        sort_tags: true
 ```
 
 _GitHub mounts the current workdir as `/github/workspace` and the output directory is `/github/workspace/swagger_output`

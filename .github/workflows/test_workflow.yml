@@ -38,6 +38,11 @@ jobs:
         with:
           java-version: ${{ steps.java_info.outputs.java_version }}
           distribution: 'temurin'
+      - name: "🧪 Build & Test"
+        run: ${{ steps.java_info.outputs.cmd_test_build }}
+        env:
+          GITHUB_USER: 'GithubBot'
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
       - name: "🗒️ Maven License Info"
         id: "license_info"
         uses: YunaBraska/maven-license-info-action@main
