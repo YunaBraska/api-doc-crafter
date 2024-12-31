@@ -2,7 +2,7 @@ name: "Build"
 
 on:
   schedule:
-    - cron: "08 20 * * *"
+    - cron: "08 20 * * 5"
   workflow_dispatch:
     inputs:
       ref:
@@ -106,15 +106,13 @@ jobs:
         with:
           semver-a: ${{ steps.java_info.outputs.project_version }}
           increase-a: 'minor'
-      - name: "💾 Commit & Tag [${{ steps.semver_info.outputs.clean_semver }}]"
+      - name: "💾 Commit [${{ steps.semver_info.outputs.clean_semver}}]"
         if: ${{ steps.update.outputs.has_changes == 'true' }}
         run: |
           ${{ steps.java_info.outputs.cmd }} -B -q versions:set -DnewVersion=${{ steps.semver_info.outputs.clean_semver }} -DgenerateBackupPoms=false
           git add .
           git commit -m "chore: update ${{ steps.semver_info.outputs.clean_semver }}"
           git push origin HEAD:${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
-          # git tag ${{ steps.semver_info.outputs.clean_semver }}; 
-          # git push origin ${{ steps.semver_info.outputs.clean_semver }}
   release:
     needs: deploy
     if: ${{ github.event.inputs.run_deploy == 'true' || needs.deploy.outputs.has_changes == 'true' }}

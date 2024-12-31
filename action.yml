@@ -31,6 +31,11 @@ inputs:
     description: "[PATH] Directory to save the output files."
     required: false
     default: "./swagger_output"
+  file_download:
+    description: "[Path] Download external files. Separated by or `||`. (`https://petstore.swagger.io/v2/swagger.json`)"
+    required: false
+  file_download_header:
+    description: "[Map] Download request header separated by or `||` and `->` (`Auth->token||x-trace-id->2008`)"
   file_includes:
     description: "[GLOB] File patterns to include. GLOB patterns separated by '::' or '|'."
     required: false
@@ -111,6 +116,8 @@ runs:
     ADC_SWAGGER_LINKS: ${{ inputs.swagger_links }}
     ADC_OUTPUT_DIR: ${{ inputs.output_dir }}
     ADC_WORK_DIR: ${{ inputs.work_dir }}
+    ADC_FILE_DOWNLOAD: ${{ inputs.file_download }}
+    ADC_FILE_DOWNLOAD_HEADER: ${{ inputs.file_download_header }}
     ADC_FILE_INCLUDES: ${{ inputs.file_includes }}
     ADC_FILE_EXCLUDES: ${{ inputs.file_excludes }}
     ADC_MAX_DEEP: ${{ inputs.max_deep }}

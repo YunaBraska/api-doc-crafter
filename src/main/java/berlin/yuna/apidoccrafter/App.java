@@ -9,17 +9,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import static berlin.yuna.typemap.logic.ArgsDecoder.hasText;
 import static berlin.yuna.apidoccrafter.config.Config.*;
 import static berlin.yuna.apidoccrafter.logic.Processor.*;
 import static berlin.yuna.apidoccrafter.util.Util.*;
+import static berlin.yuna.typemap.logic.ArgsDecoder.hasText;
 import static java.util.Optional.ofNullable;
 
 // java:S106 - Standard outputs should not be used directly to log anything
-@SuppressWarnings("java:S106")
+@SuppressWarnings({"java:S106", "java:S1192"})
 public class App {
 
     public static void main(final String[] args) {
@@ -31,6 +33,8 @@ public class App {
         final int maxDeep = config().asIntOpt(MAX_DEEP).filter(num -> num > -1).orElse(100);
         final String tagGroups = config().asString(GROUP_TAGS);
         final String serverGroups = config().asString(GROUP_SERVERS);
+
+        downloadRemoteOpenApiFiles(inputDir);
 
         final Map<Path, OpenAPI> fileMap = readOpenApiFiles(inputDir, maxDeep, fileIncludes, fileExcludes);
         System.out.println("[INFO] Files [" + fileMap.size() + "] to process");
@@ -46,6 +50,18 @@ public class App {
         mergedApis.forEach((path, openAPI) -> saveJson(openAPI, outputDir.resolve(filenameJson(path, openAPI))));
 
         HtmlGenerator.generateHtml(sortByString(mergedApis, pathOpenAPIEntry -> displayName(pathOpenAPIEntry.getKey(), pathOpenAPIEntry.getValue())), outputDir);
+    }
+
+    private static void downloadRemoteOpenApiFiles(final Path inputDir) {
+        final List<String> downloadUrls = config().asStringOpt(FILE_DOWNLOAD).map(urls -> urls.split("\\|\\|")).map(List::of).orElse(List.of());
+        final Map<String, String> headers = config().asStringOpt(FILE_DOWNLOAD_HEADER)
+            .map(headersStr -> Arrays.stream(headersStr.split("\\|\\|"))
+                .map(header -> header.trim().split("->", 2))
+                .filter(parts -> parts.length == 2 && !parts[0].isEmpty() && !parts[1].isEmpty())
+                .collect(Collectors.toMap(parts -> parts[0].trim(), parts -> parts[1].trim(), (v1, v2) -> v1)))
+            .orElse(Map.of());
+
+        downloadUrls.forEach(url -> download(url, headers, inputDir));
     }
 
     private static Path parseOutputDir(final String outputDirArg, final Path inputDir) {

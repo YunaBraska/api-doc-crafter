@@ -18,6 +18,8 @@ class AppTest {
         final Path swaggerOutput = Path.of(org.assertj.core.util.Files.temporaryFolderPath()).resolve("swagger_output");
         final Path expectedFilesPath = Path.of("src/test/resources/files_expected");
 
+//        System.getProperties().put(FILE_DOWNLOAD, "https://raw.githubusercontent.com/europace/unterlagen-api/refs/heads/master/docs/v2/swagger.yml||https://raw.githubusercontent.com/europace/unterlagen-api/refs/heads/master/docs/v2/swagger.yml");
+        System.getProperties().put(FILE_DOWNLOAD_HEADER, "x-trace-id-1->1234567890||x-trace-id-2->1234567890");
         System.getProperties().put(REMOVE_PATTERNS, "Management|**Internal**");
         System.getProperties().put(SWAGGER_LOGO, "https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg");
         System.getProperties().put(SWAGGER_LOGO_LINK, "index.html");

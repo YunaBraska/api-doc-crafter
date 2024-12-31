@@ -21,6 +21,15 @@ jobs:
           ls -lah
           ls -lah swagger_output
           ls -lah swagger_output/index.html
+      - name: "♻️ Restore cache [unix-build-${{ hashFiles('**/pom.xml', '**/build.gradle*') }}]"
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: unix-build-${{ hashFiles('**/pom.xml', '**/build.gradle*') }}
+          restore-keys: unix-build-${{ hashFiles('**/pom.xml', '**/build.gradle*') }}
       - name: "🔍 Read Java Info"
         id: "java_info"
         uses: YunaBraska/java-info-action@main

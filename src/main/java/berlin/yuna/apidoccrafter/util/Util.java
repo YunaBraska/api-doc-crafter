@@ -6,9 +6,14 @@ import io.swagger.v3.oas.models.info.Info;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -228,6 +233,46 @@ public class Util {
             System.err.println("[ERROR] Failed to copy resource [" + resourceName + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
             return null;
         }
+    }
+
+    public static void download(final String url, final Map<String, String> headers, final Path target) {
+        try {
+            if (!Files.exists(target))
+                Files.createDirectories(target);
+            final Path targetFile = extractFileName(url, target);
+            final HttpRequest.Builder request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .timeout(Duration.ofSeconds(30)) // Request timeout
+                .GET();
+            headers.forEach(request::header);
+
+            try (HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build()){
+                final HttpResponse<Path> response = client.send(request.build(), HttpResponse.BodyHandlers.ofFile(targetFile));
+                if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                    System.out.println("[INFO] Downloaded [" + targetFile + "]");
+                } else {
+                    Files.deleteIfExists(targetFile); // Cleanup incomplete file
+                    System.err.println("[ERROR] Download [" + url + "] Status [" + response.statusCode() + "] message [" + response.body() + "]");
+                }
+            }
+        } catch (InterruptedException ignored) {
+            Thread.currentThread().interrupt();
+        } catch (Exception e) {
+            System.err.println("[ERROR] Download [" + url + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
+        }
+    }
+
+    private static Path extractFileName(final String url, final Path target) {
+        final Path targetFile = Optional.of(url).map(path -> {
+                if (path.contains("/"))
+                    return path.substring(path.lastIndexOf("/") + 1);
+                if (path.contains("\\"))
+                    return path.substring(path.lastIndexOf("\\") + 1);
+                return null;
+            }).map(name -> name.replaceAll("[^a-zA-Z0-9.-]", "_").replace("__", "_"))
+            .map(target::resolve)
+            .orElse(target.resolve(System.currentTimeMillis() + ".tmp"));
+        return targetFile;
     }
 
     private Util() {

@@ -54,6 +54,8 @@ public class Config {
     public static final String SORT_ENCODING = CONFIG_PREFIX + "sort_encoding";
 
     public static final String REMOVE_PATTERNS = CONFIG_PREFIX + "remove_patterns";
+    public static final String FILE_DOWNLOAD = CONFIG_PREFIX + "file_download"; // separated by "||"
+    public static final String FILE_DOWNLOAD_HEADER = CONFIG_PREFIX + "file_download_header"; // separated by "||" and "->"
     // GLOB patterns separated by "::" or "|"
     public static final String FILE_INCLUDES = CONFIG_PREFIX + "file_includes";
     // GLOB patterns separated by "::" or "|"
