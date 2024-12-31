@@ -33,6 +33,8 @@ jobs:
         # Available amd64, amd64/v2 amd64/v3, arm64, riscv64, ppc64le, s390x, 386, arm/v7, arm/v6
         # GraalVM only knows about amd64, arm64
         arch: [ amd64, arm64 ]
+    outputs:
+      version: ${{ inputs.version || steps.java_info.outputs.project_version }}
     steps:
       - name: "🧑‍💻 Checkout [${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}]"
         uses: actions/checkout@main
@@ -40,6 +42,9 @@ jobs:
           fetch-depth: 1
           ref: ${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: "🔍 Read Java Info"
+        id: "java_info"
+        uses: YunaBraska/java-info-action@main
       - name: "🕹️ Set up QEMU"
         uses: docker/setup-qemu-action@v3
       - name: "🐳 Set up Docker"
@@ -53,13 +58,14 @@ jobs:
           target: export
           outputs: type=local,dest=target
           platforms: linux/${{matrix.arch}}
+          cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: false
         env:
           DOCKER_BUILD_CHECKS_ANNOTATIONS: false
           DOCKER_BUILD_RECORD_UPLOAD: false
           DOCKER_BUILD_SUMMARY: true
-      - name: "📤 Prepare upload"
+      - name: "📝 Set filename ${{ github.event.repository.name }}-${{runner.os}}-${{ matrix.arch }}-${{ inputs.version || steps.java_info.outputs.project_version }}.native"
         id: "artifact"
         run: |
           echo "########## LIST    ##########"
@@ -67,7 +73,7 @@ jobs:
           echo "########## INSPECT ##########"
           docker buildx inspect --bootstrap | grep Platforms | while read -r line; do echo "${line#*:}"; done | tr -d '[:space:]' || true
           echo "########## SAVE    ##########"
-          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ matrix.arch }}-${{ inputs.version || github.run_number }}.native" | tr '[:upper:]' '[:lower:]')
+          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ matrix.arch }}-${{ inputs.version || steps.java_info.outputs.project_version }}.native" | tr '[:upper:]' '[:lower:]')
           echo "filename [${filename}]"
           echo "filename=${filename}" >> $GITHUB_OUTPUT
           ls -lah
@@ -108,10 +114,10 @@ jobs:
         with:
           java-version: ${{ steps.java_info.outputs.java_version }}
           distribution: 'graalvm'
-      - name: "🏗️ Build [${{runner.os}}/${{runner.arch}}]"
+      - name: "🏗️ Build [${{runner.os}}/${{matrix.arch}}]"
         id: "artifact"
         run: |
-          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ runner.arch }}-${{ inputs.version || github.run_number }}.native" | tr '[:upper:]' '[:lower:]')
+          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ runner.arch }}-${{ inputs.version || steps.java_info.outputs.project_version }}.native" | tr '[:upper:]' '[:lower:]')
           echo "filename [${filename}]"
           echo "filename=${filename}" >> $GITHUB_OUTPUT
           ${{ steps.java_info.outputs.cmd_build }} -Pnative
@@ -157,11 +163,11 @@ jobs:
         shell: cmd
         run: |
           ${{ steps.java_info.outputs.cmd_build }} -Pnative
-      - name: "📝 Set filename"
+      - name: "📝 Set filename [${{ github.event.repository.name }}-${{runner.os}}-${{ runner.arch }}-${{ inputs.version || steps.java_info.outputs.project_version }}.exe]"
         id: "artifact"
         shell: sh
         run: |
-          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ runner.arch }}-${{ inputs.version || github.run_number }}.exe" | tr '[:upper:]' '[:lower:]')
+          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ runner.arch }}-${{ inputs.version || steps.java_info.outputs.project_version }}.exe" | tr '[:upper:]' '[:lower:]')
           echo "filename [${filename}]"
           echo "filename=${filename}" >> $GITHUB_OUTPUT
           ls -lah
@@ -192,7 +198,7 @@ jobs:
           allowUpdates: true
           removeArtifacts: true
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
-          tag: ${{ inputs.version || github.run_number }}
-          name: "Release ${{ inputs.version || github.run_number }}"
+          tag: ${{ needs.linux.outputs.version }}
+          name: ${{ needs.linux.outputs.version }}
           artifacts: ${{ github.event.repository.name }}-*.native,${{ github.event.repository.name }}-*.exe
 

@@ -26,7 +26,7 @@ import static berlin.yuna.typemap.logic.ArgsDecoder.hasText;
 import static java.util.Optional.ofNullable;
 
 // java:S106 - Standard outputs should not be used directly to log anything
-@SuppressWarnings("java:S106")
+@SuppressWarnings({"java:S106", "java:S1192"})
 public class Util {
 
     public static final String SPLIT_REGEX = "::|\\|";
@@ -263,7 +263,7 @@ public class Util {
     }
 
     private static Path extractFileName(final String url, final Path target) {
-        final Path targetFile = Optional.of(url).map(path -> {
+       return Optional.of(url).map(path -> {
                 if (path.contains("/"))
                     return path.substring(path.lastIndexOf("/") + 1);
                 if (path.contains("\\"))
@@ -272,7 +272,6 @@ public class Util {
             }).map(name -> name.replaceAll("[^a-zA-Z0-9.-]", "_").replace("__", "_"))
             .map(target::resolve)
             .orElse(target.resolve(System.currentTimeMillis() + ".tmp"));
-        return targetFile;
     }
 
     private Util() {
