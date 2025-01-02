@@ -6,7 +6,7 @@
 
     <groupId>berlin.yuna</groupId>
     <artifactId>api-doc-crafter</artifactId>
-    <version>2025.2.0</version>
+    <version>2025.3.0</version>
     <packaging>jar</packaging>
 
     <name>api-doc-crafter</name>
@@ -132,7 +132,11 @@
             <artifactId>jakarta.xml.bind-api</artifactId>
             <version>${jakarta.xml.bind-api.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jcl</artifactId>
+            <version>1.7.36</version>
+        </dependency>
 
         <!-- TEST -->
         <dependency>

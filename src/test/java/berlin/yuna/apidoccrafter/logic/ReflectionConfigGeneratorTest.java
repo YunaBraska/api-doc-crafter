@@ -3,14 +3,15 @@ package berlin.yuna.apidoccrafter.logic;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ScanResult;
+import io.swagger.v3.oas.models.media.Schema;
+import io.swagger.v3.oas.models.parameters.Parameter;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
 
 class ReflectionConfigGeneratorTest {
 
@@ -19,10 +20,11 @@ class ReflectionConfigGeneratorTest {
         generateReflectConfig(
             List.of("io.swagger.v3.oas.models"),
             "src/main/resources/META-INF/native-image/berlin.yuna/api-doc-crafter/reflect-config.json"
-            );
+        );
     }
 
     public static void generateReflectConfig(List<String> packages, String outputPath) throws Exception {
+        final String mergerClasses = Files.readString(Path.of(System.getProperty("user.dir")).resolve("src").resolve("main").resolve("java").resolve("berlin").resolve("yuna").resolve("apidoccrafter").resolve("logic").resolve("Merger.java"));
         List<Map<String, Object>> config = new ArrayList<>();
 
         for (String packageName : packages) {
@@ -30,6 +32,14 @@ class ReflectionConfigGeneratorTest {
             for (Class<?> clazz : classes) {
                 // Only include concrete classes (non-abstract, non-interface)
                 if (!Modifier.isAbstract(clazz.getModifiers()) && !clazz.isInterface()) {
+                    if (!mergerClasses.contains("case " + clazz.getSimpleName())
+                        && !clazz.isEnum()
+                        && !clazz.isAnnotation()
+                        && !Schema.class.isAssignableFrom(clazz)
+                        && !Map.class.isAssignableFrom(clazz)
+                        && !Collection.class.isAssignableFrom(clazz)
+                        && !Parameter.class.isAssignableFrom(clazz))
+                        throw new AssertionError("Class not covered by Merger: " + clazz.getCanonicalName());
                     Map<String, Object> classConfig = new HashMap<>();
                     classConfig.put("name", clazz.getName());
                     classConfig.put("allDeclaredFields", true);

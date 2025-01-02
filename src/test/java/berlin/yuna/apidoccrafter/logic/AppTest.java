@@ -24,7 +24,7 @@ class AppTest {
         System.getProperties().put(SWAGGER_LOGO, "https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg");
         System.getProperties().put(SWAGGER_LOGO_LINK, "index.html");
         System.getProperties().put(SORT_TAGS, false);
-        System.getProperties().put(FILE_INCLUDES, "**/files/**");
+        System.getProperties().put(FILE_INCLUDES, "**/files/**||**/api-doc-download/**");
         System.getProperties().put(OUTPUT_DIR, swaggerOutput.toString());
 
         App.main(new String[0]);

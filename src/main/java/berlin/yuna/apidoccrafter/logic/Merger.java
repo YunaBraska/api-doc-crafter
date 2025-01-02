@@ -2,6 +2,8 @@ package berlin.yuna.apidoccrafter.logic;
 
 import berlin.yuna.apidoccrafter.config.Identifier;
 import berlin.yuna.apidoccrafter.util.Util;
+import com.fasterxml.jackson.core.TreeNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.models.SecurityRequirement;
 import io.swagger.v3.oas.models.*;
@@ -12,9 +14,8 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.links.Link;
-import io.swagger.v3.oas.models.media.MediaType;
-import io.swagger.v3.oas.models.media.Schema;
-import io.swagger.v3.oas.models.media.XML;
+import io.swagger.v3.oas.models.links.LinkParameter;
+import io.swagger.v3.oas.models.media.*;
 import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.parameters.RequestBody;
 import io.swagger.v3.oas.models.responses.ApiResponse;
@@ -34,7 +35,22 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static berlin.yuna.apidoccrafter.config.Config.*;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_CONTENT;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_ENCODING;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_EXAMPLES;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_EXTENSIONS;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_HEADERS;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_PARAMETERS;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_PATHS;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_REQUESTS;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_RESPONSES;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_SCHEMAS;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_SCOPES;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_SECURITY;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_SERVERS;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_TAGS;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_WEBHOOKS;
+import static berlin.yuna.apidoccrafter.config.Config.sortBy;
 import static berlin.yuna.apidoccrafter.config.Identifier.isEqual;
 import static berlin.yuna.apidoccrafter.util.Util.nothing;
 import static java.util.Optional.ofNullable;
@@ -417,25 +433,49 @@ public class Merger {
                 mergeCollection((Collection<Object>) oldList, (Collection<Object>) newList, sortBy(ascending));
             case Map<?, ?> oldMap when newItem instanceof Map<?, ?> newMap ->
                 mergeMap((Map<Object, Object>) oldMap, (Map<Object, Object>) newMap, sortBy(ascending));
-            case CharSequence ignored -> {
-                // ignored not a complex object to handle
+            case LinkParameter oldObj when newItem instanceof final LinkParameter newObj -> {
+                merge(oldObj::getValue, newObj::getValue, oldObj::setValue);
+                merge(oldObj::getExtensions, newObj::getExtensions, oldObj::setExtensions, SORT_EXTENSIONS);
             }
-            case Number ignored -> {
-                // ignored not a complex object to handle
+            case Discriminator oldObj when newItem instanceof final Discriminator newObj -> {
+                merge(oldObj::getPropertyName, newObj::getPropertyName, oldObj::setPropertyName);
+                merge(oldObj::getMapping, newObj::getMapping, oldObj::setMapping, SORT_WEBHOOKS);
+                merge(oldObj::getExtensions, newObj::getExtensions, oldObj::setExtensions, SORT_EXTENSIONS);
             }
-            case Boolean ignored -> {
-                // ignored not a complex object to handle
+            case Encoding oldObj when newItem instanceof final Encoding newObj -> {
+                merge(oldObj::getContentType, newObj::getContentType, oldObj::setContentType);
+                merge(oldObj::getHeaders, newObj::getHeaders, oldObj::setHeaders, SORT_WEBHOOKS);
+                merge(oldObj::getStyle, newObj::getStyle, oldObj::setStyle);
+                merge(oldObj::getStyle, newObj::getStyle, oldObj::setStyle);
+                merge(oldObj::getExplode, newObj::getExplode, oldObj::setExplode);
+                merge(oldObj::getAllowReserved, newObj::getAllowReserved, oldObj::setAllowReserved);
+                merge(oldObj::getExtensions, newObj::getExtensions, oldObj::setExtensions, SORT_EXTENSIONS);
             }
-            case Enum<?> ignored -> {
-                // ignored not a complex object to handle
+            case EncodingProperty oldObj when newItem instanceof final EncodingProperty newObj -> {
+                merge(oldObj::getContentType, newObj::getContentType, oldObj::setContentType);
+                merge(oldObj::getHeaders, newObj::getHeaders, oldObj::setHeaders, SORT_WEBHOOKS);
+                merge(oldObj::getStyle, newObj::getStyle, oldObj::setStyle);
+                merge(oldObj::getStyle, newObj::getStyle, oldObj::setStyle);
+                merge(oldObj::getExplode, newObj::getExplode, oldObj::setExplode);
+                merge(oldObj::getAllowReserved, newObj::getAllowReserved, oldObj::setAllowReserved);
+                merge(oldObj::getExtensions, newObj::getExtensions, oldObj::setExtensions, SORT_EXTENSIONS);
             }
-            case TemporalAccessor ignored -> {
-                // ignored not a complex object to handle
+            default -> {
+                if (oldItem instanceof Date
+                    || oldItem instanceof Boolean
+                    || oldItem instanceof Number
+                    || oldItem instanceof CharSequence
+                    || oldItem instanceof ArrayNode
+                    || oldItem instanceof ObjectNode
+                    || oldItem instanceof TemporalAccessor
+                    || oldItem instanceof Enum<?>
+                    || TreeNode.class.isAssignableFrom(oldItem.getClass())
+                ) {
+                    // ignored not merge-able
+                } else {
+                    System.out.println("[DEBUG] Unknown type [" + oldItem.getClass() + "]");
+                }
             }
-            case ObjectNode ignored -> {
-                // ignored not merge-able
-            }
-            default -> System.out.println("[DEBUG] Unknown type [" + oldItem.getClass() + "]");
         }
         return oldItem;
     }
@@ -481,7 +521,7 @@ public class Merger {
     }
 
     private static Components mergeComponents(final Components oldComp, final Components newComp) {
-        if (oldComp == null) return newComp;
+        if (oldComp == null || newComp == null) return newComp;
         merge(oldComp::getSchemas, newComp::getSchemas, oldComp::setSchemas, SORT_SCHEMAS);
         merge(oldComp::getResponses, newComp::getResponses, oldComp::setResponses, SORT_RESPONSES);
         merge(oldComp::getParameters, newComp::getParameters, oldComp::setParameters, SORT_PARAMETERS);

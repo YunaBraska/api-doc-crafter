@@ -58,6 +58,7 @@ and args._
 ## Inputs
 
 _for NON GitHub Action usage: use prefix `adc_` for all input parameters_
+Downloads OpenAPI files can be also done by listing URLs in `api-doc-links.txt`.
 
 | Parameter              | type    | Description                                                                                                                                         | Default                                                                  |
 |------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
@@ -72,7 +73,7 @@ _for NON GitHub Action usage: use prefix `adc_` for all input parameters_
 | `swagger_links`        | Boolean | \[UI] Generate download source links                                                                                                                | true                                                                     |
 | `work_dir`             | Path    | Working directory for the input files.                                                                                                              | `.`                                                                      |
 | `output_dir`           | Path    | Directory to save the output files.                                                                                                                 | `./swagger_output`                                                       |
-| `file_download`        | Path[]  | Download external files separated by or `\|\|`. (`https://petstore.swagger.io/v2/swagger.json`)                                                     |                                                                          |
+| `file_download`        | Path[]  | Download external files separated by or `\|\|`. (`https://petstore.swagger.io/v2/swagger.json`). Or line separated in `api-doc-links.txt`           |                                                                          |
 | `file_download_header` | Map     | Download request header separated by or `\|\|` and `->` (`Auth->token\|\|x-trace-id->2008`).                                                        |                                                                          |
 | `file_includes`        | Glob    | File patterns to include. GLOB patterns separated by `::` or `\|`.                                                                                  |                                                                          |
 | `file_excludes`        | Glob    | File patterns to exclude. GLOB patterns separated by `::` or `\|`.                                                                                  |                                                                          |

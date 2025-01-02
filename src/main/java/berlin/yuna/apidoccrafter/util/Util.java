@@ -214,7 +214,7 @@ public class Util {
                 return;
             }
             Path targetPath = outputDir.resolve(resourceName.contains("/") ? resourceName.substring(resourceName.lastIndexOf("/") + 1) : resourceName);
-            Files.createDirectories(targetPath.getParent());
+            mkdir(targetPath.getParent());
             Files.copy(resourceStream, targetPath);
             System.out.println("[INFO] Created [" + targetPath + "]");
         } catch (IOException e) {
@@ -235,18 +235,28 @@ public class Util {
         }
     }
 
+    public static void mkdir(final Path path) {
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (Exception e) {
+                System.err.println("[ERROR] Creating dir [" + path + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
+            }
+        }
+    }
+
     public static void download(final String url, final Map<String, String> headers, final Path target) {
+        if(!hasText(url) || url.startsWith("//")  || url.startsWith("#") || url.startsWith("-") || url.startsWith(">") || url.startsWith("<")) return;
         try {
-            if (!Files.exists(target))
-                Files.createDirectories(target);
-            final Path targetFile = extractFileName(url, target);
+            mkdir(target);
+            final Path targetFile = generateFileName(url, target);
             final HttpRequest.Builder request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .timeout(Duration.ofSeconds(30)) // Request timeout
                 .GET();
             headers.forEach(request::header);
 
-            try (HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build()){
+            try (HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build()) {
                 final HttpResponse<Path> response = client.send(request.build(), HttpResponse.BodyHandlers.ofFile(targetFile));
                 if (response.statusCode() >= 200 && response.statusCode() < 300) {
                     System.out.println("[INFO] Downloaded [" + targetFile + "]");
@@ -262,14 +272,10 @@ public class Util {
         }
     }
 
-    private static Path extractFileName(final String url, final Path target) {
-       return Optional.of(url).map(path -> {
-                if (path.contains("/"))
-                    return path.substring(path.lastIndexOf("/") + 1);
-                if (path.contains("\\"))
-                    return path.substring(path.lastIndexOf("\\") + 1);
-                return null;
-            }).map(name -> name.replaceAll("[^a-zA-Z0-9.-]", "_").replace("__", "_"))
+    private static Path generateFileName(final String url, final Path target) {
+        return Optional.of(url)
+            .map(path -> Integer.toHexString(path.hashCode()))
+            .map(path -> path + (url.endsWith(".json") ? ".json" : ".yaml"))
             .map(target::resolve)
             .orElse(target.resolve(System.currentTimeMillis() + ".tmp"));
     }

@@ -6,14 +6,17 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.tags.Tag;
 import io.swagger.v3.parser.OpenAPIV3Parser;
+import io.swagger.v3.parser.core.models.ParseOptions;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static berlin.yuna.apidoccrafter.util.FileCleaner.cleanFile;
 import static berlin.yuna.apidoccrafter.util.Util.*;
 import static java.util.Arrays.stream;
 import static java.util.Collections.emptySet;
@@ -77,8 +80,23 @@ public class Processor {
      * @return An optional containing the file path and OpenAPI object.
      */
     public static Optional<Map.Entry<Path, OpenAPI>> toOpenAPIFile(final Path filePath) {
+        System.out.println("[INFO] Reading file [" + filePath + "]");
+        final AtomicReference<Path> cleanFile = new AtomicReference<>();
         return parse(filePath, path -> new OpenAPIV3Parser().readLocation(path.toString(), null, null).getOpenAPI())
             .or(() -> parse(filePath, path -> new OpenAPIParser().readLocation(path.toString(), null, null).getOpenAPI()))
+            .or(() -> {
+                cleanFile.set(cleanFile(filePath));
+                return Optional.empty();
+            } )
+            .or(() -> parse(cleanFile.get(), path -> new OpenAPIV3Parser().readLocation(path.toString(), null, null).getOpenAPI()))
+            .or(() -> parse(cleanFile.get(), path -> new OpenAPIParser().readLocation(path.toString(), null, null).getOpenAPI()))
+            .or(() -> parse(cleanFile.get(), path -> {
+                final ParseOptions options = new ParseOptions();
+                options.isLegacyYamlDeserialization();
+                options.setValidateInternalRefs(false);
+                options.setValidateExternalRefs(false);
+                return new OpenAPIParser().readLocation(path.toString(), null, null).getOpenAPI();
+            }))
             .map(api -> new AbstractMap.SimpleImmutableEntry<>(filePath, api));
     }
 
@@ -103,13 +121,32 @@ public class Processor {
     public static List<Map<Path, OpenAPI>> groupFiles(final Map<Path, OpenAPI> fileMap, final String groupPattern, final String serverGroups) {
         // Group files by tags
         final Map<Boolean, List<Map<Path, OpenAPI>>> groups = groupFiles(fileMap, groupPattern, false).stream().collect(Collectors.partitioningBy(map -> map.size() > 1));
+        // Group files by servers
+        final Map<Boolean, List<Map<Path, OpenAPI>>> serverMap = groupFiles(groups.get(false).stream().flatMap(map -> map.entrySet().stream()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), serverGroups, true).stream().collect(Collectors.partitioningBy(map -> map.size() > 1));;
+        // Group files by title
+        final Map<Boolean, List<Map<Path, OpenAPI>>> titleMap = groupFilesByTitle(
+            serverMap.get(false)
+                .stream()
+                .flatMap(map -> map.entrySet().stream())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+        ).stream().collect(Collectors.partitioningBy(map -> map.size() > 1));
 
-        // Group rest files by servers
-        final List<Map<Path, OpenAPI>> serverMap = groupFiles(groups.get(false).stream().flatMap(map -> map.entrySet().stream()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), serverGroups, true);
+        // Merge Groups
+        final List<Map<Path, OpenAPI>> result = new ArrayList<>();
+        result.addAll(groups.get(true));
+        result.addAll(serverMap.get(true));
+        result.addAll(titleMap.get(true));
+        // Get non-grouped files from last group list
+        result.addAll(titleMap.get(false));
+        return result;
+    }
 
-        // Merge Tag and Server Groups
-        serverMap.addAll(groups.get(true));
-        return serverMap;
+    private static List<Map<Path, OpenAPI>> groupFilesByTitle(final Map<Path, OpenAPI> files) {
+        return files.entrySet().stream().collect(Collectors.groupingBy(
+                entry -> Optional.ofNullable(entry.getValue().getInfo().getTitle()).orElse(UUID.randomUUID().toString()).toLowerCase(),
+                Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)
+            ))
+            .values().stream().map(LinkedHashMap::new).collect(Collectors.toList());
     }
 
     public static List<Map<Path, OpenAPI>> groupFiles(final Map<Path, OpenAPI> files, final String groupPattern, final boolean isServer) {

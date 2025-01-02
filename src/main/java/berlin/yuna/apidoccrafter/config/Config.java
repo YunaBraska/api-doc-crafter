@@ -3,6 +3,10 @@ package berlin.yuna.apidoccrafter.config;
 import berlin.yuna.typemap.logic.ArgsDecoder;
 import berlin.yuna.typemap.model.TypeMap;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import static berlin.yuna.typemap.logic.ArgsDecoder.hasText;
 import static berlin.yuna.typemap.logic.TypeConverter.convertObj;
 
@@ -77,11 +81,20 @@ public class Config {
     private static final TypeMap CONFIG_ITEMS = new TypeMap();
 
     public static Boolean sortBy(final String key) {
-        return CONFIG_ITEMS.asStringOpt(key).map(String::toLowerCase).filter(cfg -> ("none".equals(cfg) || "null".equals(cfg))).isPresent()? null : CONFIG_ITEMS.asBooleanOpt(key).orElse(true);
+        return CONFIG_ITEMS.asStringOpt(key).map(String::toLowerCase).filter(cfg -> ("none".equals(cfg) || "null".equals(cfg))).isPresent() ? null : CONFIG_ITEMS.asBooleanOpt(key).orElse(true);
     }
 
     public static String getRemovePattern() {
         return CONFIG_ITEMS.asStringOpt(REMOVE_PATTERNS).map(String::trim).map(String::toLowerCase).orElse(null);
+    }
+
+    public static Map<String, String> getFileDownloadHeaders() {
+        return CONFIG_ITEMS.asStringOpt(FILE_DOWNLOAD_HEADER)
+            .map(headersStr -> Arrays.stream(headersStr.split("\\|\\|"))
+                .map(header -> header.trim().split("->", 2))
+                .filter(parts -> parts.length == 2 && !parts[0].isEmpty() && !parts[1].isEmpty())
+                .collect(Collectors.toMap(parts -> parts[0].trim(), parts -> parts[1].trim(), (v1, v2) -> v1)))
+            .orElse(Map.of());
     }
 
     public static TypeMap config() {

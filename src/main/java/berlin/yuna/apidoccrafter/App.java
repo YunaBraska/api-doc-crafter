@@ -9,10 +9,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 import static berlin.yuna.apidoccrafter.config.Config.*;
 import static berlin.yuna.apidoccrafter.logic.Processor.*;
@@ -34,7 +34,7 @@ public class App {
         final String tagGroups = config().asString(GROUP_TAGS);
         final String serverGroups = config().asString(GROUP_SERVERS);
 
-        downloadRemoteOpenApiFiles(inputDir);
+        downloadRemoteOpenApiFiles(inputDir, maxDeep);
 
         final Map<Path, OpenAPI> fileMap = readOpenApiFiles(inputDir, maxDeep, fileIncludes, fileExcludes);
         System.out.println("[INFO] Files [" + fileMap.size() + "] to process");
@@ -49,19 +49,41 @@ public class App {
         mergedApis.forEach((path, openAPI) -> saveYaml(openAPI, outputDir.resolve(filenameYaml(path, openAPI))));
         mergedApis.forEach((path, openAPI) -> saveJson(openAPI, outputDir.resolve(filenameJson(path, openAPI))));
 
+        // TODO: find non resolvable components in other API files and merge these references
         HtmlGenerator.generateHtml(sortByString(mergedApis, pathOpenAPIEntry -> displayName(pathOpenAPIEntry.getKey(), pathOpenAPIEntry.getValue())), outputDir);
     }
 
-    private static void downloadRemoteOpenApiFiles(final Path inputDir) {
-        final List<String> downloadUrls = config().asStringOpt(FILE_DOWNLOAD).map(urls -> urls.split("\\|\\|")).map(List::of).orElse(List.of());
-        final Map<String, String> headers = config().asStringOpt(FILE_DOWNLOAD_HEADER)
-            .map(headersStr -> Arrays.stream(headersStr.split("\\|\\|"))
-                .map(header -> header.trim().split("->", 2))
-                .filter(parts -> parts.length == 2 && !parts[0].isEmpty() && !parts[1].isEmpty())
-                .collect(Collectors.toMap(parts -> parts[0].trim(), parts -> parts[1].trim(), (v1, v2) -> v1)))
-            .orElse(Map.of());
+    private static void downloadRemoteOpenApiFiles(final Path inputDir, final int maxDeep) {
+        final Path targetDir = inputDir.resolve("api-doc-download");
+        System.out.println("[INFO] Downloading dir [" + targetDir + "]");
+        mkdir(targetDir);
+        // Download files from file_download
+        config().asStringOpt(FILE_DOWNLOAD)
+            .map(urls -> urls.split("\\|\\|"))
+            .map(List::of)
+            .orElse(List.of())
+            .forEach(url -> download(url, getFileDownloadHeaders(), inputDir));
 
-        downloadUrls.forEach(url -> download(url, headers, inputDir));
+        // Download files from api-doc-links.txt
+        try (final Stream<Path> files = Files.walk(inputDir, maxDeep)) {
+            files
+                .filter(Files::isRegularFile)
+                .filter(file -> file.getFileName().toString().equals("api-doc-links.txt"))
+                .map(file -> {
+                    try {
+                        return Files.readAllLines(file);
+                    } catch (IOException e) {
+                        System.err.println("[ERROR] Failed to read [" + file + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
+                        return null;
+                    }
+                })
+                .filter(Objects::nonNull)
+                .flatMap(List::stream)
+                .distinct()
+                .forEach(url -> download(url, getFileDownloadHeaders(), targetDir));
+        } catch (IOException e) {
+            System.err.println("[ERROR] Failed to read [" + inputDir + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
+        }
     }
 
     private static Path parseOutputDir(final String outputDirArg, final Path inputDir) {
@@ -69,13 +91,9 @@ public class App {
         if (Files.exists(result) && !Files.isDirectory(result)) {
             System.err.println("[ERROR] outputDir [" + result + "] is not a directory");
         } else {
-            try {
-                if (Files.exists(result))
-                    deleteFolder(result);
-                Files.createDirectories(result);
-            } catch (IOException e) {
-                System.err.println("[ERROR] Failed to create outputDir [" + result + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
-            }
+            if (Files.exists(result))
+                deleteFolder(result);
+            mkdir(result);
         }
         System.out.println("[INFO] OutputDir [" + result + "]");
         return result;
