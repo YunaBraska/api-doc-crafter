@@ -272,118 +272,6 @@
         ]
     },
     {
-        "line": "com.google.code.findbugs:jsr305:3.0.2",
-        "group": "com.google.code.findbugs",
-        "artifact": "jsr305",
-        "version": "3.0.2",
-        "scope": "compile",
-        "url": "http://findbugs.sourceforge.net/",
-        "licenses": [
-            {
-                "name": "Apache License",
-                "version": "2.0",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
-        "line": "com.google.errorprone:error_prone_annotations:2.21.1",
-        "group": "com.google.errorprone",
-        "artifact": "error_prone_annotations",
-        "version": "2.21.1",
-        "scope": "compile",
-        "url": "https://errorprone.info/error_prone_annotations",
-        "licenses": [
-            {
-                "name": "Apache",
-                "version": "2.0",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
-        "line": "com.google.guava:failureaccess:1.0.1",
-        "group": "com.google.guava",
-        "artifact": "failureaccess",
-        "version": "1.0.1",
-        "scope": "compile",
-        "url": "https://github.com/google/guava/failureaccess",
-        "licenses": [
-            {
-                "name": "Apache License",
-                "version": "2.0",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
-        "line": "com.google.guava:guava:32.1.3android",
-        "group": "com.google.guava",
-        "artifact": "guava",
-        "version": "32.1.3android",
-        "scope": "compile",
-        "url": "https://github.com/google/guava",
-        "licenses": [
-            {
-                "name": "Apache License",
-                "version": "2.0",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
-        "line": "com.google.guava:listenablefuture:9999.0empty-to-avoid-conflict-with-guava",
-        "group": "com.google.guava",
-        "artifact": "listenablefuture",
-        "version": "9999.0emptyto-avoid-conflict-with-guava",
-        "scope": "compile",
-        "url": "https://github.com/google/guava/listenablefuture",
-        "licenses": [
-            {
-                "name": "Apache License",
-                "version": "2.0",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
-        "line": "com.google.j2objc:j2objcannotations:2.8",
-        "group": "com.google.j2objc",
-        "artifact": "j2objcannotations",
-        "version": "2.8",
-        "scope": "compile",
-        "url": "https://github.com/google/j2objc/",
-        "licenses": [
-            {
-                "name": "Apache License",
-                "version": "2.0",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
-        "line": "com.googlecode.libphonenumber:libphonenumber:8.11.1",
-        "group": "com.googlecode.libphonenumber",
-        "artifact": "libphonenumber",
-        "version": "8.11.1",
-        "scope": "compile",
-        "url": "https://github.com/google/libphonenumber/",
-        "licenses": [
-            {
-                "name": "Apache License",
-                "version": "2.0",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
         "line": "com.sun.istack:istackcommons-runtime:4.1.2",
         "group": "com.sun.istack",
         "artifact": "istackcommonsruntime",
@@ -416,12 +304,12 @@
         ]
     },
     {
-        "line": "io.swagger:swaggerannotations:1.6.14",
-        "group": "io.swagger",
-        "artifact": "swaggerannotations",
-        "version": "1.6.14",
+        "line": "commonslogging:commons-logging:1.1.1",
+        "group": "commonslogging",
+        "artifact": "commonslogging",
+        "version": "1.1.1",
         "scope": "compile",
-        "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-annotations",
+        "url": "http://commons.apache.org/logging",
         "licenses": [
             {
                 "name": "Apache License",
@@ -502,22 +390,6 @@
         "version": "1.0.72",
         "scope": "compile",
         "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver",
-        "licenses": [
-            {
-                "name": "Apache License",
-                "version": "2.0",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
-        "line": "io.swagger.core.v3:swaggerannotations:2.2.26",
-        "group": "io.swagger.core.v3",
-        "artifact": "swaggerannotations",
-        "version": "2.2.26",
-        "scope": "compile",
-        "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-annotations",
         "licenses": [
             {
                 "name": "Apache License",
@@ -704,22 +576,6 @@
         ]
     },
     {
-        "line": "net.sf.joptsimple:jopt-simple:5.0.4",
-        "group": "net.sf.joptsimple",
-        "artifact": "joptsimple",
-        "version": "5.0.4",
-        "scope": "compile",
-        "url": "http://joptsimple.github.io/jopt-simple",
-        "licenses": [
-            {
-                "name": "MIT",
-                "version": "1",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
         "line": "org.apache.commons:commonslang3:3.14.0",
         "group": "org.apache.commons",
         "artifact": "commonslang3",
@@ -730,22 +586,6 @@
             {
                 "name": "Apache",
                 "version": "2.0",
-                "scope": "compile",
-                "isLimited": false
-            }
-        ]
-    },
-    {
-        "line": "org.checkerframework:checkerqual:3.37.0",
-        "group": "org.checkerframework",
-        "artifact": "checkerqual",
-        "version": "3.37.0",
-        "scope": "compile",
-        "url": "https://checkerframework.org/",
-        "licenses": [
-            {
-                "name": "MIT",
-                "version": "1",
                 "scope": "compile",
                 "isLimited": false
             }
@@ -800,26 +640,26 @@
         ]
     },
     {
-        "line": "org.mozilla:rhino:1.7.7.2",
-        "group": "org.mozilla",
-        "artifact": "rhino",
-        "version": "1.7.7.2",
+        "line": "org.slf4j:slf4japi:1.7.36",
+        "group": "org.slf4j",
+        "artifact": "slf4japi",
+        "version": "1.7.36",
         "scope": "compile",
-        "url": "https://developer.mozilla.org/en/Rhino",
+        "url": "http://www.slf4j.org",
         "licenses": [
             {
-                "name": "MPL",
-                "version": "2.0",
+                "name": "MIT",
+                "version": "1",
                 "scope": "compile",
-                "isLimited": true
+                "isLimited": false
             }
         ]
     },
     {
-        "line": "org.slf4j:slf4japi:2.0.9",
+        "line": "org.slf4j:slf4jjcl:1.7.36",
         "group": "org.slf4j",
-        "artifact": "slf4japi",
-        "version": "2.0.9",
+        "artifact": "slf4jjcl",
+        "version": "1.7.36",
         "scope": "compile",
         "url": "http://www.slf4j.org",
         "licenses": [

@@ -215,97 +215,6 @@
         </licenses>
     </dependency>
     <dependency>
-        <groupId>com.google.code.findbugs</groupId>
-        <artifactId>jsr305</artifactId>
-        <version>3.0.2</version>
-        <scope>compile</scope>
-        <url>http://findbugs.sourceforge.net/</url>
-        <licenses>
-            <license>
-                <name>Apache License</name>
-                <version>2.0</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
-        <groupId>com.google.errorprone</groupId>
-        <artifactId>error_prone_annotations</artifactId>
-        <version>2.21.1</version>
-        <scope>compile</scope>
-        <url>https://errorprone.info/error_prone_annotations</url>
-        <licenses>
-            <license>
-                <name>Apache</name>
-                <version>2.0</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>failureaccess</artifactId>
-        <version>1.0.1</version>
-        <scope>compile</scope>
-        <url>https://github.com/google/guava/failureaccess</url>
-        <licenses>
-            <license>
-                <name>Apache License</name>
-                <version>2.0</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>32.1.3android</version>
-        <scope>compile</scope>
-        <url>https://github.com/google/guava</url>
-        <licenses>
-            <license>
-                <name>Apache License</name>
-                <version>2.0</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>listenablefuture</artifactId>
-        <version>9999.0emptyto-avoid-conflict-with-guava</version>
-        <scope>compile</scope>
-        <url>https://github.com/google/guava/listenablefuture</url>
-        <licenses>
-            <license>
-                <name>Apache License</name>
-                <version>2.0</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
-        <groupId>com.google.j2objc</groupId>
-        <artifactId>j2objcannotations</artifactId>
-        <version>2.8</version>
-        <scope>compile</scope>
-        <url>https://github.com/google/j2objc/</url>
-        <licenses>
-            <license>
-                <name>Apache License</name>
-                <version>2.0</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
-        <groupId>com.googlecode.libphonenumber</groupId>
-        <artifactId>libphonenumber</artifactId>
-        <version>8.11.1</version>
-        <scope>compile</scope>
-        <url>https://github.com/google/libphonenumber/</url>
-        <licenses>
-            <license>
-                <name>Apache License</name>
-                <version>2.0</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
         <groupId>com.sun.istack</groupId>
         <artifactId>istackcommonsruntime</artifactId>
         <version>4.1.2</version>
@@ -332,11 +241,11 @@
         </licenses>
     </dependency>
     <dependency>
-        <groupId>io.swagger</groupId>
-        <artifactId>swaggerannotations</artifactId>
-        <version>1.6.14</version>
+        <groupId>commonslogging</groupId>
+        <artifactId>commonslogging</artifactId>
+        <version>1.1.1</version>
         <scope>compile</scope>
-        <url>https://github.com/swaggerapi/swagger-core/modules/swagger-annotations</url>
+        <url>http://commons.apache.org/logging</url>
         <licenses>
             <license>
                 <name>Apache License</name>
@@ -402,19 +311,6 @@
         <version>1.0.72</version>
         <scope>compile</scope>
         <url>http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver</url>
-        <licenses>
-            <license>
-                <name>Apache License</name>
-                <version>2.0</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
-        <groupId>io.swagger.core.v3</groupId>
-        <artifactId>swaggerannotations</artifactId>
-        <version>2.2.26</version>
-        <scope>compile</scope>
-        <url>https://github.com/swaggerapi/swagger-core/modules/swagger-annotations</url>
         <licenses>
             <license>
                 <name>Apache License</name>
@@ -566,19 +462,6 @@
         </licenses>
     </dependency>
     <dependency>
-        <groupId>net.sf.joptsimple</groupId>
-        <artifactId>joptsimple</artifactId>
-        <version>5.0.4</version>
-        <scope>compile</scope>
-        <url>http://joptsimple.github.io/jopt-simple</url>
-        <licenses>
-            <license>
-                <name>MIT</name>
-                <version>1</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commonslang3</artifactId>
         <version>3.14.0</version>
@@ -588,19 +471,6 @@
             <license>
                 <name>Apache</name>
                 <version>2.0</version>
-            </license>
-        </licenses>
-    </dependency>
-    <dependency>
-        <groupId>org.checkerframework</groupId>
-        <artifactId>checkerqual</artifactId>
-        <version>3.37.0</version>
-        <scope>compile</scope>
-        <url>https://checkerframework.org/</url>
-        <licenses>
-            <license>
-                <name>MIT</name>
-                <version>1</version>
             </license>
         </licenses>
     </dependency>
@@ -644,22 +514,22 @@
         </licenses>
     </dependency>
     <dependency>
-        <groupId>org.mozilla</groupId>
-        <artifactId>rhino</artifactId>
-        <version>1.7.7.2</version>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4japi</artifactId>
+        <version>1.7.36</version>
         <scope>compile</scope>
-        <url>https://developer.mozilla.org/en/Rhino</url>
+        <url>http://www.slf4j.org</url>
         <licenses>
             <license>
-                <name>MPL</name>
-                <version>2.0</version>
+                <name>MIT</name>
+                <version>1</version>
             </license>
         </licenses>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
-        <artifactId>slf4japi</artifactId>
-        <version>2.0.9</version>
+        <artifactId>slf4jjcl</artifactId>
+        <version>1.7.36</version>
         <scope>compile</scope>
         <url>http://www.slf4j.org</url>
         <licenses>

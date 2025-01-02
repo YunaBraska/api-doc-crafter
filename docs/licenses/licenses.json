@@ -30,12 +30,6 @@
         "isLimited": false
     },
     {
-        "name": "MPL",
-        "version": "2.0",
-        "scope": "compile",
-        "isLimited": true
-    },
-    {
         "name": "EDL",
         "version": "1.0",
         "scope": "runtime",

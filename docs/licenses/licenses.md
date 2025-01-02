@@ -7,5 +7,4 @@
 | EDL | 1.0 | false | compile |
 | LGPL | 3 | true | compile |
 | MIT | 1 | false | compile |
-| MPL | 2.0 | true | compile |
 | EDL | 1.0 | false | runtime |

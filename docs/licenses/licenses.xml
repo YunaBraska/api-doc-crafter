@@ -31,12 +31,6 @@
         <limited>false</limited>
     </license>
     <license>
-        <name>MPL</name>
-        <version>2.0</version>
-        <version>compile</version>
-        <limited>true</limited>
-    </license>
-    <license>
         <name>EDL</name>
         <version>1.0</version>
         <version>runtime</version>
