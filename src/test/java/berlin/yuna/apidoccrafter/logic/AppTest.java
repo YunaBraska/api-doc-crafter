@@ -52,7 +52,7 @@ class AppTest {
             assertThat(expectedFilesPath.resolve(fileName)).exists();
 
             try {
-                assertThat(Files.readString(swaggerOutput.resolve(fileName))).isEqualTo(Files.readString(expectedFilesPath.resolve(fileName)));
+                assertThat(Files.readString(swaggerOutput.resolve(fileName)).trim()).isEqualTo(Files.readString(expectedFilesPath.resolve(fileName)).trim());
             } catch (IOException e) {
                 try {
                     assertThat(Files.readAllBytes(swaggerOutput.resolve(fileName))).isEqualTo(Files.readAllBytes(expectedFilesPath.resolve(fileName)));

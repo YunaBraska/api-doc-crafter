@@ -9,8 +9,33 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 
-import static berlin.yuna.apidoccrafter.config.Config.*;
-import static berlin.yuna.apidoccrafter.util.Util.*;
+import static berlin.yuna.apidoccrafter.config.Config.LOCAL_PATTERN;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_PATHS;
+import static berlin.yuna.apidoccrafter.config.Config.SORT_TAGS;
+import static berlin.yuna.apidoccrafter.config.Config.STATIC_SWAGGER_BUNDLE_JS;
+import static berlin.yuna.apidoccrafter.config.Config.STATIC_SWAGGER_CSS;
+import static berlin.yuna.apidoccrafter.config.Config.STATIC_SWAGGER_FAVICON;
+import static berlin.yuna.apidoccrafter.config.Config.STATIC_SWAGGER_LOGO;
+import static berlin.yuna.apidoccrafter.config.Config.STATIC_SWAGGER_STANDALONE_JS;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_BUNDLE_JS;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_CSS;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_FAVICON;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_JS;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_LINKS;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_LOGO;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_LOGO_LINK;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_NAV;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_NAV_CSS;
+import static berlin.yuna.apidoccrafter.config.Config.SWAGGER_TITLE;
+import static berlin.yuna.apidoccrafter.config.Config.config;
+import static berlin.yuna.apidoccrafter.config.Config.sortBy;
+import static berlin.yuna.apidoccrafter.util.Util.copyResourceToOutput;
+import static berlin.yuna.apidoccrafter.util.Util.displayName;
+import static berlin.yuna.apidoccrafter.util.Util.filenameHtml;
+import static berlin.yuna.apidoccrafter.util.Util.filenameJson;
+import static berlin.yuna.apidoccrafter.util.Util.filenameYaml;
+import static berlin.yuna.apidoccrafter.util.Util.readResource;
+import static berlin.yuna.apidoccrafter.util.Util.writeFile;
 import static java.util.Optional.ofNullable;
 
 @SuppressWarnings({"java:S106"})
@@ -32,7 +57,7 @@ public class HtmlGenerator {
         ));
 
         // Index page
-        writeFile(outputDir.resolve("index.html"), generateHead(config().asStringOpt("title").orElse("API Documentation")) + "<body>" + generateNavigation(mergedApis, null) + "</body></html>");
+        writeFile(outputDir.resolve("index.html"), generateHead(config().asStringOpt(SWAGGER_TITLE).orElse("API Documentation")) + "<body>" + generateNavigation(mergedApis, null) + "</body></html>");
 
         // RESOURCES
         copyResourceToOutput("bin/static/favicon.png", outputDir);
@@ -92,7 +117,7 @@ public class HtmlGenerator {
                 );
                 navigation.append("    </div>").append(LS);
             });
-            navigation.append("    <h2>Docs</h2>").append(LS).append("    <ul>").append(LS);
+            navigation.append("    <h2>").append(config().asStringOpt(SWAGGER_TITLE).orElse("API Documentation")).append("</h2>").append(LS).append("    <ul>").append(LS);
             mergedApis.forEach((path, openAPI) -> {
                 final String displayName = displayName(path, openAPI);
                 navigation.append("      <li><a class=\"link\" href='").append(filenameHtml(path, openAPI)).append("'>").append(displayName.equals(selected) ? "<strong>" + displayName + "</strong>" : displayName).append("</a></li>").append(LS);

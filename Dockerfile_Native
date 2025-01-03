@@ -44,5 +44,9 @@ COPY --from=native_build ./target/*.native ./app.native
 # [ARCH] docker buildx build --platform linux/amd64 -t app-native -f Dockerfile --load . && docker run --rm -p 8080:8080 app-native
 FROM debian:bookworm-slim AS native_image
 COPY --from=native_build ./target/*.native ./app.native
+
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
 EXPOSE 8080
 ENTRYPOINT ["./app.native"]

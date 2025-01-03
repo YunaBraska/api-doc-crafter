@@ -3,6 +3,8 @@ package berlin.yuna.apidoccrafter.config;
 import berlin.yuna.typemap.logic.ArgsDecoder;
 import berlin.yuna.typemap.model.TypeMap;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,6 +42,7 @@ public class Config {
     public static final String SWAGGER_LOGO_LINK = CONFIG_PREFIX + "swagger_logo_link";
     public static final String SWAGGER_NAV = CONFIG_PREFIX + "swagger_nav";
     public static final String SWAGGER_LINKS = CONFIG_PREFIX + "swagger_links";
+    public static final String SWAGGER_TITLE = CONFIG_PREFIX + "swagger_title";
 
     public static final String SORT_EXTENSIONS = CONFIG_PREFIX + "adc_sort_extensions";
     public static final String SORT_SERVERS = CONFIG_PREFIX + "sort_servers";
@@ -57,6 +60,7 @@ public class Config {
     public static final String SORT_CONTENT = CONFIG_PREFIX + "sort_content";
     public static final String SORT_ENCODING = CONFIG_PREFIX + "sort_encoding";
 
+    public static final String ENCODING = CONFIG_PREFIX + "encoding";
     public static final String REMOVE_PATTERNS = CONFIG_PREFIX + "remove_patterns";
     public static final String FILE_DOWNLOAD = CONFIG_PREFIX + "file_download"; // separated by "||"
     public static final String FILE_DOWNLOAD_HEADER = CONFIG_PREFIX + "file_download_header"; // separated by "||" and "->"
@@ -88,6 +92,16 @@ public class Config {
         return CONFIG_ITEMS.asStringOpt(REMOVE_PATTERNS).map(String::trim).map(String::toLowerCase).orElse(null);
     }
 
+    public static Charset getEncoding() {
+        return CONFIG_ITEMS.asStringOpt(ENCODING).map(String::trim).map(String::toUpperCase).map(encoding -> {
+            try {
+                return Charset.forName(encoding);
+            } catch (Exception ignored) {
+                return null;
+            }
+        }).orElse(StandardCharsets.UTF_8);
+    }
+
     public static Map<String, String> getFileDownloadHeaders() {
         return CONFIG_ITEMS.asStringOpt(FILE_DOWNLOAD_HEADER)
             .map(headersStr -> Arrays.stream(headersStr.split("\\|\\|"))
@@ -108,11 +122,14 @@ public class Config {
      * @return A TypeMap containing the configuration.
      */
     public static TypeMap readConfigs(final String... args) {
+        System.out.println("[DEBUG] System Encoding: " + Charset.defaultCharset().name());
         final TypeMap result = new TypeMap();
         System.getenv().forEach((key, value) -> addConfig(result, key, value));
         System.getProperties().forEach((key, value) -> addConfig(result, key, value));
         if (args != null)
             ArgsDecoder.argsOf(String.join(" ", args)).forEach((key, value) -> addConfig(result, key, value));
+        System.setProperty("file.encoding", getEncoding().name());
+        System.out.println("[DEBUG] Encoding: " + getEncoding());
         return result;
     }
 

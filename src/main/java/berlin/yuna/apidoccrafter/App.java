@@ -71,7 +71,7 @@ public class App {
                 .filter(file -> file.getFileName().toString().equals("api-doc-links.txt"))
                 .map(file -> {
                     try {
-                        return Files.readAllLines(file);
+                        return Files.readAllLines(file, getEncoding());
                     } catch (IOException e) {
                         System.err.println("[ERROR] Failed to read [" + file + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
                         return null;
