@@ -19,6 +19,15 @@ on:
         required: false
         default: false
         description: "Runs deploys to Github - false = only release on updates"
+      version:
+        type: choice
+        description: "Version to release"
+        default: "minor"
+        options:
+          - "minor"
+          - "major"
+          - "patch"
+          - "rc"
 
 concurrency:
   group: "build-${{ github.event.repository.name }}"
@@ -82,7 +91,15 @@ jobs:
           git config --global user.email 'kira@noreply.github.com'
           if [[ -n $(git status -s) && ${{ startsWith(inputs.ref, 'refs/heads/') }} ]]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "has_changes [true]"
+          else
+            echo "has_changes [false]"
           fi
+          
+          echo "Ref [${{ inputs.ref }}]"
+          echo "Version [${{ inputs.version }}]"
+          echo "Deploy [${{ inputs.run_deploy }}]"
+          echo "Test [${{ inputs.run_test }}]"
         env:
           GITHUB_USER: 'GithubBot'
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
@@ -98,15 +115,15 @@ jobs:
         env:
           GITHUB_USER: 'GithubBot'
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
-      - name: "📝 Read Version [${{ steps.java_info.outputs.project_version }}] deploy [${{ inputs.run_deploy == 'true' || steps.update.outputs.has_changes == 'true' }}]"
-        if: ${{ steps.update.outputs.has_changes == 'true' || inputs.run_deploy == 'true' }}
+      - name: "📝 Read Version [${{ steps.java_info.outputs.project_version }}] [${{ inputs.version || 'patch' }}] deploy [${{ inputs.run_deploy }}] changes [${{ steps.update.outputs.has_changes == 'true' }}]"
+        if: ${{ steps.update.outputs.has_changes == 'true' || inputs.run_deploy }}
         uses: YunaBraska/semver-info-action@main
         id: "semver_info"
         with:
           semver-a: ${{ steps.java_info.outputs.project_version }}
-          increase-a: 'minor'
+          increase-a: ${{ inputs.version || 'patch' }}
       - name: "💾 Commit [${{ steps.semver_info.outputs.clean_semver}}]"
-        if: ${{ steps.update.outputs.has_changes == 'true' || inputs.run_deploy == 'true' }}
+        if: ${{ steps.update.outputs.has_changes == 'true' || inputs.run_deploy }}
         run: |
           ${{ steps.java_info.outputs.cmd }} -B -q versions:set -DnewVersion=${{ steps.semver_info.outputs.clean_semver }} -DgenerateBackupPoms=false
           git add .
@@ -114,7 +131,7 @@ jobs:
           git push origin HEAD:${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
   release:
     needs: deploy
-    if: ${{ inputs.run_deploy == 'true' || needs.deploy.outputs.has_changes == 'true' }}
+    if: ${{ inputs.run_deploy || needs.deploy.outputs.has_changes == 'true' }}
     name: "Trigger Release"
     uses: YunaBraska/api-doc-crafter/.github/workflows/github_release.yml@main
     secrets: inherit

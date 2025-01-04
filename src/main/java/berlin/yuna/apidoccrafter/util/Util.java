@@ -21,6 +21,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static berlin.yuna.apidoccrafter.config.Config.getEncoding;
 import static berlin.yuna.apidoccrafter.config.Config.getRemovePattern;
 import static berlin.yuna.typemap.logic.ArgsDecoder.hasText;
 import static java.util.Optional.ofNullable;
@@ -180,7 +181,7 @@ public class Util {
 
     public static void writeFile(final Path path, final String content) {
         try {
-            Files.writeString(path, content);
+            Files.writeString(path, content, getEncoding());
             System.out.println("[INFO] Generated [" + path + "]");
         } catch (IOException e) {
             System.err.println("[ERROR] Failed to write [" + path + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");

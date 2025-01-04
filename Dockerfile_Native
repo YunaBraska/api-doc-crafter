@@ -9,12 +9,14 @@ ENV AMD64="https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21
 ENV ARM64="https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_linux-aarch64_bin.tar.gz"
 
 # Prerequisites: https://www.graalvm.org/latest/reference-manual/native-image/#prerequisites
+# locales && locales-all: https://github.com/oracle/graal/issues/8792#issuecomment-2189166038 (java commands such as Path.resolve() fail without it when locating special chars in the path)
 RUN set -eux; \
     GRAALVM_DOWNLOAD_URL=$(if [ "$(uname -m)" = "aarch64" ]; then echo "${ARM64}"; else echo "${AMD64}"; fi) \
 	&& mkdir -p "${GRAALVM_HOME}" \
-    && apt-get -y update -qqy  \
-    && apt-get -y install -qqy curl \
-    && apt-get -y install -qqy --no-install-recommends build-essential libz-dev zlib1g-dev \
+    && apt-get -y update \
+    && apt-get -y install curl \
+    && apt-get -y install locales locales-all \
+    && apt-get -y install --no-install-recommends build-essential libz-dev zlib1g-dev \
     && curl -sSL -o graalvm.tar.gz ${GRAALVM_DOWNLOAD_URL} \
     && tar -zxf graalvm.tar.gz -C "${GRAALVM_HOME}" --strip-components 1 \
     && rm -f graalvm.tar.gz \
@@ -31,7 +33,12 @@ COPY mvnw pom.xml ./
 # [SYSTEM] docker build -t app-native -f Dockerfile .
 # [ARCH] docker buildx build --platform linux/amd64 -t app-native -f Dockerfile --load .
 FROM copy_sources AS native_build
-RUN (chmod +x mvnw && JAVA_HOME="${GRAALVM_HOME}" ./mvnw clean package -B -q -DskipTests -Pnative)
+
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
+
+RUN (chmod +x mvnw && JAVA_HOME="${GRAALVM_HOME}" ./mvnw clean package -B -q -DskipTests -Pnative) && /target/api-doc-crafter.native
 
 # USED TO EXPORT THE NATIVE IMAGE
 # [SYSTEM] docker build -t app-native -f Dockerfile . && docker build --target export . --output target
@@ -44,5 +51,9 @@ COPY --from=native_build ./target/*.native ./app.native
 # [ARCH] docker buildx build --platform linux/amd64 -t app-native -f Dockerfile --load . && docker run --rm -p 8080:8080 app-native
 FROM debian:bookworm-slim AS native_image
 COPY --from=native_build ./target/*.native ./app.native
+
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
 EXPOSE 8080
 ENTRYPOINT ["./app.native"]

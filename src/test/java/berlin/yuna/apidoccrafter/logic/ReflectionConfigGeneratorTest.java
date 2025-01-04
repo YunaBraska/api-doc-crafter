@@ -13,6 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+import static berlin.yuna.apidoccrafter.config.Config.getEncoding;
+
 class ReflectionConfigGeneratorTest {
 
     @Test
@@ -24,7 +26,7 @@ class ReflectionConfigGeneratorTest {
     }
 
     public static void generateReflectConfig(List<String> packages, String outputPath) throws Exception {
-        final String mergerClasses = Files.readString(Path.of(System.getProperty("user.dir")).resolve("src").resolve("main").resolve("java").resolve("berlin").resolve("yuna").resolve("apidoccrafter").resolve("logic").resolve("Merger.java"));
+        final String mergerClasses = Files.readString(Path.of(System.getProperty("user.dir")).resolve("src").resolve("main").resolve("java").resolve("berlin").resolve("yuna").resolve("apidoccrafter").resolve("logic").resolve("Merger.java"), getEncoding());
         List<Map<String, Object>> config = new ArrayList<>();
 
         for (String packageName : packages) {
