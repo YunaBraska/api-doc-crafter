@@ -17,14 +17,14 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Game'
+                  $ref: "#/components/schemas/Game"
     post:
       summary: Add a new game
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Game'
+              $ref: "#/components/schemas/Game"
       responses:
         "201":
           description: Game created
@@ -45,7 +45,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Game'
+                $ref: "#/components/schemas/Game"
 components:
   schemas:
     Game:

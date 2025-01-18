@@ -42,10 +42,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: "#/components/schemas/Pet"
           application/xml:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: "#/components/schemas/Pet"
         required: true
       responses:
         "400":
@@ -78,10 +78,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: "#/components/schemas/Pet"
           application/xml:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: "#/components/schemas/Pet"
         required: true
       responses:
         "405":
@@ -129,12 +129,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: "#/components/schemas/Pet"
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: "#/components/schemas/Pet"
         "400":
           description: Invalid status value
           content: {}
@@ -175,12 +175,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: "#/components/schemas/Pet"
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: "#/components/schemas/Pet"
         "400":
           description: Invalid tag value
           content: {}
@@ -216,10 +216,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: "#/components/schemas/Pet"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: "#/components/schemas/Pet"
         "400":
           description: Invalid ID supplied
           content: {}
@@ -337,7 +337,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
       security:
       - petstore_auth:
         - read:pets
@@ -372,7 +372,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              $ref: "#/components/schemas/Order"
         required: true
       responses:
         "200":
@@ -380,10 +380,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                $ref: "#/components/schemas/Order"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Order'
+                $ref: "#/components/schemas/Order"
         "400":
           description: Invalid Order
           content: {}
@@ -412,10 +412,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                $ref: "#/components/schemas/Order"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Order'
+                $ref: "#/components/schemas/Order"
         "400":
           description: Invalid ID supplied
           content: {}
@@ -457,7 +457,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
         required: true
       responses:
         default:
@@ -477,7 +477,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         required: true
       responses:
         default:
@@ -497,7 +497,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         required: true
       responses:
         default:
@@ -576,10 +576,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
             application/xml:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         "400":
           description: Invalid username supplied
           content: {}
@@ -604,7 +604,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
         required: true
       responses:
         "400":
@@ -689,7 +689,7 @@ components:
       type: object
       properties:
         category:
-          $ref: '#/components/schemas/Category'
+          $ref: "#/components/schemas/Category"
         id:
           type: integer
           format: int64
@@ -716,7 +716,7 @@ components:
           xml:
             wrapped: true
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: "#/components/schemas/Tag"
       xml:
         name: Pet
     Tag:

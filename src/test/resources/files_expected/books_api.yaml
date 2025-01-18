@@ -36,7 +36,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Author'
+                  $ref: "#/components/schemas/Author"
     post:
       tags:
       - Authors
@@ -46,7 +46,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/Author'
+              $ref: "#/components/schemas/Author"
         required: true
       responses:
         "201":
@@ -67,7 +67,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
+                  $ref: "#/components/schemas/Book"
     post:
       tags:
       - Books
@@ -77,7 +77,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/Book'
+              $ref: "#/components/schemas/Book"
         required: true
       responses:
         "201":
@@ -104,7 +104,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Book'
+                $ref: "#/components/schemas/Book"
         "404":
           description: Book not found
           content: {}
@@ -125,7 +125,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/Book'
+              $ref: "#/components/schemas/Book"
         required: true
       responses:
         "200":

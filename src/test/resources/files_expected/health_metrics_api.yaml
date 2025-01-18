@@ -18,14 +18,14 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Metric'
+                  $ref: "#/components/schemas/Metric"
     post:
       summary: Add a new metric
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Metric'
+              $ref: "#/components/schemas/Metric"
       responses:
         "201":
           description: Metric added
@@ -43,7 +43,7 @@ paths:
                 metrics:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Metric'
+                    $ref: "#/components/schemas/Metric"
       responses:
         "200":
           description: Synchronization successful
@@ -64,7 +64,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Metric'
+                $ref: "#/components/schemas/Metric"
     delete:
       summary: Delete a metric
       parameters:
@@ -95,7 +95,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Trend'
+                $ref: "#/components/schemas/Trend"
   /users:
     get:
       summary: Retrieve all users
@@ -107,7 +107,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: "#/components/schemas/User"
   /users/{id}:
     get:
       summary: Retrieve a specific user
@@ -125,7 +125,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
     patch:
       summary: Update user information
       parameters:
@@ -140,7 +140,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       responses:
         "200":
           description: User updated

@@ -8,20 +8,15 @@ on:
       ref:
         type: string
         required: false
-        description: "[ref] e.g. branch, tag or commit to checkout [default: github_ref_name || github_head_ref ]"
-      run_test:
-        type: boolean
-        required: false
-        default: true
-        description: "Runs tests"
+        description: "[Ref] e.g. branch, tag or commit"
       run_deploy:
         type: boolean
         required: false
         default: false
-        description: "Runs deploys to Github - false = only release on updates"
+        description: "[Deploy] - else only if changes"
       version:
         type: choice
-        description: "Version to release"
+        description: "[Version] to increase"
         default: "minor"
         options:
           - "minor"
@@ -99,19 +94,11 @@ jobs:
           echo "Ref [${{ inputs.ref }}]"
           echo "Version [${{ inputs.version }}]"
           echo "Deploy [${{ inputs.run_deploy }}]"
-          echo "Test [${{ inputs.run_test }}]"
         env:
           GITHUB_USER: 'GithubBot'
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
       - name: "🧪 Build & Test"
-        if: ${{ inputs.run_test }}
         run: ${{ steps.java_info.outputs.cmd_test_build }}
-        env:
-          GITHUB_USER: 'GithubBot'
-          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
-      - name: "🏗️ Build only"
-        if: ${{ !inputs.run_test }}
-        run: ${{ steps.java_info.outputs.cmd_build }}
         env:
           GITHUB_USER: 'GithubBot'
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
