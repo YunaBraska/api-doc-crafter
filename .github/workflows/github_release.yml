@@ -24,6 +24,49 @@ concurrency:
   group: "release-${{ github.event.repository.name }}"
 
 jobs:
+  jar:
+    name: "Jar"
+    timeout-minutes: 10
+    runs-on: Ubuntu-latest
+    steps:
+      - name: "🧑‍💻 Checkout [${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}]"
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          ref: ${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
+          token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: "🔍 Read Java Info"
+        id: "java_info"
+        uses: YunaBraska/java-info-action@main
+      - name: "☕ Setup Java [${{ steps.java_info.outputs.java_version }}] Builder [${{ steps.java_info.outputs.builder_name }}] [${{ steps.java_info.outputs.builder_version }}]"
+        uses: actions/setup-java@main
+        with:
+          java-version: ${{ steps.java_info.outputs.java_version }}
+          distribution: 'temurin'
+      - name: "🏗️ Build [jar]"
+        run: |
+          ${{ steps.java_info.outputs.cmd_build }}
+      - name: "📝 Set filename ${{ github.event.repository.name }}-${{steps.java_info.outputs.java_version}}-${{ inputs.version || steps.java_info.outputs.project_version }}.jar"
+        id: "artifact"
+        run: |
+          echo "########## LIST    ##########"
+          docker buildx ls
+          echo "########## INSPECT ##########"
+          docker buildx inspect --bootstrap | grep Platforms | while read -r line; do echo "${line#*:}"; done | tr -d '[:space:]' || true
+          echo "########## SAVE    ##########"
+          filename=$(echo "${{ github.event.repository.name }}-${{steps.java_info.outputs.java_version}}-${{ inputs.version || steps.java_info.outputs.project_version }}.jar" | tr '[:upper:]' '[:lower:]')
+          echo "filename [${filename}]"
+          echo "filename=${filename}" >> $GITHUB_OUTPUT
+          ls -lah
+          mv target/${{ github.event.repository.name }}.jar ${filename}
+          chmod +x ${filename}
+          ls -lah
+      - name: "💼 Save [${{ steps.artifact.outputs.filename }}] Artifact"
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.artifact.outputs.filename }}
+          path: ${{ steps.artifact.outputs.filename }}
+          if-no-files-found: 'error'
   linux:
     name: "Linux"
     timeout-minutes: 60
@@ -182,14 +225,14 @@ jobs:
   release:
     name: "Release"
     timeout-minutes: 5
-    needs: [ linux, macos, windows ]
+    needs: [ jar, linux, macos, windows ]
     runs-on: ubuntu-latest
     steps:
       - name: "💾 Download Artifacts"
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
-          pattern: ${{ github.event.repository.name }}-*.{native,exe}
+          pattern: ${{ github.event.repository.name }}-*.{native,exe,jar}
       - name: "🏷️ Release"
         uses: ncipollo/release-action@v1
         with:
@@ -200,5 +243,5 @@ jobs:
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
           tag: ${{ needs.linux.outputs.version }}
           name: ${{ needs.linux.outputs.version }}
-          artifacts: ${{ github.event.repository.name }}-*.native,${{ github.event.repository.name }}-*.exe
+          artifacts: ${{ github.event.repository.name }}-*.native,${{ github.event.repository.name }}-*.exe,${{ github.event.repository.name }}-*.jar
 

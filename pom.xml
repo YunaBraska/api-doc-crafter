@@ -6,7 +6,7 @@
 
     <groupId>berlin.yuna</groupId>
     <artifactId>api-doc-crafter</artifactId>
-    <version>2025.4.4</version>
+    <version>2025.4.5</version>
     <packaging>jar</packaging>
 
     <name>api-doc-crafter</name>
