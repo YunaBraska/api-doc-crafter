@@ -69,7 +69,7 @@ jobs:
           if-no-files-found: 'error'
   linux:
     name: "Linux"
-    timeout-minutes: 60
+    timeout-minutes: 120
     runs-on: Ubuntu-latest
     strategy:
       matrix:
