@@ -1,9 +1,9 @@
 [
     {
-        "line": "berlin.yuna:typemap:2025.0.8",
+        "line": "berlin.yuna:typemap:2025.0.9",
         "group": "berlin.yuna",
         "artifact": "typemap",
-        "version": "2025.0.8",
+        "version": "2025.0.9",
         "scope": "compile",
         "url": "https://github.com/YunaBraska/typemap",
         "licenses": [
@@ -16,10 +16,10 @@
         ]
     },
     {
-        "line": "com.fasterxml.jackson.core:jacksonannotations:2.18.2",
+        "line": "com.fasterxml.jackson.core:jacksonannotations:2.18.3",
         "group": "com.fasterxml.jackson.core",
         "artifact": "jacksonannotations",
-        "version": "2.18.2",
+        "version": "2.18.3",
         "scope": "compile",
         "url": "https://github.com/FasterXML/jackson",
         "licenses": [
@@ -32,10 +32,10 @@
         ]
     },
     {
-        "line": "com.fasterxml.jackson.core:jacksoncore:2.18.2",
+        "line": "com.fasterxml.jackson.core:jacksoncore:2.18.3",
         "group": "com.fasterxml.jackson.core",
         "artifact": "jacksoncore",
-        "version": "2.18.2",
+        "version": "2.18.3",
         "scope": "compile",
         "url": "https://github.com/FasterXML/jacksoncore",
         "licenses": [
@@ -48,10 +48,10 @@
         ]
     },
     {
-        "line": "com.fasterxml.jackson.core:jacksondatabind:2.18.2",
+        "line": "com.fasterxml.jackson.core:jacksondatabind:2.18.3",
         "group": "com.fasterxml.jackson.core",
         "artifact": "jacksondatabind",
-        "version": "2.18.2",
+        "version": "2.18.3",
         "scope": "compile",
         "url": "https://github.com/FasterXML/jackson",
         "licenses": [
@@ -64,10 +64,10 @@
         ]
     },
     {
-        "line": "com.fasterxml.jackson.dataformat:jacksondataformat-yaml:2.18.2",
+        "line": "com.fasterxml.jackson.dataformat:jacksondataformat-yaml:2.18.3",
         "group": "com.fasterxml.jackson.dataformat",
         "artifact": "jacksondataformatyaml",
-        "version": "2.18.2",
+        "version": "2.18.3",
         "scope": "compile",
         "url": "https://github.com/FasterXML/jacksondataformats-text",
         "licenses": [
@@ -400,10 +400,10 @@
         ]
     },
     {
-        "line": "io.swagger.core.v3:swaggercore:2.2.28",
+        "line": "io.swagger.core.v3:swaggercore:2.2.29",
         "group": "io.swagger.core.v3",
         "artifact": "swaggercore",
-        "version": "2.2.28",
+        "version": "2.2.29",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-core",
         "licenses": [
@@ -416,10 +416,10 @@
         ]
     },
     {
-        "line": "io.swagger.core.v3:swaggermodels:2.2.28",
+        "line": "io.swagger.core.v3:swaggermodels:2.2.29",
         "group": "io.swagger.core.v3",
         "artifact": "swaggermodels",
-        "version": "2.2.28",
+        "version": "2.2.29",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-models",
         "licenses": [
@@ -432,10 +432,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser:2.1.25",
+        "line": "io.swagger.parser.v3:swaggerparser:2.1.26",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparser",
-        "version": "2.1.25",
+        "version": "2.1.26",
         "scope": "compile",
         "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser",
         "licenses": [
@@ -448,10 +448,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-core:2.1.25",
+        "line": "io.swagger.parser.v3:swaggerparser-core:2.1.26",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparsercore",
-        "version": "2.1.25",
+        "version": "2.1.26",
         "scope": "compile",
         "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-core",
         "licenses": [
@@ -464,10 +464,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-safe-url-resolver:2.1.25",
+        "line": "io.swagger.parser.v3:swaggerparser-safe-url-resolver:2.1.26",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparsersafe-url-resolver",
-        "version": "2.1.25",
+        "version": "2.1.26",
         "scope": "compile",
         "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver",
         "licenses": [
@@ -480,10 +480,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-v2-converter:2.1.25",
+        "line": "io.swagger.parser.v3:swaggerparser-v2-converter:2.1.26",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparserv2-converter",
-        "version": "2.1.25",
+        "version": "2.1.26",
         "scope": "compile",
         "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v2-converter",
         "licenses": [
@@ -496,10 +496,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-v3:2.1.25",
+        "line": "io.swagger.parser.v3:swaggerparser-v3:2.1.26",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparserv3",
-        "version": "2.1.25",
+        "version": "2.1.26",
         "scope": "compile",
         "url": "http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v3",
         "licenses": [
@@ -672,10 +672,10 @@
         ]
     },
     {
-        "line": "org.yaml:snakeyaml:2.3",
+        "line": "org.yaml:snakeyaml:2.4",
         "group": "org.yaml",
         "artifact": "snakeyaml",
-        "version": "2.3",
+        "version": "2.4",
         "scope": "compile",
         "url": "https://bitbucket.org/snakeyaml/snakeyaml",
         "licenses": [

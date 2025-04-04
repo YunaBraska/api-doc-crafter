@@ -6,7 +6,7 @@
 
     <groupId>berlin.yuna</groupId>
     <artifactId>api-doc-crafter</artifactId>
-    <version>2025.4.16</version>
+    <version>2025.4.17</version>
     <packaging>jar</packaging>
 
     <name>api-doc-crafter</name>
@@ -39,7 +39,7 @@
         <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
         <!-- PROD -->
-        <type-map.version>2025.0.9</type-map.version>
+        <type-map.version>2025.0.11</type-map.version>
         <swagger-parser.version>2.1.26</swagger-parser.version>
         <!-- PROD overrides old version from swagger -->
         <jaxb-runtime.version>4.0.5</jaxb-runtime.version>
@@ -51,12 +51,12 @@
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-scm-plugin.version>1.11.2</maven-scm-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
         <maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-failsafe-plugin.version>3.2.2</maven-failsafe-plugin.version>
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
         <native-image-maven-plugin.version>0.10.2</native-image-maven-plugin.version>

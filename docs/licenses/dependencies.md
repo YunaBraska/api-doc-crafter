@@ -2,11 +2,11 @@
 
 | Line | Group | Artifact | Version | Scope | URL | Licenses |
 | ---- | ----- | -------- | ------- | ----- | --- | -------- |
-| berlin.yuna:typemap:2025.0.8 | berlin.yuna | typemap | 2025.0.8 | compile | https://github.com/YunaBraska/typemap | Apache License (2.0) |
-| com.fasterxml.jackson.core:jacksonannotations:2.18.2 | com.fasterxml.jackson.core | jacksonannotations | 2.18.2 | compile | https://github.com/FasterXML/jackson | Apache License (2.0) |
-| com.fasterxml.jackson.core:jacksoncore:2.18.2 | com.fasterxml.jackson.core | jacksoncore | 2.18.2 | compile | https://github.com/FasterXML/jacksoncore | Apache License (2.0) |
-| com.fasterxml.jackson.core:jacksondatabind:2.18.2 | com.fasterxml.jackson.core | jacksondatabind | 2.18.2 | compile | https://github.com/FasterXML/jackson | Apache License (2.0) |
-| com.fasterxml.jackson.dataformat:jacksondataformat-yaml:2.18.2 | com.fasterxml.jackson.dataformat | jacksondataformatyaml | 2.18.2 | compile | https://github.com/FasterXML/jacksondataformats-text | Apache License (2.0) |
+| berlin.yuna:typemap:2025.0.9 | berlin.yuna | typemap | 2025.0.9 | compile | https://github.com/YunaBraska/typemap | Apache License (2.0) |
+| com.fasterxml.jackson.core:jacksonannotations:2.18.3 | com.fasterxml.jackson.core | jacksonannotations | 2.18.3 | compile | https://github.com/FasterXML/jackson | Apache License (2.0) |
+| com.fasterxml.jackson.core:jacksoncore:2.18.3 | com.fasterxml.jackson.core | jacksoncore | 2.18.3 | compile | https://github.com/FasterXML/jacksoncore | Apache License (2.0) |
+| com.fasterxml.jackson.core:jacksondatabind:2.18.3 | com.fasterxml.jackson.core | jacksondatabind | 2.18.3 | compile | https://github.com/FasterXML/jackson | Apache License (2.0) |
+| com.fasterxml.jackson.dataformat:jacksondataformat-yaml:2.18.3 | com.fasterxml.jackson.dataformat | jacksondataformatyaml | 2.18.3 | compile | https://github.com/FasterXML/jacksondataformats-text | Apache License (2.0) |
 | com.fasterxml.jackson.datatype:jacksondatatype-jsr310:2.18.2 | com.fasterxml.jackson.datatype | jacksondatatypejsr310 | 2.18.2 | compile | https://github.com/FasterXML/jacksonmodules-java8/jackson-datatype-jsr310 | Apache License (2.0) |
 | com.github.javajson-tools:btf:1.3 | com.github.javajsontools | btf | 1.3 | compile | https://github.com/javajson-tools/btf | Apache License (2.0)<br>LGPL (3) |
 | com.github.javajson-tools:jackson-coreutils:2.0 | com.github.javajsontools | jacksoncoreutils | 2.0 | compile | https://github.com/javajson-tools/jackson-coreutils | Apache License (2.0)<br>LGPL (3) |
@@ -24,13 +24,13 @@
 | io.swagger:swaggermodels:1.6.15 | io.swagger | swaggermodels | 1.6.15 | compile | https://github.com/swaggerapi/swagger-core/modules/swagger-models | Apache License (2.0) |
 | io.swagger:swaggerparser:1.0.73 | io.swagger | swaggerparser | 1.0.73 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser | Apache License (2.0) |
 | io.swagger:swaggerparser-safe-url-resolver:1.0.73 | io.swagger | swaggerparsersafe-url-resolver | 1.0.73 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver | Apache License (2.0) |
-| io.swagger.core.v3:swaggercore:2.2.28 | io.swagger.core.v3 | swaggercore | 2.2.28 | compile | https://github.com/swaggerapi/swagger-core/modules/swagger-core | Apache License (2.0) |
-| io.swagger.core.v3:swaggermodels:2.2.28 | io.swagger.core.v3 | swaggermodels | 2.2.28 | compile | https://github.com/swaggerapi/swagger-core/modules/swagger-models | Apache License (2.0) |
-| io.swagger.parser.v3:swaggerparser:2.1.25 | io.swagger.parser.v3 | swaggerparser | 2.1.25 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser | Apache License (2.0) |
-| io.swagger.parser.v3:swaggerparser-core:2.1.25 | io.swagger.parser.v3 | swaggerparsercore | 2.1.25 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-core | Apache License (2.0) |
-| io.swagger.parser.v3:swaggerparser-safe-url-resolver:2.1.25 | io.swagger.parser.v3 | swaggerparsersafe-url-resolver | 2.1.25 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver | Apache License (2.0) |
-| io.swagger.parser.v3:swaggerparser-v2-converter:2.1.25 | io.swagger.parser.v3 | swaggerparserv2-converter | 2.1.25 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v2-converter | Apache License (2.0) |
-| io.swagger.parser.v3:swaggerparser-v3:2.1.25 | io.swagger.parser.v3 | swaggerparserv3 | 2.1.25 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v3 | Apache License (2.0) |
+| io.swagger.core.v3:swaggercore:2.2.29 | io.swagger.core.v3 | swaggercore | 2.2.29 | compile | https://github.com/swaggerapi/swagger-core/modules/swagger-core | Apache License (2.0) |
+| io.swagger.core.v3:swaggermodels:2.2.29 | io.swagger.core.v3 | swaggermodels | 2.2.29 | compile | https://github.com/swaggerapi/swagger-core/modules/swagger-models | Apache License (2.0) |
+| io.swagger.parser.v3:swaggerparser:2.1.26 | io.swagger.parser.v3 | swaggerparser | 2.1.26 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser | Apache License (2.0) |
+| io.swagger.parser.v3:swaggerparser-core:2.1.26 | io.swagger.parser.v3 | swaggerparsercore | 2.1.26 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-core | Apache License (2.0) |
+| io.swagger.parser.v3:swaggerparser-safe-url-resolver:2.1.26 | io.swagger.parser.v3 | swaggerparsersafe-url-resolver | 2.1.26 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver | Apache License (2.0) |
+| io.swagger.parser.v3:swaggerparser-v2-converter:2.1.26 | io.swagger.parser.v3 | swaggerparserv2-converter | 2.1.26 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v2-converter | Apache License (2.0) |
+| io.swagger.parser.v3:swaggerparser-v3:2.1.26 | io.swagger.parser.v3 | swaggerparserv3 | 2.1.26 | compile | http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v3 | Apache License (2.0) |
 | jakarta.activation:jakarta.activationapi:2.1.3 | jakarta.activation | jakarta.activationapi | 2.1.3 | compile | https://github.com/jakartaee/jafapi | EDL (1.0) |
 | jakarta.validation:jakarta.validationapi:2.0.2 | jakarta.validation | jakarta.validationapi | 2.0.2 | compile | https://beanvalidation.org | Apache License (2.0) |
 | jakarta.xml.bind:jakarta.xml.bindapi:4.0.2 | jakarta.xml.bind | jakarta.xml.bindapi | 4.0.2 | compile | https://github.com/jakartaee/jaxbapi/jakarta.xml.bind-api | EDL (1.0) |
@@ -41,5 +41,5 @@
 | org.glassfish.jaxb:txw2:4.0.5 | org.glassfish.jaxb | txw2 | 4.0.5 | compile | https://eclipseee4j.github.io/jaxb-ri/ | EDL (1.0) |
 | org.slf4j:slf4japi:1.7.36 | org.slf4j | slf4japi | 1.7.36 | compile | http://www.slf4j.org | MIT (1) |
 | org.slf4j:slf4jjcl:1.7.36 | org.slf4j | slf4jjcl | 1.7.36 | compile | http://www.slf4j.org | MIT (1) |
-| org.yaml:snakeyaml:2.3 | org.yaml | snakeyaml | 2.3 | compile | https://bitbucket.org/snakeyaml/snakeyaml | Apache License (2.0) |
+| org.yaml:snakeyaml:2.4 | org.yaml | snakeyaml | 2.4 | compile | https://bitbucket.org/snakeyaml/snakeyaml | Apache License (2.0) |
 | org.eclipse.angus:angusactivation:2.0.2 | org.eclipse.angus | angusactivation | 2.0.2 | runtime | https://github.com/eclipseee4j/angus-activation/angus-activation | EDL (1.0) |
