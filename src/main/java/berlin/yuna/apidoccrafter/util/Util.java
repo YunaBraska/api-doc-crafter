@@ -1,6 +1,11 @@
 package berlin.yuna.apidoccrafter.util;
 
 import berlin.yuna.typemap.logic.ArgsDecoder;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.core.util.Json;
+import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 
@@ -17,6 +22,8 @@ import java.time.Duration;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,6 +39,26 @@ public class Util {
 
     public static final String SPLIT_REGEX = "::|\\|";
     public static final String SPLIT_REGEX_WITH_COMMA = ",|::|\\|";
+    private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\$\\{([^}]+)}");
+    public static final ObjectMapper safeJsonMapper = Json.mapper().copy()
+        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        .configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false)
+        .configure(DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES, false)
+        .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true)
+        .configure(JsonParser.Feature.ALLOW_COMMENTS, true)
+        .configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true)
+        .configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
+        .configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true);
+
+    public static final ObjectMapper safeYamlMapper = Yaml.mapper().copy()
+        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        .configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false)
+        .configure(DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES, false)
+        .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true)
+        .configure(JsonParser.Feature.ALLOW_COMMENTS, true)
+        .configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true)
+        .configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
+        .configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true);
 
     /**
      * Matches a string against a glob pattern.
@@ -247,7 +274,8 @@ public class Util {
     }
 
     public static void download(final String url, final Map<String, String> headers, final Path target) {
-        if(!hasText(url) || url.startsWith("//")  || url.startsWith("#") || url.startsWith("-") || url.startsWith(">") || url.startsWith("<")) return;
+        if (!hasText(url) || url.startsWith("//") || url.startsWith("#") || url.startsWith("-") || url.startsWith(">") || url.startsWith("<"))
+            return;
         try {
             mkdir(target);
             final Path targetFile = generateFileName(url, target);
@@ -271,6 +299,22 @@ public class Util {
         } catch (Exception e) {
             System.err.println("[ERROR] Download [" + url + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
         }
+    }
+
+    public static String replaceVariables(final String input) {
+        if (input == null || !input.contains("${")) return input;
+        final Matcher matcher = VARIABLE_PATTERN.matcher(input);
+        final StringBuilder builder = new StringBuilder();
+
+        while (matcher.find()) {
+            final String key = matcher.group(1);
+            final String replacement = Optional.ofNullable(System.getProperty(key))
+                .or(() -> Optional.ofNullable(System.getenv(key)))
+                .orElse("${" + key + "}");
+            matcher.appendReplacement(builder, Matcher.quoteReplacement(replacement));
+        }
+        matcher.appendTail(builder);
+        return builder.toString();
     }
 
     private static Path generateFileName(final String url, final Path target) {

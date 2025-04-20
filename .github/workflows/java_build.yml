@@ -14,15 +14,6 @@ on:
         required: false
         default: false
         description: "[Deploy] - else only if changes"
-      version:
-        type: choice
-        description: "[Version] to increase"
-        default: "minor"
-        options:
-          - "minor"
-          - "major"
-          - "patch"
-          - "rc"
 
 concurrency:
   group: "build-${{ github.event.repository.name }}"
@@ -92,7 +83,6 @@ jobs:
           fi
           
           echo "Ref [${{ inputs.ref }}]"
-          echo "Version [${{ inputs.version }}]"
           echo "Deploy [${{ inputs.run_deploy }}]"
         env:
           GITHUB_USER: 'GithubBot'
@@ -102,19 +92,19 @@ jobs:
         env:
           GITHUB_USER: 'GithubBot'
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
-      - name: "📝 Read Version [${{ steps.java_info.outputs.project_version }}] [${{ inputs.version || 'patch' }}] deploy [${{ inputs.run_deploy }}] changes [${{ steps.update.outputs.has_changes == 'true' }}]"
+      - name: "📝 Create new version, deploy [${{ inputs.run_deploy }}] changes [${{ steps.update.outputs.has_changes == 'true' }}]"
         if: ${{ steps.update.outputs.has_changes == 'true' || inputs.run_deploy }}
-        uses: YunaBraska/semver-info-action@main
         id: "semver_info"
-        with:
-          semver-a: ${{ steps.java_info.outputs.project_version }}
-          increase-a: ${{ inputs.version || 'patch' }}
-      - name: "💾 Commit [${{ steps.semver_info.outputs.clean_semver}}]"
+        run: |
+          semver=$(date -u '+%Y.%m.%j%H%M')
+          echo "semver=${semver}" >> $GITHUB_OUTPUT
+          echo "semver [${semver}]"
+      - name: "💾 Commit [${{ steps.semver_info.outputs.semver}}]"
         if: ${{ steps.update.outputs.has_changes == 'true' || inputs.run_deploy }}
         run: |
-          ${{ steps.java_info.outputs.cmd }} -B -q versions:set -DnewVersion=${{ steps.semver_info.outputs.clean_semver }} -DgenerateBackupPoms=false
+          ${{ steps.java_info.outputs.cmd }} -B -q versions:set -DnewVersion=${{ steps.semver_info.outputs.semver }} -DgenerateBackupPoms=false
           git add .
-          git commit -m "chore: update ${{ steps.semver_info.outputs.clean_semver }}"
+          git commit -m "chore: update ${{ steps.semver_info.outputs.semver }}"
           git push origin HEAD:${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
   release:
     needs: deploy

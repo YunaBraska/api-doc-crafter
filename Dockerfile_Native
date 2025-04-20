@@ -38,7 +38,7 @@ ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
 
-RUN (chmod +x mvnw && JAVA_HOME="${GRAALVM_HOME}" ./mvnw clean package -B -q -DskipTests -Pnative) && /target/api-doc-crafter.native
+RUN (chmod +x mvnw && JAVA_HOME="${GRAALVM_HOME}" ./mvnw clean package -B -q -DskipTests -Pnative) && /target/api-doc-crafter.native -Dadc_output_dir=/target/generated_api -Dadc_work_dir=/src/test/resources/files
 
 # USED TO EXPORT THE NATIVE IMAGE
 # [SYSTEM] docker build -t app-native -f Dockerfile . && docker build --target export . --output target

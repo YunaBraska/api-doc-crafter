@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "1.0.0"
   title: "Books API"
-  description: "API to manage books, authors, and their relationships."
+  description: "API to manage books, authors, and their ${TEST_KEY} relationships."
   termsOfService: "https://api.books.example.com/terms"
   contact:
     name: "API Support"

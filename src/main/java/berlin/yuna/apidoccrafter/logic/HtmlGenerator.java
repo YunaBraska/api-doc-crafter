@@ -35,6 +35,8 @@ import static berlin.yuna.apidoccrafter.util.Util.filenameHtml;
 import static berlin.yuna.apidoccrafter.util.Util.filenameJson;
 import static berlin.yuna.apidoccrafter.util.Util.filenameYaml;
 import static berlin.yuna.apidoccrafter.util.Util.readResource;
+import static berlin.yuna.apidoccrafter.util.Util.replaceVariables;
+import static berlin.yuna.apidoccrafter.util.Util.safeJsonMapper;
 import static berlin.yuna.apidoccrafter.util.Util.writeFile;
 import static java.util.Optional.ofNullable;
 
@@ -53,11 +55,11 @@ public class HtmlGenerator {
         // HTML pages
         mergedApis.forEach((path, openApi) -> writeFile(
             outputDir.resolve(filenameHtml(path, openApi)),
-            getSwaggerUiTemplate(path, openApi, mergedApis)
+            replaceVariables(getSwaggerUiTemplate(path, openApi, mergedApis))
         ));
 
         // Index page
-        writeFile(outputDir.resolve("index.html"), generateHead(config().asStringOpt(SWAGGER_TITLE).orElse("API Documentation")) + "<body>" + generateNavigation(mergedApis, null) + "</body></html>");
+        writeFile(outputDir.resolve("index.html"), replaceVariables(generateHead(config().asStringOpt(SWAGGER_TITLE).orElse("API Documentation")) + "<body>" + generateNavigation(mergedApis, null) + "</body></html>"));
 
         // RESOURCES
         copyResourceToOutput("bin/static/favicon.png", outputDir);
@@ -148,7 +150,7 @@ public class HtmlGenerator {
 
     private static String openApiToJson(final OpenAPI openApi) {
         try {
-            return Json.mapper().writeValueAsString(openApi);
+            return safeJsonMapper.writeValueAsString(openApi);
         } catch (IOException e) {
             System.err.println("[ERROR] Failed to write json cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
             return "{}";

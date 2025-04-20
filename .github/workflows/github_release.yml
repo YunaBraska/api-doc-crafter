@@ -15,10 +15,6 @@ on:
         type: string
         description: "[ref] e.g. branch, tag or commit to checkout [default: github_ref_name || github_head_ref ]"
         required: false
-      version:
-        type: string
-        description: "[version] e.g. 1.0.0"
-        required: false
 
 concurrency:
   group: "release-${{ github.event.repository.name }}"
@@ -116,7 +112,7 @@ jobs:
           echo "########## INSPECT ##########"
           docker buildx inspect --bootstrap | grep Platforms | while read -r line; do echo "${line#*:}"; done | tr -d '[:space:]' || true
           echo "########## SAVE    ##########"
-          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ matrix.arch }}-${{ inputs.version || steps.java_info.outputs.project_version }}.native" | tr '[:upper:]' '[:lower:]')
+          filename=$(echo "${{ github.event.repository.name }}-${{runner.os}}-${{ matrix.arch }}-${{ steps.java_info.outputs.project_version }}.native" | tr '[:upper:]' '[:lower:]')
           echo "filename [${filename}]"
           echo "filename=${filename}" >> $GITHUB_OUTPUT
           ls -lah

@@ -1,0 +1,40 @@
+{
+  "resources" : {
+    "includes" : [ {
+      "pattern" : "\\QMETA-INF/services/io.swagger.parser.SwaggerParserExtension\\E"
+    }, {
+      "pattern" : "\\QMETA-INF/services/io.swagger.v3.parser.core.extensions.SwaggerParserExtension\\E"
+    }, {
+      "pattern" : "\\QMETA-INF/services/io.swagger.v3.parser.extensions.JsonSchemaParserExtension\\E"
+    }, {
+      "pattern" : "\\QMETA-INF/services/java.lang.System$LoggerFinder\\E"
+    }, {
+      "pattern" : "\\QMETA-INF/services/java.net.spi.URLStreamHandlerProvider\\E"
+    }, {
+      "pattern" : "\\QMETA-INF/services/org.apache.commons.logging.LogFactory\\E"
+    }, {
+      "pattern" : "\\Qbin/static/favicon.png\\E"
+    }, {
+      "pattern" : "\\Qbin/static/logo.png\\E"
+    }, {
+      "pattern" : "\\Qbin/static/swagger.css\\E"
+    }, {
+      "pattern" : "\\Qbin/static/swagger.js\\E"
+    }, {
+      "pattern" : "\\Qbin/static/swagger_bundle.js\\E"
+    }, {
+      "pattern" : "\\Qbin/static/swagger_nav.css\\E"
+    }, {
+      "pattern" : "\\Qcommons-logging.properties\\E"
+    }, {
+      "pattern" : "\\Qorg/slf4j/impl/StaticLoggerBinder.class\\E"
+    } ]
+  },
+  "bundles" : [ {
+    "name" : "sun.text.resources.cldr.FormatData",
+    "locales" : [ "en", "en-001", "en-150", "en-DE", "en-US", "und" ]
+  }, {
+    "name" : "sun.util.resources.cldr.CalendarData",
+    "locales" : [ "und" ]
+  } ]
+}

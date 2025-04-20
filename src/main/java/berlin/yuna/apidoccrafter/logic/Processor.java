@@ -1,8 +1,13 @@
 package berlin.yuna.apidoccrafter.logic;
 
+import berlin.yuna.apidoccrafter.util.ExFunction;
 import berlin.yuna.typemap.logic.ArgsDecoder;
 import io.swagger.parser.OpenAPIParser;
+import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.tags.Tag;
 import io.swagger.v3.parser.OpenAPIV3Parser;
@@ -11,17 +16,29 @@ import io.swagger.v3.parser.core.models.ParseOptions;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static berlin.yuna.apidoccrafter.config.Config.CONFIG_PREFIX;
+import static berlin.yuna.apidoccrafter.config.Config.ENABLE_CUSTOM_INFO;
+import static berlin.yuna.apidoccrafter.config.Config.config;
 import static berlin.yuna.apidoccrafter.util.FileCleaner.cleanFile;
-import static berlin.yuna.apidoccrafter.util.Util.*;
+import static berlin.yuna.apidoccrafter.util.Util.SPLIT_REGEX;
+import static berlin.yuna.apidoccrafter.util.Util.SPLIT_REGEX_WITH_COMMA;
+import static berlin.yuna.apidoccrafter.util.Util.matchesGlob;
+import static berlin.yuna.apidoccrafter.util.Util.matchesStringGlob;
+import static berlin.yuna.apidoccrafter.util.Util.nothing;
+import static berlin.yuna.apidoccrafter.util.Util.safeJsonMapper;
+import static berlin.yuna.apidoccrafter.util.Util.safeYamlMapper;
+import static berlin.yuna.apidoccrafter.util.Util.toArrayList;
 import static java.util.Arrays.stream;
 import static java.util.Collections.emptySet;
 import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 /**
  * Orchestrates the reading, grouping, and merging of OpenAPI files.
@@ -41,10 +58,84 @@ import static java.util.stream.Collectors.*;
  * <ul>
  *     <li>S106 = System.out.println is used - That is okay as it's not a production code</li>
  *     <li>S3358 = nested ifs</li>
+ *     <li>S1874 = deprecated methods - will be used for safety until they are removed</li>
  * </ul>
  */
-@SuppressWarnings({"java:S106", "java:S3358"})
+@SuppressWarnings({"java:S106", "java:S3358", "java:S1874"})
 public class Processor {
+
+    public record ParseResult(String parserName, Path file, OpenAPI api, int jsonSize) {
+    }
+
+    /**
+     * Enriches the given OpenAPI specification with custom metadata based on external configuration.
+     * <p>
+     * When the configuration key {@code enable_custom_info} is set to {@code true}, this method populates:
+     * <ul>
+     *   <li>{@code info.title}, {@code info.version}, {@code info.summary}, {@code info.description}</li>
+     *   <li>{@code info.termsOfService}, {@code contact.name}, {@code contact.url}, {@code contact.email}</li>
+     *   <li>{@code license.name}, {@code license.url}, {@code license.identifier}</li>
+     *   <li>{@code externalDocs.url}, {@code externalDocs.description}</li>
+     *   <li>{@code servers} and {@code tags}, using string-encoded lists split on {@code , ; |} and parsed via {@code ::}</li>
+     * </ul>
+     * Any null components in the {@code OpenAPI} object will be lazily instantiated before mutation.
+     * <p>
+     * This method is a no-op if the {@code api} parameter is null or the enrichment flag is disabled.
+     *
+     * @param api the {@link OpenAPI} object to enrich. Must not be null if enrichment is desired.
+     */
+    public static void enrichOpenAPI(final OpenAPI api) {
+        if (api == null || !config().asBooleanOpt(ENABLE_CUSTOM_INFO).orElse(false)) return;
+
+        final Info info = Optional.ofNullable(api.getInfo()).orElseGet(Info::new);
+        final Contact contact = Optional.ofNullable(info.getContact()).orElseGet(Contact::new);
+        final License license = Optional.ofNullable(info.getLicense()).orElseGet(License::new);
+        final ExternalDocumentation docs = Optional.ofNullable(api.getExternalDocs()).orElseGet(ExternalDocumentation::new);
+
+        config().asStringOpt(CONFIG_PREFIX + "info_title").ifPresent(info::setTitle);
+        config().asStringOpt(CONFIG_PREFIX + "info_version").ifPresent(info::setVersion);
+        config().asStringOpt(CONFIG_PREFIX + "info_summary").ifPresent(info::setSummary);
+        config().asStringOpt(CONFIG_PREFIX + "info_description").ifPresent(info::setDescription);
+        config().asStringOpt(CONFIG_PREFIX + "info_termsofservice").ifPresent(info::setTermsOfService);
+        config().asStringOpt(CONFIG_PREFIX + "info_contact_name").ifPresent(contact::setName);
+        config().asStringOpt(CONFIG_PREFIX + "info_contact_url").ifPresent(contact::setUrl);
+        config().asStringOpt(CONFIG_PREFIX + "info_contact_email").ifPresent(contact::setEmail);
+        config().asStringOpt(CONFIG_PREFIX + "info_license_name").ifPresent(license::setName);
+        config().asStringOpt(CONFIG_PREFIX + "info_license_url").ifPresent(license::setUrl);
+        config().asStringOpt(CONFIG_PREFIX + "info_license_identifier").ifPresent(license::setIdentifier);
+        config().asStringOpt(CONFIG_PREFIX + "externaldocs_url").ifPresent(docs::setUrl);
+        config().asStringOpt(CONFIG_PREFIX + "externaldocs_description").ifPresent(docs::setDescription);
+        config().asStringOpt(CONFIG_PREFIX + "servers").map(svr -> Arrays.stream(svr.split("[,;]")).map(String::trim).filter(s -> !s.isEmpty()).map(s -> {
+            final Server server = new Server();
+            final String[] array = stream(s.split("::", 2)).map(String::trim).filter(str -> !str.isEmpty()).toArray(String[]::new);
+            if (array.length == 1) {
+                server.setUrl(array[0]);
+                return server;
+            } else {
+                server.setUrl(array[0]);
+                server.setDescription(array[1]);
+                return server;
+            }
+        }).toList()).filter(svr -> !svr.isEmpty()).ifPresent(api::setServers);
+
+        config().asStringOpt(CONFIG_PREFIX + "tags").map(svr -> Arrays.stream(svr.split("[,;]")).map(String::trim).filter(s -> !s.isEmpty()).map(s -> {
+            final Tag tag = new Tag();
+            final String[] array = stream(s.split("::", 2)).map(String::trim).filter(str -> !str.isEmpty()).toArray(String[]::new);
+            if (array.length == 1) {
+                tag.setName(array[0]);
+                return tag;
+            } else {
+                tag.setName(array[0]);
+                tag.setDescription(array[1]);
+                return tag;
+            }
+        }).toList()).filter(svr -> !svr.isEmpty()).ifPresent(api::setTags);
+
+        info.setContact(contact);
+        info.setLicense(license);
+        api.setInfo(info);
+        api.setExternalDocs(docs);
+    }
 
     /**
      * Reads OpenAPI files from the specified directory, filtering by patterns and depth.
@@ -80,25 +171,54 @@ public class Processor {
      * @return An optional containing the file path and OpenAPI object.
      */
     public static Optional<Map.Entry<Path, OpenAPI>> toOpenAPIFile(final Path filePath) {
-        System.out.println("[INFO] Reading file [" + filePath + "]");
-        final AtomicReference<Path> cleanFile = new AtomicReference<>();
-        return parse(filePath, path -> new OpenAPIV3Parser().readLocation(path.toString(), null, null).getOpenAPI())
-            .or(() -> parse(filePath, path -> new OpenAPIParser().readLocation(path.toString(), null, null).getOpenAPI()))
-            .or(() -> {
-                cleanFile.set(cleanFile(filePath));
-                return Optional.empty();
-            } )
-            .or(() -> parse(cleanFile.get(), path -> new OpenAPIV3Parser().readLocation(path.toString(), null, null).getOpenAPI()))
-            .or(() -> parse(cleanFile.get(), path -> new OpenAPIParser().readLocation(path.toString(), null, null).getOpenAPI()))
-            .or(() -> parse(cleanFile.get(), path -> {
-                final ParseOptions options = new ParseOptions();
-                options.isLegacyYamlDeserialization();
-                options.setValidateInternalRefs(false);
-                options.setValidateExternalRefs(false);
-                return new OpenAPIParser().readLocation(path.toString(), null, null).getOpenAPI();
-            }))
-            .map(api -> new AbstractMap.SimpleImmutableEntry<>(filePath, api));
+        final Path cleanFile = cleanFile(filePath);
+        return Stream.of(
+                parseWith(OpenAPIV3Parser.class.getSimpleName(), p -> new OpenAPIV3Parser().readLocation(p.toString(), null, null).getOpenAPI(), filePath),
+                parseWith(OpenAPIParser.class.getSimpleName(), p -> new OpenAPIParser().readLocation(p.toString(), null, null).getOpenAPI(), filePath),
+                parseWith("modified." + OpenAPIV3Parser.class.getSimpleName(), p -> new OpenAPIV3Parser().readLocation(p.toString(), null, null).getOpenAPI(), cleanFile),
+                parseWith("modified." + OpenAPIParser.class.getSimpleName(), p -> new OpenAPIParser().readLocation(p.toString(), null, null).getOpenAPI(), cleanFile),
+                parseWith("legacy." + OpenAPIParser.class.getSimpleName(), p -> {
+                    final ParseOptions options = new ParseOptions();
+                    options.isLegacyYamlDeserialization();
+                    options.setValidateInternalRefs(false);
+                    options.setValidateExternalRefs(false);
+                    return new OpenAPIParser().readLocation(p.toString(), null, options).getOpenAPI();
+                }, cleanFile),
+                parseWith("Json." + safeJsonMapper.getClass().getSimpleName(), p -> safeJsonMapper.readValue(Files.readString(p), OpenAPI.class), filePath),
+                parseWith("Yaml." + safeYamlMapper.getClass().getSimpleName(), p -> safeYamlMapper.readValue(Files.readString(p), OpenAPI.class), filePath)
+            )
+            .parallel()
+            .filter(Objects::nonNull)
+            .filter(pr -> pr.api() != null)
+            .max(Comparator.comparingInt(ParseResult::jsonSize))
+            .map(pr -> {
+                System.out.println("[INFO] Read"
+                    + " parser [" + pr.parserName() + "]"
+                    + " info [" + ofNullable(pr.api())
+                    .map(OpenAPI::getInfo)
+                    .flatMap(info -> ofNullable(info.getTitle())
+                        .or(() -> ofNullable(info.getSummary()))
+                        .or(() -> ofNullable(info.getDescription())))
+                    .or(() -> ofNullable(pr.api())
+                        .map(OpenAPI::getTags)
+                        .map(tags -> tags.stream().map(Tag::getName).filter(Objects::nonNull).distinct().collect(Collectors.joining(",")))
+                    ).orElse(null) + "]"
+                    + " file [" + filePath + "]"
+                );
+                return new AbstractMap.SimpleImmutableEntry<>(filePath, pr.api());
+            })
+            ;
     }
+
+    public static ParseResult parseWith(final String name, final ExFunction<Path, OpenAPI> parser, final Path file) {
+        try {
+            final OpenAPI api = parser.apply(file);
+            return new ParseResult(name, file, api, safeJsonMapper.writeValueAsString(api).length());
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
 
     public static Optional<OpenAPI> parse(final Path filePath, final Function<Path, OpenAPI> parser) {
         try {
@@ -122,7 +242,7 @@ public class Processor {
         // Group files by tags
         final Map<Boolean, List<Map<Path, OpenAPI>>> groups = groupFiles(fileMap, groupPattern, false).stream().collect(Collectors.partitioningBy(map -> map.size() > 1));
         // Group files by servers
-        final Map<Boolean, List<Map<Path, OpenAPI>>> serverMap = groupFiles(groups.get(false).stream().flatMap(map -> map.entrySet().stream()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), serverGroups, true).stream().collect(Collectors.partitioningBy(map -> map.size() > 1));;
+        final Map<Boolean, List<Map<Path, OpenAPI>>> serverMap = groupFiles(groups.get(false).stream().flatMap(map -> map.entrySet().stream()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), serverGroups, true).stream().collect(Collectors.partitioningBy(map -> map.size() > 1));
         // Group files by title
         final Map<Boolean, List<Map<Path, OpenAPI>>> titleMap = groupFilesByTitle(
             serverMap.get(false)
@@ -143,10 +263,10 @@ public class Processor {
 
     private static List<Map<Path, OpenAPI>> groupFilesByTitle(final Map<Path, OpenAPI> files) {
         return files.entrySet().stream().collect(Collectors.groupingBy(
-                entry -> Optional.ofNullable(entry.getValue().getInfo().getTitle()).orElse(UUID.randomUUID().toString()).toLowerCase(),
+                entry -> ofNullable(entry.getValue()).map(OpenAPI::getInfo).map(Info::getTitle).orElseGet(() -> UUID.randomUUID().toString()).toLowerCase(),
                 Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)
             ))
-            .values().stream().map(LinkedHashMap::new).collect(Collectors.toList());
+            .values().stream().map(LinkedHashMap::new).collect(toList());
     }
 
     public static List<Map<Path, OpenAPI>> groupFiles(final Map<Path, OpenAPI> files, final String groupPattern, final boolean isServer) {

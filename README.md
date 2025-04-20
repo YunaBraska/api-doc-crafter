@@ -1,4 +1,5 @@
 # Api-Doc-Crafter
+
 _GitHub Action & Docker & CLI_
 
 Api-Doc-Merger is a standalone cli tool designed to merge multiple API files and generate Swagger HTML documentation. It
@@ -19,7 +20,7 @@ This makes it particularly useful for generating documentation from code and exc
 
 [![c_license_count](https://img.shields.io/badge/licenses-5-97CA00?style=flat-square)](docs/licenses/licenses.csv)
 [![c_license_count_limited](https://img.shields.io/badge/licenses_limited-1-4c1?style=flat-square)](docs/licenses/licenses.csv)
-[![c_dependency_count](https://img.shields.io/badge/dependencies-41-fe7d37?style=flat-square)](docs/licenses/dependencies.csv) 
+[![c_dependency_count](https://img.shields.io/badge/dependencies-41-fe7d37?style=flat-square)](docs/licenses/dependencies.csv)
 _sorry for so many third party libs, it comes all from the swagger parser 🤷‍♀️ - many deps are excluded_
 
 ![Example](src/test/resources/example_01.png)
@@ -32,6 +33,7 @@ _sorry for so many third party libs, it comes all from the swagger parser 🤷�
 * **Filter by Glob Patterns**: Removes servers and paths based on specified glob patterns, allowing for the exclusion of
   internal endpoints.
 * **Standalone Operation**: No external dependencies required, making it easy to integrate into any workflow.
+* **Replaces Variables**: Replaces `${variables}` by envs or properties in the output files.
 
 ## Usage
 
@@ -99,6 +101,36 @@ Downloads OpenAPI files can be also done by listing URLs in `api-doc-links.txt`.
 | `group_tags`           | Glob    | Group OpenAPI files by tags. Separate tags by `::` or `\|` or `,`.  (disabling can be done by non matching values)                                  | null                                                                     |
 | `group_servers`        | Glob    | Group OpenAPI files by servers. Separate servers by `::` or `\|`.  (disabling can be done by non matching values)                                   | null                                                                     |
 
+### OpenAPI Metadata Enrichment
+
+These parameters allow you to inject custom metadata into your OpenAPI spec using configuration values.  
+Set `enable_custom_info=true` to activate this feature.
+
+| Parameter                  | Type    | Description                                                        |
+|----------------------------|---------|--------------------------------------------------------------------|
+| `enable_custom_info`       | Boolean | Enables enrichment of the OpenAPI specification                    |
+| `info_title`               | String  | Sets the OpenAPI `info.title`                                      |
+| `info_version`             | String  | Sets the OpenAPI `info.version`                                    |
+| `info_summary`             | String  | Sets the OpenAPI `info.summary`                                    |
+| `info_description`         | String  | Sets the OpenAPI `info.description`                                |
+| `info_termsofservice`      | String  | Sets the OpenAPI `info.termsOfService`                             |
+| `info_contact_name`        | String  | Sets the contact name in `info.contact`                            |
+| `info_contact_url`         | String  | Sets the contact URL in `info.contact`                             |
+| `info_contact_email`       | String  | Sets the contact email in `info.contact`                           |
+| `info_license_name`        | String  | Sets the license name in `info.license`                            |
+| `info_license_url`         | String  | Sets the license URL in `info.license`                             |
+| `info_license_identifier`  | String  | Sets the license SPDX identifier in `info.license`                 |
+| `externaldocs_url`         | String  | Sets the external documentation URL                                |
+| `externaldocs_description` | String  | Sets the external documentation description                        |
+| `servers`                  | List    | Comma `,`, or semicolon `;`  separated. Format: `URL::Description` |
+| `tags`                     | List    | Comma `,`, or semicolon `;` separated. Format: `Name::Description` |
+
+**Note:**
+
+- Entries in `servers` or `tags` use `::` to separate fields.
+- If only one value is present, it’s treated as the URL (for `servers`) or the name (for `tags`).
+- Multiple entries are split on any of: `,` or `;`.
+
 ## Known Issues
 
 * Parsing files without `"openapi":"3.0.1"` property could be ignored by the parser when running as binary in
@@ -119,8 +151,8 @@ Downloads OpenAPI files can be also done by listing URLs in `api-doc-links.txt`.
 ### Docker files
 
 * Complete Image:
-  * Description: Used in GitHub action
-  * `ghcr.io/yunabraska/api-doc-crafter:latest`
+    * Description: Used in GitHub action
+    * `ghcr.io/yunabraska/api-doc-crafter:latest`
 * Dockerfile:
     * Description: Used as executable in `action.yml` to build the application from the releases
     * Build `docker build -t app -f Dockerfile .`

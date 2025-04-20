@@ -45,8 +45,9 @@
         <jaxb-runtime.version>4.0.5</jaxb-runtime.version>
         <jakarta.xml.bind-api.version>4.0.2</jakarta.xml.bind-api.version>
         <!-- TEST -->
+        <junit.version>5.12.0</junit.version>
         <assertj.version>3.27.3</assertj.version>
-        <junit-jupiter-api.version>5.12.2</junit-jupiter-api.version>
+        <junit-launcher.version>1.12.0</junit-launcher.version>
         <!-- BUILD -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-scm-plugin.version>1.11.2</maven-scm-plugin.version>
@@ -118,7 +119,6 @@
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-annotations</artifactId>
                 </exclusion>
-
             </exclusions>
         </dependency>
         <!-- SWAGGER RUNTIME DEPENDENCIES -->
@@ -142,13 +142,19 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit-jupiter-api.version}</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>${junit-jupiter-api.version}</version>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit-launcher.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -1,6 +1,7 @@
 package berlin.yuna.apidoccrafter;
 
 import berlin.yuna.apidoccrafter.logic.HtmlGenerator;
+import berlin.yuna.apidoccrafter.logic.Processor;
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -44,6 +45,7 @@ public class App {
 
         // Merge and filter files
         final Map<Path, OpenAPI> mergedApis = mergeApis(groupedApis);
+        mergedApis.forEach((path, openAPI) -> Processor.enrichOpenAPI(openAPI));
 
         // Save files
         mergedApis.forEach((path, openAPI) -> saveYaml(openAPI, outputDir.resolve(filenameYaml(path, openAPI))));
@@ -111,8 +113,7 @@ public class App {
 
     private static void saveYaml(final OpenAPI mergedApi, final Path outputPath) {
         try (FileWriter writer = new FileWriter(outputPath.toFile())) {
-            writer.write(Yaml.mapper().writeValueAsString(mergedApi));
-            writer.write(Json.mapper().writeValueAsString(mergedApi));
+            writer.write(replaceVariables(safeYamlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mergedApi)));
             System.out.println("[INFO] Generated [" + outputPath + "]");
         } catch (IOException e) {
             System.err.println("[ERROR] Failed to save [" + outputPath + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");
@@ -121,7 +122,7 @@ public class App {
 
     private static void saveJson(final OpenAPI mergedApi, final Path outputPath) {
         try (FileWriter writer = new FileWriter(outputPath.toFile())) {
-            writer.write(Json.mapper().writeValueAsString(mergedApi));
+            writer.write(replaceVariables(safeJsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mergedApi)));
             System.out.println("[INFO] Generated [" + outputPath + "]");
         } catch (IOException e) {
             System.err.println("[ERROR] Failed to save [" + outputPath + "] cause [" + e.getClass().getSimpleName() + "] message [" + e.getMessage() + "]");

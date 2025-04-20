@@ -59,6 +59,7 @@ public class Config {
     public static final String SORT_REQUESTS = CONFIG_PREFIX + "sort_requests";
     public static final String SORT_CONTENT = CONFIG_PREFIX + "sort_content";
     public static final String SORT_ENCODING = CONFIG_PREFIX + "sort_encoding";
+    public static final String ENABLE_CUSTOM_INFO = CONFIG_PREFIX + "enable_custom_info";
 
     public static final String ENCODING = CONFIG_PREFIX + "encoding";
     public static final String REMOVE_PATTERNS = CONFIG_PREFIX + "remove_patterns";

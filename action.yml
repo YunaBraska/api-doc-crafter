@@ -110,6 +110,54 @@ inputs:
   group_servers:
     description: "[GLOB] Group OpenAPI files by servers. Separate servers with '::' or '|'."
     required: false
+  enable_custom_info:
+    description: "[BOOL] Enables enrichment of the OpenAPI metadata (info, servers, tags, etc.)"
+    required: false
+  info_title:
+    description: "[STRING] Sets the OpenAPI `info.title` field"
+    required: false
+  info_version:
+    description: "[STRING] Sets the OpenAPI `info.version` field"
+    required: false
+  info_summary:
+    description: "[STRING] Sets the OpenAPI `info.summary` field"
+    required: false
+  info_description:
+    description: "[STRING] Sets the OpenAPI `info.description` field"
+    required: false
+  info_termsofservice:
+    description: "[STRING] Sets the OpenAPI `info.termsOfService` field"
+    required: false
+  info_contact_name:
+    description: "[STRING] Sets the OpenAPI contact name"
+    required: false
+  info_contact_url:
+    description: "[STRING] Sets the OpenAPI contact URL"
+    required: false
+  info_contact_email:
+    description: "[STRING] Sets the OpenAPI contact email"
+    required: false
+  info_license_name:
+    description: "[STRING] Sets the OpenAPI license name"
+    required: false
+  info_license_url:
+    description: "[STRING] Sets the OpenAPI license URL"
+    required: false
+  info_license_identifier:
+    description: "[STRING] Sets the OpenAPI license SPDX identifier"
+    required: false
+  externaldocs_url:
+    description: "[STRING] Sets the external documentation URL"
+    required: false
+  externaldocs_description:
+    description: "[STRING] Sets the external documentation description"
+    required: false
+  servers:
+    description: "[LIST] Comma or semicolon separated. Format: URL::Description"
+    required: false
+  tags:
+    description: "[LIST] Comma or semicolon separated. Format: Name::Description"
+    required: false
 runs:
   using: "docker"
   image: "docker://ghcr.io/yunabraska/api-doc-crafter:latest"
@@ -149,6 +197,22 @@ runs:
     ADC_GROUP_TAGS: ${{ inputs.group_tags }}
     ADC_GROUP_SERVERS: ${{ inputs.group_servers }}
     ADC_ENCODING: ${{ inputs.encoding }}
+    ADC_ENABLE_CUSTOM_INFO: ${{ inputs.enable_custom_info }}
+    ADC_INFO_TITLE: ${{ inputs.info_title }}
+    ADC_INFO_VERSION: ${{ inputs.info_version }}
+    ADC_INFO_SUMMARY: ${{ inputs.info_summary }}
+    ADC_INFO_DESCRIPTION: ${{ inputs.info_description }}
+    ADC_INFO_TERMSOFSERVICE: ${{ inputs.info_termsofservice }}
+    ADC_INFO_CONTACT_NAME: ${{ inputs.info_contact_name }}
+    ADC_INFO_CONTACT_URL: ${{ inputs.info_contact_url }}
+    ADC_INFO_CONTACT_EMAIL: ${{ inputs.info_contact_email }}
+    ADC_INFO_LICENSE_NAME: ${{ inputs.info_license_name }}
+    ADC_INFO_LICENSE_URL: ${{ inputs.info_license_url }}
+    ADC_INFO_LICENSE_IDENTIFIER: ${{ inputs.info_license_identifier }}
+    ADC_EXTERNALDOCS_URL: ${{ inputs.externaldocs_url }}
+    ADC_EXTERNALDOCS_DESCRIPTION: ${{ inputs.externaldocs_description }}
+    ADC_SERVERS: ${{ inputs.servers }}
+    ADC_TAGS: ${{ inputs.tags }}
 
 branding:
   color: "green"
