@@ -1,0 +1,114 @@
+name: "Build"
+
+on:
+  schedule:
+    - cron: "08 20 * * 5"
+  workflow_dispatch:
+    inputs:
+      ref:
+        type: string
+        required: false
+        description: "[Ref] e.g. branch, tag or commit"
+      run_deploy:
+        type: boolean
+        required: false
+        default: false
+        description: "[Deploy] - else only if changes"
+
+concurrency:
+  group: "build-${{ github.event.repository.name }}"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: "Build"
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      # update repository
+      contents: write
+      # create download GitHub packages
+      packages: write
+      # update deploy status
+      deployments: write
+    outputs:
+      has_changes: ${{ steps.update.outputs.has_changes }}
+    steps:
+      - name: "🧑‍💻 Checkout [${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}]"
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          ref: ${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
+          token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: "♻️ Restore cache [unix-build-${{ hashFiles('**/pom.xml', '**/build.gradle*') }}]"
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: unix-build-${{ hashFiles('**/pom.xml', '**/build.gradle*') }}
+          restore-keys: unix-build-${{ hashFiles('**/pom.xml', '**/build.gradle*') }}
+      - name: "🔍 Read Java Info"
+        id: "java_info"
+        uses: YunaBraska/java-info-action@main
+      - name: "☕ Setup Java [${{ steps.java_info.outputs.java_version }}] Builder [${{ steps.java_info.outputs.builder_name }}] [${{ steps.java_info.outputs.builder_version }}]"
+        uses: actions/setup-java@main
+        with:
+          java-version: ${{ steps.java_info.outputs.java_version }}
+          distribution: 'temurin'
+      - name: "🗒️ Maven License Info"
+        id: "license_info"
+        uses: YunaBraska/maven-license-info-action@main
+        with:
+          exclude-scopes: 'test,provided,system'
+          output-dir: 'docs/licenses'
+      - name: "🔄 Update"
+        id: "update"
+        run: |
+          ${{ steps.java_info.outputs.cmd_update_wrapper }}
+          if [ "${{ steps.java_info.outputs.builder_name }}" != "Gradle" ]; then
+            ${{ steps.java_info.outputs.cmd_update_props }}
+            ${{ steps.java_info.outputs.cmd_update_parent }}
+          fi
+          git config --global user.name 'Kira Bot'
+          git config --global user.email 'kira@noreply.github.com'
+          if [[ -n $(git status -s) && ${{ startsWith(inputs.ref, 'refs/heads/') }} ]]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "has_changes [true]"
+          else
+            echo "has_changes [false]"
+          fi
+          
+          echo "Ref [${{ inputs.ref }}]"
+          echo "Deploy [${{ inputs.run_deploy }}]"
+        env:
+          GITHUB_USER: 'GithubBot'
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: "🧪 Build & Test"
+        run: ${{ steps.java_info.outputs.cmd_test_build }}
+        env:
+          GITHUB_USER: 'GithubBot'
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: "📝 Create new version, deploy [${{ inputs.run_deploy }}] changes [${{ steps.update.outputs.has_changes == 'true' }}]"
+        if: ${{ steps.update.outputs.has_changes == 'true' || inputs.run_deploy }}
+        id: "semver_info"
+        run: |
+          semver=$(date -u '+%Y.%m.%j%H%M')
+          echo "semver=${semver}" >> $GITHUB_OUTPUT
+          echo "semver [${semver}]"
+      - name: "💾 Commit [${{ steps.semver_info.outputs.semver}}]"
+        if: ${{ steps.update.outputs.has_changes == 'true' || inputs.run_deploy }}
+        run: |
+          ${{ steps.java_info.outputs.cmd }} -B -q versions:set -DnewVersion=${{ steps.semver_info.outputs.semver }} -DgenerateBackupPoms=false
+          git add .
+          git commit -m "chore: update ${{ steps.semver_info.outputs.semver }}"
+          git push origin HEAD:${{ inputs.ref || github.ref || github.ref_name || github.head_ref }}
+  release:
+    needs: deploy
+    if: ${{ inputs.run_deploy || needs.deploy.outputs.has_changes == 'true' }}
+    name: "Trigger Release"
+    uses: YunaBraska/api-doc-crafter/.github/workflows/github_release.yml@main
+    secrets: inherit

@@ -11,6 +11,8 @@
     }, {
       "pattern" : "\\QMETA-INF/services/java.net.spi.URLStreamHandlerProvider\\E"
     }, {
+      "pattern" : "\\QMETA-INF/services/java.time.zone.ZoneRulesProvider\\E"
+    }, {
       "pattern" : "\\QMETA-INF/services/org.apache.commons.logging.LogFactory\\E"
     }, {
       "pattern" : "\\Qbin/static/favicon.png\\E"
@@ -28,6 +30,10 @@
       "pattern" : "\\Qcommons-logging.properties\\E"
     }, {
       "pattern" : "\\Qorg/slf4j/impl/StaticLoggerBinder.class\\E"
+    }, {
+      "pattern" : "java.logging:\\Qsun/util/logging/resources/logging_en.properties\\E"
+    }, {
+      "pattern" : "java.logging:\\Qsun/util/logging/resources/logging_en_DE.properties\\E"
     } ]
   },
   "bundles" : [ {

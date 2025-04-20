@@ -154,12 +154,12 @@ public class Processor {
                 .filter(path -> includePattern == null || matchesGlob(path, includePattern))
                 .filter(path -> excludePattern == null || !matchesGlob(path, excludePattern))
                 .map(Processor::toOpenAPIFile)
+                .filter(Objects::nonNull)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .forEach(oaf -> result.put(oaf.getKey(), oaf.getValue()));
         } catch (final Exception e) {
             System.err.println("[FATAL] Failed to read OpenAPI files: " + e.getMessage());
-            e.printStackTrace();
         }
         return result;
     }
@@ -189,7 +189,7 @@ public class Processor {
             )
             .parallel()
             .filter(Objects::nonNull)
-            .filter(pr -> pr.api() != null)
+            .filter(pr -> pr.api() != null && pr.jsonSize() > 20) // 20 == empty OpenAPI file
             .max(Comparator.comparingInt(ParseResult::jsonSize))
             .map(pr -> {
                 System.out.println("[INFO] Read"
@@ -203,6 +203,7 @@ public class Processor {
                         .map(OpenAPI::getTags)
                         .map(tags -> tags.stream().map(Tag::getName).filter(Objects::nonNull).distinct().collect(Collectors.joining(",")))
                     ).orElse(null) + "]"
+                    + " length [" + pr.jsonSize() + "]"
                     + " file [" + filePath + "]"
                 );
                 return new AbstractMap.SimpleImmutableEntry<>(filePath, pr.api());
@@ -218,7 +219,6 @@ public class Processor {
             return null;
         }
     }
-
 
     public static Optional<OpenAPI> parse(final Path filePath, final Function<Path, OpenAPI> parser) {
         try {
