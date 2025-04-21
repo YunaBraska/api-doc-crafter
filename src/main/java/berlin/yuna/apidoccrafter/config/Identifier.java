@@ -67,6 +67,7 @@ public class Identifier {
         registerIdentifiers(result, Link.class, item -> toIds(item, Link::getOperationId, Link::getOperationRef, Link::get$ref, link -> ofNullable(link.getServer()).map(Server::getUrl).orElse(null)));
         registerIdentifiers(result, OAuthFlows.class, Identifier::toIds);
         registerIdentifiers(result, OAuthFlow.class, Identifier::toIds);
+        registerIdentifiers(result, io.swagger.v3.oas.models.security.SecurityRequirement.class, item -> item.keySet().stream().map(String::toLowerCase).toArray(String[]::new));
         registerIdentifiers(result, SecurityScheme.class, item -> toIds(item, SecurityScheme::get$ref, SecurityScheme::getName));
         registerIdentifiers(result, License.class, item -> toIds(item, License::getIdentifier, License::getUrl, License::getName));
         registerIdentifiers(result, Contact.class, item -> toIds(item, Contact::getName, Contact::getUrl, Contact::getEmail));

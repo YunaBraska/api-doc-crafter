@@ -131,11 +131,6 @@ Set `enable_custom_info=true` to activate this feature.
 - If only one value is present, it’s treated as the URL (for `servers`) or the name (for `tags`).
 - Multiple entries are split on any of: `,` or `;`.
 
-## Known Issues
-
-* Parsing files without `"openapi":"3.0.1"` property could be ignored by the parser when running as binary in
-  docker or github action. Reason=unkown
-
 ## \[DEV] Setup Environment
 
 * Use Java >= 21
@@ -180,6 +175,15 @@ Released files pattern: `api-doc-crafter-<os>-<arch>-<version>.native` (api-doc-
     * Graalvm only supports AMD64, ARM64
 * [github_docker.yml](.github/workflows/github_docker.yml) builds multi arch docker image with released binaries, after
   a new release is created
+
+### Classes
+
+* [App.java](src/main/java/berlin/yuna/apidoccrafter/App.java) Starting point of the application
+* [Config.java](src/main/java/berlin/yuna/apidoccrafter/config/Config.java) Configuration class
+* [Identifier.java](src/main/java/berlin/yuna/apidoccrafter/config/Identifier.java) Utility class for managing and comparing unique identifiers for various OpenAPI elements and data structures. (Avoids duplicates)
+* [Merger.java](src/main/java/berlin/yuna/apidoccrafter/logic/Merger.java) Handles logic for merging & filtering fields of various OpenApi types (Maps and Collections are automatically merged with the use of [Identifier.java](src/main/java/berlin/yuna/apidoccrafter/config/Identifier.java))
+* [HtmlGenerator.java](src/main/java/berlin/yuna/apidoccrafter/logic/HtmlGenerator.java) You guessed it, it generates HTML files
+* [Processor.java](src/main/java/berlin/yuna/apidoccrafter/logic/Processor.java) Orchestrates the reading, grouping, and merging of OpenAPI files
 
 [build_shield]: https://github.com/YunaBraska/api-doc-crafter/actions/workflows/test_workflow.yml/badge.svg
 

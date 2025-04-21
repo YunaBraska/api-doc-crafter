@@ -47,7 +47,10 @@ class AppTest {
             "games_api.yaml",
             "health_metrics_api.html",
             "health_metrics_api.json",
-            "health_metrics_api.yaml"
+            "health_metrics_api.yaml",
+            "swagger_petstore.html",
+            "swagger_petstore.json",
+            "swagger_petstore.yaml"
         ).forEach(fileName -> {
             assertThat(swaggerOutput.resolve(fileName)).exists();
             assertThat(expectedFilesPath.resolve(fileName)).exists();
