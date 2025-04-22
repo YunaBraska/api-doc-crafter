@@ -56,6 +56,10 @@ inputs:
     description: "[INT] Maximum directory depth to search."
     required: false
     default: "100"
+  enable_object_mapper:
+    description: "[BOOL] Enable Objectmapper additional to the OpenApiParser for more compatibility - can fail due reflection usage."
+    required: false
+    default: "100"
   sort_extensions:
     description: "[BOOL] Sort OpenAPI extensions alphabetically."
     required: false
@@ -178,6 +182,7 @@ runs:
     ADC_FILE_INCLUDES: ${{ inputs.file_includes }}
     ADC_FILE_EXCLUDES: ${{ inputs.file_excludes }}
     ADC_MAX_DEEP: ${{ inputs.max_deep }}
+    ADC_ENABLE_OBJECT_MAPPER: ${{ inputs.enable_object_mapper }}
     ADC_SORT_EXTENSIONS: ${{ inputs.sort_extensions }}
     ADC_SORT_SERVERS: ${{ inputs.sort_servers }}
     ADC_SORT_SECURITY: ${{ inputs.sort_security }}

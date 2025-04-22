@@ -146,14 +146,14 @@ public class Processor {
      * @param excludePattern Pattern for files to exclude.
      * @return A map of file paths to OpenAPI objects.
      */
-    public static Map<Path, OpenAPI> readOpenApiFiles(final Path inputDir, final int maxDeep, final String includePattern, final String excludePattern) {
+    public static Map<Path, OpenAPI> readOpenApiFiles(final Path inputDir, final boolean enableObjectMapper, final int maxDeep, final String includePattern, final String excludePattern) {
         final Map<Path, OpenAPI> result = new HashMap<>();
         try (final Stream<Path> files = Files.walk(inputDir, maxDeep)) {
             files.filter(Files::isRegularFile)
                 .filter(path -> path.toString().endsWith(".yml") || path.toString().endsWith(".yaml") || path.toString().endsWith(".json"))
                 .filter(path -> includePattern == null || matchesGlob(path, includePattern))
                 .filter(path -> excludePattern == null || !matchesGlob(path, excludePattern))
-                .map(Processor::toOpenAPIFile)
+                .map(path -> Processor.toOpenAPIFile(enableObjectMapper, path))
                 .filter(Objects::nonNull)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
@@ -170,7 +170,7 @@ public class Processor {
      * @param filePath The path to the file.
      * @return An optional containing the file path and OpenAPI object.
      */
-    public static Optional<Map.Entry<Path, OpenAPI>> toOpenAPIFile(final Path filePath) {
+    public static Optional<Map.Entry<Path, OpenAPI>> toOpenAPIFile(final boolean enableObjectMapper, final Path filePath) {
         final Path cleanFile = cleanFile(filePath);
         return Stream.of(
                 parseWith(OpenAPIV3Parser.class.getSimpleName(), p -> new OpenAPIV3Parser().readLocation(p.toString(), null, null).getOpenAPI(), filePath),
@@ -179,13 +179,13 @@ public class Processor {
                 parseWith("modified." + OpenAPIParser.class.getSimpleName(), p -> new OpenAPIParser().readLocation(p.toString(), null, null).getOpenAPI(), cleanFile),
                 parseWith("legacy." + OpenAPIParser.class.getSimpleName(), p -> {
                     final ParseOptions options = new ParseOptions();
-                    options.isLegacyYamlDeserialization();
+                    options.setLegacyYamlDeserialization(true);
                     options.setValidateInternalRefs(false);
                     options.setValidateExternalRefs(false);
                     return new OpenAPIParser().readLocation(p.toString(), null, options).getOpenAPI();
                 }, cleanFile),
-                parseWith("Json." + safeJsonMapper.getClass().getSimpleName(), p -> safeJsonMapper.readValue(Files.readString(p), OpenAPI.class), filePath),
-                parseWith("Yaml." + safeYamlMapper.getClass().getSimpleName(), p -> safeYamlMapper.readValue(Files.readString(p), OpenAPI.class), filePath)
+                !enableObjectMapper ? null : parseWith("Json." + safeJsonMapper.getClass().getSimpleName(), p -> safeJsonMapper.readValue(Files.readString(p), OpenAPI.class), filePath),
+                !enableObjectMapper ? null : parseWith("Yaml." + safeYamlMapper.getClass().getSimpleName(), p -> safeYamlMapper.readValue(Files.readString(p), OpenAPI.class), filePath)
             )
             .parallel()
             .filter(Objects::nonNull)

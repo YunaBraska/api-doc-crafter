@@ -2,8 +2,6 @@ package berlin.yuna.apidoccrafter;
 
 import berlin.yuna.apidoccrafter.logic.HtmlGenerator;
 import berlin.yuna.apidoccrafter.logic.Processor;
-import io.swagger.v3.core.util.Json;
-import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
 
 import java.io.FileWriter;
@@ -15,9 +13,32 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static berlin.yuna.apidoccrafter.config.Config.*;
-import static berlin.yuna.apidoccrafter.logic.Processor.*;
-import static berlin.yuna.apidoccrafter.util.Util.*;
+import static berlin.yuna.apidoccrafter.config.Config.ENABLE_OBJECT_MAPPER;
+import static berlin.yuna.apidoccrafter.config.Config.FILE_DOWNLOAD;
+import static berlin.yuna.apidoccrafter.config.Config.FILE_EXCLUDES;
+import static berlin.yuna.apidoccrafter.config.Config.FILE_INCLUDES;
+import static berlin.yuna.apidoccrafter.config.Config.GROUP_SERVERS;
+import static berlin.yuna.apidoccrafter.config.Config.GROUP_TAGS;
+import static berlin.yuna.apidoccrafter.config.Config.MAX_DEEP;
+import static berlin.yuna.apidoccrafter.config.Config.OUTPUT_DIR;
+import static berlin.yuna.apidoccrafter.config.Config.WORK_DIR;
+import static berlin.yuna.apidoccrafter.config.Config.config;
+import static berlin.yuna.apidoccrafter.config.Config.getEncoding;
+import static berlin.yuna.apidoccrafter.config.Config.getFileDownloadHeaders;
+import static berlin.yuna.apidoccrafter.config.Config.readConfigs;
+import static berlin.yuna.apidoccrafter.logic.Processor.groupFiles;
+import static berlin.yuna.apidoccrafter.logic.Processor.mergeApis;
+import static berlin.yuna.apidoccrafter.logic.Processor.readOpenApiFiles;
+import static berlin.yuna.apidoccrafter.util.Util.deleteFolder;
+import static berlin.yuna.apidoccrafter.util.Util.displayName;
+import static berlin.yuna.apidoccrafter.util.Util.download;
+import static berlin.yuna.apidoccrafter.util.Util.filenameJson;
+import static berlin.yuna.apidoccrafter.util.Util.filenameYaml;
+import static berlin.yuna.apidoccrafter.util.Util.mkdir;
+import static berlin.yuna.apidoccrafter.util.Util.replaceVariables;
+import static berlin.yuna.apidoccrafter.util.Util.safeJsonMapper;
+import static berlin.yuna.apidoccrafter.util.Util.safeYamlMapper;
+import static berlin.yuna.apidoccrafter.util.Util.sortByString;
 import static berlin.yuna.typemap.logic.ArgsDecoder.hasText;
 import static java.util.Optional.ofNullable;
 
@@ -34,10 +55,11 @@ public class App {
         final int maxDeep = config().asIntOpt(MAX_DEEP).filter(num -> num > -1).orElse(100);
         final String tagGroups = config().asString(GROUP_TAGS);
         final String serverGroups = config().asString(GROUP_SERVERS);
+        final boolean enableObjectMapper = config().asBooleanOpt(ENABLE_OBJECT_MAPPER).orElse(false);
 
         downloadRemoteOpenApiFiles(inputDir, maxDeep);
 
-        final Map<Path, OpenAPI> fileMap = readOpenApiFiles(inputDir, maxDeep, fileIncludes, fileExcludes);
+        final Map<Path, OpenAPI> fileMap = readOpenApiFiles(inputDir, enableObjectMapper, maxDeep, fileIncludes, fileExcludes);
         System.out.println("[INFO] Files [" + fileMap.size() + "] to process");
 
         // Group files

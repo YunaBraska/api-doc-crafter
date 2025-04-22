@@ -76,6 +76,7 @@ public class Config {
     public static final String OUTPUT_DIR = CONFIG_PREFIX + "output_dir";
     public static final String WORK_DIR = CONFIG_PREFIX + "work_dir";
     public static final String MAX_DEEP = CONFIG_PREFIX + "max_deep";
+    public static final String ENABLE_OBJECT_MAPPER = CONFIG_PREFIX + "enable_object_mapper";
     // Swagger configs
     public static final String LOCAL_PATTERN = "local";
     public static final String STATIC_SWAGGER_STANDALONE_JS = "https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-standalone-preset.js";

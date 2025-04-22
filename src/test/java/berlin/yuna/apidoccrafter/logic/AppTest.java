@@ -27,6 +27,7 @@ class AppTest {
         System.getProperties().put(FILE_INCLUDES, "**/files/**||**/api-doc-download/**");
         System.getProperties().put(OUTPUT_DIR, swaggerOutput.toString());
         System.getProperties().put(ENABLE_CUSTOM_INFO, false);
+        System.getProperties().put(ENABLE_OBJECT_MAPPER, true);
 
         App.main(new String[0]);
 
@@ -79,6 +80,7 @@ class AppTest {
         System.getProperties().put(SORT_TAGS, false);
         System.getProperties().put(FILE_INCLUDES, "**/files/**||**/api-doc-download/**");
         System.getProperties().put(OUTPUT_DIR, swaggerOutput.toString());
+        System.getProperties().put(ENABLE_OBJECT_MAPPER, true);
 
         // Activate metadata enrichment
         System.getProperties().put(ENABLE_CUSTOM_INFO, true);
