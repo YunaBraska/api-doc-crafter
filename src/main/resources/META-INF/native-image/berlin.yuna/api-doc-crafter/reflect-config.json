@@ -1,1663 +1,1240 @@
 [ {
-  "name" : "[B"
+  "name" : "[B",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "[C"
+  "name" : "[C",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "[Lcom.fasterxml.jackson.databind.deser.BeanDeserializerModifier;"
+  "name" : "[Lcom.fasterxml.jackson.databind.deser.BeanDeserializerModifier;",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "[Lcom.fasterxml.jackson.databind.deser.Deserializers;"
+  "name" : "[Lcom.fasterxml.jackson.databind.deser.Deserializers;",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "[Lcom.fasterxml.jackson.databind.deser.KeyDeserializers;"
+  "name" : "[Lcom.fasterxml.jackson.databind.deser.KeyDeserializers;",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "[Lcom.fasterxml.jackson.databind.deser.ValueInstantiators;"
+  "name" : "[Lcom.fasterxml.jackson.databind.deser.ValueInstantiators;",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "[Lcom.fasterxml.jackson.databind.ser.BeanSerializerModifier;"
+  "name" : "[Lcom.fasterxml.jackson.databind.ser.BeanSerializerModifier;",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "[Lcom.fasterxml.jackson.databind.ser.Serializers;"
+  "name" : "[Lcom.fasterxml.jackson.databind.ser.Serializers;",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "[Ljava.util.HashMap$Node;"
 }, {
   "name" : "com.fasterxml.jackson.databind.ext.Java7SupportImpl",
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.AbstractModel",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "methods" : [ {
-    "name" : "getExclusiveMaximum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExclusiveMinimum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExternalDocs",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaxLength",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaximum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinLength",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinimum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMultipleOf",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPattern",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getProperties",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getRequired",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getTitle",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getVendorExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getXml",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.ArrayModel",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExample",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaxItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getType",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getUniqueItems",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.Model",
-  "queryAllDeclaredMethods" : true
+  "queryAllDeclaredMethods" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.ModelImpl",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "getAdditionalProperties",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAllowEmptyValue",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDefaultValue",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDiscriminator",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getEnum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExample",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getFormat",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaximum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinimum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getType",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getUniqueItems",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.RefModel",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "get$ref",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getOriginalRef",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.Xml",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAttribute",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getName",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getNamespace",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPrefix",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getWrapped",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setName",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.auth.AbstractSecuritySchemeDefinition",
   "allDeclaredFields" : true,
-  "queryAllDeclaredMethods" : true
+  "queryAllDeclaredMethods" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.auth.OAuth2Definition",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setAuthorizationUrl",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setFlow",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setScopes",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setType",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.auth.SecuritySchemeDefinition",
-  "queryAllDeclaredMethods" : true
+  "queryAllDeclaredMethods" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.AbstractNumericProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "methods" : [ {
-    "name" : "getExclusiveMaximum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExclusiveMinimum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaximum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinimum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMultipleOf",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.AbstractProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "methods" : [ {
-    "name" : "getAllowEmptyValue",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExample",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getFormat",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPosition",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getReadOnly",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getTitle",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getType",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getVendorExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getXml",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.ArrayProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "getItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaxItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getUniqueItems",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.BaseIntegerProperty",
   "allDeclaredFields" : true,
-  "queryAllDeclaredMethods" : true
+  "queryAllDeclaredMethods" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.BooleanProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "getDefault",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getEnum",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.DateProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "getEnum",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.DateTimeProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "getEnum",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.IntegerProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "getDefault",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getEnum",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.LongProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "getDefault",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getEnum",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.Property",
-  "queryAllDeclaredMethods" : true
+  "queryAllDeclaredMethods" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.RefProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "get$ref",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getOriginalRef",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.models.properties.StringProperty",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "getDefault",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getEnum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaxLength",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinLength",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPattern",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "io.swagger.parser.SwaggerCompatConverter"
+  "name" : "io.swagger.parser.SwaggerCompatConverter",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.ApiResponsesSerializer",
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.PathsSerializer",
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.ComponentsMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.DateSchemaMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.DiscriminatorMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.ExampleMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.ExtensionsMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.InfoMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.LicenseMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.MediaTypeMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.OpenAPIMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.OperationMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.core.jackson.mixin.SchemaMixin",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.Components",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getCallbacks",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExamples",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getHeaders",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getLinks",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getParameters",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getRequestBodies",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getResponses",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getSchemas",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getSecuritySchemes",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setSchemas",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setSecuritySchemes",
-    "parameterTypes" : [ "java.util.Map" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.ExternalDocumentation",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getUrl",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setUrl",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.OpenAPI",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "addExtension",
-    "parameterTypes" : [ "java.lang.String", "java.lang.Object" ]
-  }, {
-    "name" : "getComponents",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExternalDocs",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getInfo",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getJsonSchemaDialect",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getOpenapi",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPaths",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getSecurity",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getServers",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getTags",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setComponents",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.Components" ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setExternalDocs",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.ExternalDocumentation" ]
-  }, {
-    "name" : "setInfo",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.info.Info" ]
-  }, {
-    "name" : "setOpenapi",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setPaths",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.Paths" ]
-  }, {
-    "name" : "setServers",
-    "parameterTypes" : [ "java.util.List" ]
-  }, {
-    "name" : "setTags",
-    "parameterTypes" : [ "java.util.List" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.Operation",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "addExtension",
-    "parameterTypes" : [ "java.lang.String", "java.lang.Object" ]
-  }, {
-    "name" : "getCallbacks",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDeprecated",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExternalDocs",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getOperationId",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getParameters",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getRequestBody",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getResponses",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getSecurity",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getServers",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getSummary",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getTags",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setDeprecated",
-    "parameterTypes" : [ "java.lang.Boolean" ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setOperationId",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setParameters",
-    "parameterTypes" : [ "java.util.List" ]
-  }, {
-    "name" : "setRequestBody",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.parameters.RequestBody" ]
-  }, {
-    "name" : "setResponses",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.responses.ApiResponses" ]
-  }, {
-    "name" : "setSecurity",
-    "parameterTypes" : [ "java.util.List" ]
-  }, {
-    "name" : "setSummary",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setTags",
-    "parameterTypes" : [ "java.util.List" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.PathItem",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "get$ref",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDelete",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getGet",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getHead",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getOptions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getParameters",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPatch",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPost",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPut",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getServers",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getSummary",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getTrace",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setDelete",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.Operation" ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setGet",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.Operation" ]
-  }, {
-    "name" : "setPatch",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.Operation" ]
-  }, {
-    "name" : "setPost",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.Operation" ]
-  }, {
-    "name" : "setPut",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.Operation" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.Paths",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.examples.Example",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.headers.Header",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "addExtension",
-    "parameterTypes" : [ "java.lang.String", "java.lang.Object" ]
-  }, {
-    "name" : "get$ref",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getContent",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDeprecated",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExample",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExamples",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExplode",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getRequired",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getSchema",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getStyle",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setSchema",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.media.Schema" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.headers.Header$StyleEnum",
   "allDeclaredFields" : true,
-  "queryAllDeclaredMethods" : true
+  "queryAllDeclaredMethods" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.info.Contact",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getEmail",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getName",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getUrl",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setEmail",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setName",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setUrl",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.info.Info",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getContact",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getLicense",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getTermsOfService",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getTitle",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getVersion",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setContact",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.info.Contact" ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setLicense",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.info.License" ]
-  }, {
-    "name" : "setTermsOfService",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setTitle",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setVersion",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.info.License",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getName",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getUrl",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setName",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setUrl",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.links.Link",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.ArraySchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.BinarySchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.BooleanSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.Content",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.DateSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.DateTimeSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.Discriminator",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.EmailSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.Encoding",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.FileSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.IntegerSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.MapSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.MediaType",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "addExtension",
-    "parameterTypes" : [ "java.lang.String", "java.lang.Object" ]
-  }, {
-    "name" : "getEncoding",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExample",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExamples",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getSchema",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setSchema",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.media.Schema" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.NumberSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.ObjectSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.Schema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "addExtension",
-    "parameterTypes" : [ "java.lang.String", "java.lang.Object" ]
-  }, {
-    "name" : "get$dynamicAnchor",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "get$ref",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "get$vocabulary",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAdditionalProperties",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAllOf",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAnyOf",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDefault",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDeprecated",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDiscriminator",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getEnum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExample",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExclusiveMaximum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExclusiveMinimum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExternalDocs",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getFormat",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaxItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaxLength",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaxProperties",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMaximum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinLength",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinProperties",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMinimum",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getMultipleOf",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getNot",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getNullable",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getOneOf",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPattern",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getProperties",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getReadOnly",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getRequired",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getTitle",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getType",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getUniqueItems",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getWriteOnly",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getXml",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setDefault",
-    "parameterTypes" : [ "java.lang.Object" ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setEnum",
-    "parameterTypes" : [ "java.util.List" ]
-  }, {
-    "name" : "setExample",
-    "parameterTypes" : [ "java.lang.Object" ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setFormat",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setItems",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.media.Schema" ]
-  }, {
-    "name" : "setMaximum",
-    "parameterTypes" : [ "java.math.BigDecimal" ]
-  }, {
-    "name" : "setMinimum",
-    "parameterTypes" : [ "java.math.BigDecimal" ]
-  }, {
-    "name" : "setProperties",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setRequired",
-    "parameterTypes" : [ "java.util.List" ]
-  }, {
-    "name" : "setType",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setXml",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.media.XML" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.StringSchema",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.media.XML",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAttribute",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getName",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getNamespace",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPrefix",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getWrapped",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setName",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setWrapped",
-    "parameterTypes" : [ "java.lang.Boolean" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.parameters.HeaderParameter",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getIn",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setIn",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.parameters.Parameter",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "addExtension",
-    "parameterTypes" : [ "java.lang.String", "java.lang.Object" ]
-  }, {
-    "name" : "get$ref",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAllowEmptyValue",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAllowReserved",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getContent",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDeprecated",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExample",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExamples",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExplode",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getIn",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getName",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getRequired",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getSchema",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getStyle",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setExplode",
-    "parameterTypes" : [ "java.lang.Boolean" ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setName",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setRequired",
-    "parameterTypes" : [ "java.lang.Boolean" ]
-  }, {
-    "name" : "setSchema",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.media.Schema" ]
-  }, {
-    "name" : "setStyle",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.parameters.Parameter$StyleEnum" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.parameters.Parameter$StyleEnum",
   "allDeclaredFields" : true,
-  "queryAllDeclaredMethods" : true
+  "queryAllDeclaredMethods" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.parameters.PathParameter",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getIn",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getRequired",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setIn",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setRequired",
-    "parameterTypes" : [ "java.lang.Boolean" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.parameters.QueryParameter",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getIn",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setIn",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.parameters.RequestBody",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "get$ref",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getContent",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getRequired",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setContent",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.media.Content" ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setRequired",
-    "parameterTypes" : [ "java.lang.Boolean" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.responses.ApiResponse",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "addExtension",
-    "parameterTypes" : [ "java.lang.String", "java.lang.Object" ]
-  }, {
-    "name" : "get$ref",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getContent",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getHeaders",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getLinks",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setContent",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.media.Content" ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setHeaders",
-    "parameterTypes" : [ "java.util.Map" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.responses.ApiResponses",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.security.OAuthFlow",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAuthorizationUrl",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getRefreshUrl",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getScopes",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getTokenUrl",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setAuthorizationUrl",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setScopes",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.security.Scopes" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.security.OAuthFlows",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getAuthorizationCode",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getClientCredentials",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getImplicit",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getPassword",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setImplicit",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.security.OAuthFlow" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.security.Scopes",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.security.SecurityRequirement",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.security.SecurityScheme",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "get$ref",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getBearerFormat",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getFlows",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getIn",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getName",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getOpenIdConnectUrl",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getScheme",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getType",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.security.SecurityScheme$In",
   "allDeclaredFields" : true,
-  "queryAllDeclaredMethods" : true
+  "queryAllDeclaredMethods" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.security.SecurityScheme$Type",
   "allDeclaredFields" : true,
-  "queryAllDeclaredMethods" : true
+  "queryAllDeclaredMethods" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.servers.Server",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getUrl",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getVariables",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setUrl",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.servers.ServerVariable",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.servers.ServerVariables",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
-  "queryAllDeclaredConstructors" : true
+  "queryAllDeclaredConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.tags.Tag",
   "allDeclaredFields" : true,
   "queryAllDeclaredMethods" : true,
   "queryAllDeclaredConstructors" : true,
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getDescription",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExtensions",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getExternalDocs",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "getName",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setDescription",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setExtensions",
-    "parameterTypes" : [ "java.util.Map" ]
-  }, {
-    "name" : "setExternalDocs",
-    "parameterTypes" : [ "io.swagger.v3.oas.models.ExternalDocumentation" ]
-  }, {
-    "name" : "setName",
-    "parameterTypes" : [ "java.lang.String" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "io.swagger.v3.parser.converter.SwaggerConverter"
+  "name" : "io.swagger.v3.parser.converter.SwaggerConverter",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "java.beans.Introspector"
 }, {
@@ -1731,50 +1308,96 @@
 }, {
   "name" : "jdk.internal.misc.Unsafe"
 }, {
-  "name" : "org.apache.commons.logging.LogFactory"
+  "name" : "org.apache.commons.logging.LogFactory",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "org.apache.commons.logging.impl.Jdk14Logger",
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ "java.lang.String" ]
-  }, {
-    "name" : "setLogFactory",
-    "parameterTypes" : [ "org.apache.commons.logging.LogFactory" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "org.apache.commons.logging.impl.Log4JLogger"
+  "name" : "org.apache.commons.logging.impl.Log4JLogger",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "org.apache.commons.logging.impl.LogFactoryImpl",
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
-  "name" : "org.apache.commons.logging.impl.SLF4JLogFactory"
+  "name" : "org.apache.commons.logging.impl.SLF4JLogFactory",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "org.apache.commons.logging.impl.WeakHashtable",
-  "methods" : [ {
-    "name" : "<init>",
-    "parameterTypes" : [ ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "org.yaml.snakeyaml.LoaderOptions",
-  "methods" : [ {
-    "name" : "getMaxAliasesForCollections",
-    "parameterTypes" : [ ]
-  }, {
-    "name" : "setAllowDuplicateKeys",
-    "parameterTypes" : [ "boolean" ]
-  }, {
-    "name" : "setAllowRecursiveKeys",
-    "parameterTypes" : [ "boolean" ]
-  }, {
-    "name" : "setCodePointLimit",
-    "parameterTypes" : [ "int" ]
-  }, {
-    "name" : "setMaxAliasesForCollections",
-    "parameterTypes" : [ "int" ]
-  } ]
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 }, {
   "name" : "io.swagger.v3.oas.models.PathItem$HttpMethod",
   "allDeclaredMethods" : true,

@@ -61,7 +61,7 @@ class ReflectionConfigGeneratorTest {
             Object nameObj = item.get("name");
             if (nameObj instanceof final String name) {
                 existingClassNames.add(name);
-                if (FORCE_ALL_ATTRIBUTES && EXCLUSIONS.stream().noneMatch(name::contains)) {
+                if (FORCE_ALL_ATTRIBUTES || EXCLUSIONS.stream().noneMatch(name::contains)) {
                     addMetaData(item);
                 }
             }

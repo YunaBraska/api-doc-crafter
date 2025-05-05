@@ -203,7 +203,7 @@ public class Util {
             .orElse(path.getFileName().toString().toLowerCase())
             .toLowerCase()
             .replaceAll("[^\\p{L}\\p{Nd}_.]+", "_").replaceAll("_+", "_").trim();
-        return result.contains(".") ? result.substring(0, result.indexOf(".")) : result + extension;
+        return (result.contains(".") ? result.substring(0, result.indexOf(".")) : result) + extension;
     }
 
     public static void writeFile(final Path path, final String content) {

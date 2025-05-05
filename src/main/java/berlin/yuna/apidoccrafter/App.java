@@ -60,7 +60,7 @@ public class App {
         downloadRemoteOpenApiFiles(inputDir, maxDeep);
 
         final Map<Path, OpenAPI> fileMap = readOpenApiFiles(inputDir, enableObjectMapper, maxDeep, fileIncludes, fileExcludes);
-        System.out.println("[INFO] Files [" + fileMap.size() + "] to process");
+        System.out.println("[INFO] Files [" + fileMap.size() + "] to process" + (enableObjectMapper? " (ObjectMapper enabled)" : ""));
 
         // Group files
         final List<Map<Path, OpenAPI>> groupedApis = groupFiles(fileMap, tagGroups, serverGroups);
