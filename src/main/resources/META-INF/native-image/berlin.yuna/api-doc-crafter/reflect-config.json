@@ -1593,4 +1593,17 @@
   "queryAllPublicMethods" : true,
   "queryAllPublicConstructors" : true,
   "unsafeAllocated" : true
+}, {
+  "name" : "io.swagger.v3.oas.models.media.ArbitrarySchema",
+  "allDeclaredMethods" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredConstructors" : true,
+  "allPublicMethods" : true,
+  "allPublicFields" : true,
+  "allPublicConstructors" : true,
+  "queryAllDeclaredMethods" : true,
+  "queryAllDeclaredConstructors" : true,
+  "queryAllPublicMethods" : true,
+  "queryAllPublicConstructors" : true,
+  "unsafeAllocated" : true
 } ]
