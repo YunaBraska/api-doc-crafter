@@ -3,7 +3,7 @@
     <dependency>
         <groupId>berlin.yuna</groupId>
         <artifactId>typemap</artifactId>
-        <version>2025.0.12</version>
+        <version>2025.0.13</version>
         <scope>compile</scope>
         <url>https://github.com/YunaBraska/typemap</url>
         <licenses>
@@ -16,7 +16,7 @@
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jacksonannotations</artifactId>
-        <version>2.18.3</version>
+        <version>2.19.0</version>
         <scope>compile</scope>
         <url>https://github.com/FasterXML/jackson</url>
         <licenses>
@@ -29,7 +29,7 @@
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jacksoncore</artifactId>
-        <version>2.18.3</version>
+        <version>2.19.0</version>
         <scope>compile</scope>
         <url>https://github.com/FasterXML/jacksoncore</url>
         <licenses>
@@ -42,7 +42,7 @@
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jacksondatabind</artifactId>
-        <version>2.18.3</version>
+        <version>2.19.0</version>
         <scope>compile</scope>
         <url>https://github.com/FasterXML/jackson</url>
         <licenses>
@@ -55,7 +55,7 @@
     <dependency>
         <groupId>com.fasterxml.jackson.dataformat</groupId>
         <artifactId>jacksondataformatyaml</artifactId>
-        <version>2.18.3</version>
+        <version>2.19.0</version>
         <scope>compile</scope>
         <url>https://github.com/FasterXML/jacksondataformats-text</url>
         <licenses>
@@ -230,7 +230,7 @@
     <dependency>
         <groupId>commonsio</groupId>
         <artifactId>commonsio</artifactId>
-        <version>2.18.0</version>
+        <version>2.19.0</version>
         <scope>compile</scope>
         <url>https://commons.apache.org/proper/commonsio/</url>
         <licenses>
@@ -256,9 +256,9 @@
     <dependency>
         <groupId>io.swagger</groupId>
         <artifactId>swaggercompatspec-parser</artifactId>
-        <version>1.0.73</version>
+        <version>1.0.75</version>
         <scope>compile</scope>
-        <url>http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-compat-spec-parser</url>
+        <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-compat-spec-parser</url>
         <licenses>
             <license>
                 <name>Apache License</name>
@@ -269,7 +269,7 @@
     <dependency>
         <groupId>io.swagger</groupId>
         <artifactId>swaggercore</artifactId>
-        <version>1.6.15</version>
+        <version>1.6.16</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-core/modules/swagger-core</url>
         <licenses>
@@ -282,7 +282,7 @@
     <dependency>
         <groupId>io.swagger</groupId>
         <artifactId>swaggermodels</artifactId>
-        <version>1.6.15</version>
+        <version>1.6.16</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-core/modules/swagger-models</url>
         <licenses>
@@ -295,9 +295,9 @@
     <dependency>
         <groupId>io.swagger</groupId>
         <artifactId>swaggerparser</artifactId>
-        <version>1.0.73</version>
+        <version>1.0.75</version>
         <scope>compile</scope>
-        <url>http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser</url>
+        <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser</url>
         <licenses>
             <license>
                 <name>Apache License</name>
@@ -308,9 +308,9 @@
     <dependency>
         <groupId>io.swagger</groupId>
         <artifactId>swaggerparsersafe-url-resolver</artifactId>
-        <version>1.0.73</version>
+        <version>1.0.75</version>
         <scope>compile</scope>
-        <url>http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver</url>
+        <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-safe-url-resolver</url>
         <licenses>
             <license>
                 <name>Apache License</name>
@@ -321,7 +321,7 @@
     <dependency>
         <groupId>io.swagger.core.v3</groupId>
         <artifactId>swaggercore</artifactId>
-        <version>2.2.29</version>
+        <version>2.2.32</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-core/modules/swagger-core</url>
         <licenses>
@@ -334,7 +334,7 @@
     <dependency>
         <groupId>io.swagger.core.v3</groupId>
         <artifactId>swaggermodels</artifactId>
-        <version>2.2.29</version>
+        <version>2.2.32</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-core/modules/swagger-models</url>
         <licenses>
@@ -347,9 +347,9 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparser</artifactId>
-        <version>2.1.27</version>
+        <version>2.1.28</version>
         <scope>compile</scope>
-        <url>http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser</url>
+        <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser</url>
         <licenses>
             <license>
                 <name>Apache License</name>
@@ -360,9 +360,9 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparsercore</artifactId>
-        <version>2.1.27</version>
+        <version>2.1.28</version>
         <scope>compile</scope>
-        <url>http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-core</url>
+        <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-core</url>
         <licenses>
             <license>
                 <name>Apache License</name>
@@ -373,9 +373,9 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparsersafe-url-resolver</artifactId>
-        <version>2.1.27</version>
+        <version>2.1.28</version>
         <scope>compile</scope>
-        <url>http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-safe-url-resolver</url>
+        <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-safe-url-resolver</url>
         <licenses>
             <license>
                 <name>Apache License</name>
@@ -386,9 +386,9 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparserv2-converter</artifactId>
-        <version>2.1.27</version>
+        <version>2.1.28</version>
         <scope>compile</scope>
-        <url>http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v2-converter</url>
+        <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v2-converter</url>
         <licenses>
             <license>
                 <name>Apache License</name>
@@ -399,9 +399,9 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparserv3</artifactId>
-        <version>2.1.27</version>
+        <version>2.1.28</version>
         <scope>compile</scope>
-        <url>http://nexus.sonatype.org/ossrepository-hosting.html/swagger-parser-project/modules/swagger-parser-v3</url>
+        <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v3</url>
         <licenses>
             <license>
                 <name>Apache License</name>
