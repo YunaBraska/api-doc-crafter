@@ -1,9 +1,9 @@
 [
     {
-        "line": "berlin.yuna:typemap:2025.0.13",
+        "line": "berlin.yuna:typemap:2025.06.1521025",
         "group": "berlin.yuna",
         "artifact": "typemap",
-        "version": "2025.0.13",
+        "version": "2025.06.1521025",
         "scope": "compile",
         "url": "https://github.com/YunaBraska/typemap",
         "licenses": [
@@ -432,10 +432,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser:2.1.28",
+        "line": "io.swagger.parser.v3:swaggerparser:2.1.29",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparser",
-        "version": "2.1.28",
+        "version": "2.1.29",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser",
         "licenses": [
@@ -448,10 +448,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-core:2.1.28",
+        "line": "io.swagger.parser.v3:swaggerparser-core:2.1.29",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparsercore",
-        "version": "2.1.28",
+        "version": "2.1.29",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-core",
         "licenses": [
@@ -464,10 +464,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-safe-url-resolver:2.1.28",
+        "line": "io.swagger.parser.v3:swaggerparser-safe-url-resolver:2.1.29",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparsersafe-url-resolver",
-        "version": "2.1.28",
+        "version": "2.1.29",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-safe-url-resolver",
         "licenses": [
@@ -480,10 +480,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-v2-converter:2.1.28",
+        "line": "io.swagger.parser.v3:swaggerparser-v2-converter:2.1.29",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparserv2-converter",
-        "version": "2.1.28",
+        "version": "2.1.29",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v2-converter",
         "licenses": [
@@ -496,10 +496,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-v3:2.1.28",
+        "line": "io.swagger.parser.v3:swaggerparser-v3:2.1.29",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparserv3",
-        "version": "2.1.28",
+        "version": "2.1.29",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v3",
         "licenses": [
