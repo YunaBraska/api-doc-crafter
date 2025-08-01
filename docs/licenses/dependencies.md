@@ -2,7 +2,7 @@
 
 | Line | Group | Artifact | Version | Scope | URL | Licenses |
 | ---- | ----- | -------- | ------- | ----- | --- | -------- |
-| berlin.yuna:typemap:2025.07.1860709 | berlin.yuna | typemap | 2025.07.1860709 | compile | https://github.com/YunaBraska/typemap | Apache License (2.0) |
+| berlin.yuna:typemap:2025.07.2020718 | berlin.yuna | typemap | 2025.07.2020718 | compile | https://github.com/YunaBraska/typemap | Apache License (2.0) |
 | com.fasterxml.jackson.core:jacksonannotations:2.19.0 | com.fasterxml.jackson.core | jacksonannotations | 2.19.0 | compile | https://github.com/FasterXML/jackson | Apache License (2.0) |
 | com.fasterxml.jackson.core:jacksoncore:2.19.0 | com.fasterxml.jackson.core | jacksoncore | 2.19.0 | compile | https://github.com/FasterXML/jacksoncore | Apache License (2.0) |
 | com.fasterxml.jackson.core:jacksondatabind:2.19.0 | com.fasterxml.jackson.core | jacksondatabind | 2.19.0 | compile | https://github.com/FasterXML/jackson | Apache License (2.0) |
