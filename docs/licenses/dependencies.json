@@ -1,9 +1,9 @@
 [
     {
-        "line": "berlin.yuna:typemap:2025.07.2020718",
+        "line": "berlin.yuna:typemap:2025.08.2200717",
         "group": "berlin.yuna",
         "artifact": "typemap",
-        "version": "2025.07.2020718",
+        "version": "2025.08.2200717",
         "scope": "compile",
         "url": "https://github.com/YunaBraska/typemap",
         "licenses": [
