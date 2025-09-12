@@ -3,7 +3,7 @@
     <dependency>
         <groupId>berlin.yuna</groupId>
         <artifactId>typemap</artifactId>
-        <version>2025.08.2200717</version>
+        <version>2025.09.2481205</version>
         <scope>compile</scope>
         <url>https://github.com/YunaBraska/typemap</url>
         <licenses>
@@ -347,7 +347,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparser</artifactId>
-        <version>2.1.32</version>
+        <version>2.1.33</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser</url>
         <licenses>
@@ -360,7 +360,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparsercore</artifactId>
-        <version>2.1.32</version>
+        <version>2.1.33</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-core</url>
         <licenses>
@@ -373,7 +373,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparsersafe-url-resolver</artifactId>
-        <version>2.1.32</version>
+        <version>2.1.33</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-safe-url-resolver</url>
         <licenses>
@@ -386,7 +386,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparserv2-converter</artifactId>
-        <version>2.1.32</version>
+        <version>2.1.33</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v2-converter</url>
         <licenses>
@@ -399,7 +399,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparserv3</artifactId>
-        <version>2.1.32</version>
+        <version>2.1.33</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v3</url>
         <licenses>
