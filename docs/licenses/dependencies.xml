@@ -3,7 +3,7 @@
     <dependency>
         <groupId>berlin.yuna</groupId>
         <artifactId>typemap</artifactId>
-        <version>2025.09.2550709</version>
+        <version>2025.09.2620710</version>
         <scope>compile</scope>
         <url>https://github.com/YunaBraska/typemap</url>
         <licenses>
@@ -68,7 +68,7 @@
     <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>
         <artifactId>jacksondatatypejsr310</artifactId>
-        <version>2.18.2</version>
+        <version>2.19.2</version>
         <scope>compile</scope>
         <url>https://github.com/FasterXML/jacksonmodules-java8/jackson-datatype-jsr310</url>
         <licenses>
@@ -230,7 +230,7 @@
     <dependency>
         <groupId>commonsio</groupId>
         <artifactId>commonsio</artifactId>
-        <version>2.19.0</version>
+        <version>2.20.0</version>
         <scope>compile</scope>
         <url>https://commons.apache.org/proper/commonsio/</url>
         <licenses>
@@ -321,7 +321,7 @@
     <dependency>
         <groupId>io.swagger.core.v3</groupId>
         <artifactId>swaggercore</artifactId>
-        <version>2.2.34</version>
+        <version>2.2.37</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-core/modules/swagger-core</url>
         <licenses>
@@ -334,7 +334,7 @@
     <dependency>
         <groupId>io.swagger.core.v3</groupId>
         <artifactId>swaggermodels</artifactId>
-        <version>2.2.34</version>
+        <version>2.2.37</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-core/modules/swagger-models</url>
         <licenses>
@@ -347,7 +347,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparser</artifactId>
-        <version>2.1.33</version>
+        <version>2.1.34</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser</url>
         <licenses>
@@ -360,7 +360,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparsercore</artifactId>
-        <version>2.1.33</version>
+        <version>2.1.34</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-core</url>
         <licenses>
@@ -373,7 +373,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparsersafe-url-resolver</artifactId>
-        <version>2.1.33</version>
+        <version>2.1.34</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-safe-url-resolver</url>
         <licenses>
@@ -386,7 +386,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparserv2-converter</artifactId>
-        <version>2.1.33</version>
+        <version>2.1.34</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v2-converter</url>
         <licenses>
@@ -399,7 +399,7 @@
     <dependency>
         <groupId>io.swagger.parser.v3</groupId>
         <artifactId>swaggerparserv3</artifactId>
-        <version>2.1.33</version>
+        <version>2.1.34</version>
         <scope>compile</scope>
         <url>https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v3</url>
         <licenses>
@@ -412,7 +412,7 @@
     <dependency>
         <groupId>jakarta.activation</groupId>
         <artifactId>jakarta.activationapi</artifactId>
-        <version>2.1.3</version>
+        <version>2.1.4</version>
         <scope>compile</scope>
         <url>https://github.com/jakartaee/jafapi</url>
         <licenses>
@@ -438,7 +438,7 @@
     <dependency>
         <groupId>jakarta.xml.bind</groupId>
         <artifactId>jakarta.xml.bindapi</artifactId>
-        <version>4.0.2</version>
+        <version>4.0.4</version>
         <scope>compile</scope>
         <url>https://github.com/jakartaee/jaxbapi/jakarta.xml.bind-api</url>
         <licenses>

@@ -1,9 +1,9 @@
 [
     {
-        "line": "berlin.yuna:typemap:2025.09.2550709",
+        "line": "berlin.yuna:typemap:2025.09.2620710",
         "group": "berlin.yuna",
         "artifact": "typemap",
-        "version": "2025.09.2550709",
+        "version": "2025.09.2620710",
         "scope": "compile",
         "url": "https://github.com/YunaBraska/typemap",
         "licenses": [
@@ -80,10 +80,10 @@
         ]
     },
     {
-        "line": "com.fasterxml.jackson.datatype:jacksondatatype-jsr310:2.18.2",
+        "line": "com.fasterxml.jackson.datatype:jacksondatatype-jsr310:2.19.2",
         "group": "com.fasterxml.jackson.datatype",
         "artifact": "jacksondatatypejsr310",
-        "version": "2.18.2",
+        "version": "2.19.2",
         "scope": "compile",
         "url": "https://github.com/FasterXML/jacksonmodules-java8/jackson-datatype-jsr310",
         "licenses": [
@@ -288,10 +288,10 @@
         ]
     },
     {
-        "line": "commonsio:commons-io:2.19.0",
+        "line": "commonsio:commons-io:2.20.0",
         "group": "commonsio",
         "artifact": "commonsio",
-        "version": "2.19.0",
+        "version": "2.20.0",
         "scope": "compile",
         "url": "https://commons.apache.org/proper/commonsio/",
         "licenses": [
@@ -400,10 +400,10 @@
         ]
     },
     {
-        "line": "io.swagger.core.v3:swaggercore:2.2.34",
+        "line": "io.swagger.core.v3:swaggercore:2.2.37",
         "group": "io.swagger.core.v3",
         "artifact": "swaggercore",
-        "version": "2.2.34",
+        "version": "2.2.37",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-core",
         "licenses": [
@@ -416,10 +416,10 @@
         ]
     },
     {
-        "line": "io.swagger.core.v3:swaggermodels:2.2.34",
+        "line": "io.swagger.core.v3:swaggermodels:2.2.37",
         "group": "io.swagger.core.v3",
         "artifact": "swaggermodels",
-        "version": "2.2.34",
+        "version": "2.2.37",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-core/modules/swagger-models",
         "licenses": [
@@ -432,10 +432,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser:2.1.33",
+        "line": "io.swagger.parser.v3:swaggerparser:2.1.34",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparser",
-        "version": "2.1.33",
+        "version": "2.1.34",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser",
         "licenses": [
@@ -448,10 +448,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-core:2.1.33",
+        "line": "io.swagger.parser.v3:swaggerparser-core:2.1.34",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparsercore",
-        "version": "2.1.33",
+        "version": "2.1.34",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-core",
         "licenses": [
@@ -464,10 +464,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-safe-url-resolver:2.1.33",
+        "line": "io.swagger.parser.v3:swaggerparser-safe-url-resolver:2.1.34",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparsersafe-url-resolver",
-        "version": "2.1.33",
+        "version": "2.1.34",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-safe-url-resolver",
         "licenses": [
@@ -480,10 +480,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-v2-converter:2.1.33",
+        "line": "io.swagger.parser.v3:swaggerparser-v2-converter:2.1.34",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparserv2-converter",
-        "version": "2.1.33",
+        "version": "2.1.34",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v2-converter",
         "licenses": [
@@ -496,10 +496,10 @@
         ]
     },
     {
-        "line": "io.swagger.parser.v3:swaggerparser-v3:2.1.33",
+        "line": "io.swagger.parser.v3:swaggerparser-v3:2.1.34",
         "group": "io.swagger.parser.v3",
         "artifact": "swaggerparserv3",
-        "version": "2.1.33",
+        "version": "2.1.34",
         "scope": "compile",
         "url": "https://github.com/swaggerapi/swagger-parser/modules/swagger-parser-v3",
         "licenses": [
@@ -512,10 +512,10 @@
         ]
     },
     {
-        "line": "jakarta.activation:jakarta.activationapi:2.1.3",
+        "line": "jakarta.activation:jakarta.activationapi:2.1.4",
         "group": "jakarta.activation",
         "artifact": "jakarta.activationapi",
-        "version": "2.1.3",
+        "version": "2.1.4",
         "scope": "compile",
         "url": "https://github.com/jakartaee/jafapi",
         "licenses": [
@@ -544,10 +544,10 @@
         ]
     },
     {
-        "line": "jakarta.xml.bind:jakarta.xml.bindapi:4.0.2",
+        "line": "jakarta.xml.bind:jakarta.xml.bindapi:4.0.4",
         "group": "jakarta.xml.bind",
         "artifact": "jakarta.xml.bindapi",
-        "version": "4.0.2",
+        "version": "4.0.4",
         "scope": "compile",
         "url": "https://github.com/jakartaee/jaxbapi/jakarta.xml.bind-api",
         "licenses": [
