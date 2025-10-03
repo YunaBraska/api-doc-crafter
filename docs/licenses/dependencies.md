@@ -2,7 +2,7 @@
 
 | Line | Group | Artifact | Version | Scope | URL | Licenses |
 | ---- | ----- | -------- | ------- | ----- | --- | -------- |
-| berlin.yuna:typemap:2025.09.2620710 | berlin.yuna | typemap | 2025.09.2620710 | compile | https://github.com/YunaBraska/typemap | Apache License (2.0) |
+| berlin.yuna:typemap:2025.09.2660710 | berlin.yuna | typemap | 2025.09.2660710 | compile | https://github.com/YunaBraska/typemap | Apache License (2.0) |
 | com.fasterxml.jackson.core:jacksonannotations:2.19.0 | com.fasterxml.jackson.core | jacksonannotations | 2.19.0 | compile | https://github.com/FasterXML/jackson | Apache License (2.0) |
 | com.fasterxml.jackson.core:jacksoncore:2.19.0 | com.fasterxml.jackson.core | jacksoncore | 2.19.0 | compile | https://github.com/FasterXML/jacksoncore | Apache License (2.0) |
 | com.fasterxml.jackson.core:jacksondatabind:2.19.0 | com.fasterxml.jackson.core | jacksondatabind | 2.19.0 | compile | https://github.com/FasterXML/jackson | Apache License (2.0) |
@@ -36,9 +36,9 @@
 | jakarta.xml.bind:jakarta.xml.bindapi:4.0.4 | jakarta.xml.bind | jakarta.xml.bindapi | 4.0.4 | compile | https://github.com/jakartaee/jaxbapi/jakarta.xml.bind-api | EDL (1.0) |
 | jodatime:joda-time:2.10.5 | jodatime | jodatime | 2.10.5 | compile | https://www.joda.org/jodatime/ | Apache License (2.0) |
 | org.apache.commons:commonslang3:3.17.0 | org.apache.commons | commonslang3 | 3.17.0 | compile | https://commons.apache.org/proper/commonslang/ | Apache (2.0) |
-| org.glassfish.jaxb:jaxbcore:4.0.5 | org.glassfish.jaxb | jaxbcore | 4.0.5 | compile | https://eclipseee4j.github.io/jaxb-ri/ | EDL (1.0) |
-| org.glassfish.jaxb:jaxbruntime:4.0.5 | org.glassfish.jaxb | jaxbruntime | 4.0.5 | compile | https://eclipseee4j.github.io/jaxb-ri/ | EDL (1.0) |
-| org.glassfish.jaxb:txw2:4.0.5 | org.glassfish.jaxb | txw2 | 4.0.5 | compile | https://eclipseee4j.github.io/jaxb-ri/ | EDL (1.0) |
+| org.glassfish.jaxb:jaxbcore:4.0.6 | org.glassfish.jaxb | jaxbcore | 4.0.6 | compile | https://eclipseee4j.github.io/jaxb-ri/ | EDL (1.0) |
+| org.glassfish.jaxb:jaxbruntime:4.0.6 | org.glassfish.jaxb | jaxbruntime | 4.0.6 | compile | https://eclipseee4j.github.io/jaxb-ri/ | EDL (1.0) |
+| org.glassfish.jaxb:txw2:4.0.6 | org.glassfish.jaxb | txw2 | 4.0.6 | compile | https://eclipseee4j.github.io/jaxb-ri/ | EDL (1.0) |
 | org.slf4j:slf4japi:1.7.36 | org.slf4j | slf4japi | 1.7.36 | compile | http://www.slf4j.org | MIT (1) |
 | org.slf4j:slf4jjcl:1.7.36 | org.slf4j | slf4jjcl | 1.7.36 | compile | http://www.slf4j.org | MIT (1) |
 | org.yaml:snakeyaml:2.4 | org.yaml | snakeyaml | 2.4 | compile | https://bitbucket.org/snakeyaml/snakeyaml | Apache License (2.0) |

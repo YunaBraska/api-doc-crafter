@@ -1,9 +1,9 @@
 [
     {
-        "line": "berlin.yuna:typemap:2025.09.2620710",
+        "line": "berlin.yuna:typemap:2025.09.2660710",
         "group": "berlin.yuna",
         "artifact": "typemap",
-        "version": "2025.09.2620710",
+        "version": "2025.09.2660710",
         "scope": "compile",
         "url": "https://github.com/YunaBraska/typemap",
         "licenses": [
@@ -592,10 +592,10 @@
         ]
     },
     {
-        "line": "org.glassfish.jaxb:jaxbcore:4.0.5",
+        "line": "org.glassfish.jaxb:jaxbcore:4.0.6",
         "group": "org.glassfish.jaxb",
         "artifact": "jaxbcore",
-        "version": "4.0.5",
+        "version": "4.0.6",
         "scope": "compile",
         "url": "https://eclipseee4j.github.io/jaxb-ri/",
         "licenses": [
@@ -608,10 +608,10 @@
         ]
     },
     {
-        "line": "org.glassfish.jaxb:jaxbruntime:4.0.5",
+        "line": "org.glassfish.jaxb:jaxbruntime:4.0.6",
         "group": "org.glassfish.jaxb",
         "artifact": "jaxbruntime",
-        "version": "4.0.5",
+        "version": "4.0.6",
         "scope": "compile",
         "url": "https://eclipseee4j.github.io/jaxb-ri/",
         "licenses": [
@@ -624,10 +624,10 @@
         ]
     },
     {
-        "line": "org.glassfish.jaxb:txw2:4.0.5",
+        "line": "org.glassfish.jaxb:txw2:4.0.6",
         "group": "org.glassfish.jaxb",
         "artifact": "txw2",
-        "version": "4.0.5",
+        "version": "4.0.6",
         "scope": "compile",
         "url": "https://eclipseee4j.github.io/jaxb-ri/",
         "licenses": [

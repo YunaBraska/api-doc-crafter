@@ -3,7 +3,7 @@
     <dependency>
         <groupId>berlin.yuna</groupId>
         <artifactId>typemap</artifactId>
-        <version>2025.09.2620710</version>
+        <version>2025.09.2660710</version>
         <scope>compile</scope>
         <url>https://github.com/YunaBraska/typemap</url>
         <licenses>
@@ -477,7 +477,7 @@
     <dependency>
         <groupId>org.glassfish.jaxb</groupId>
         <artifactId>jaxbcore</artifactId>
-        <version>4.0.5</version>
+        <version>4.0.6</version>
         <scope>compile</scope>
         <url>https://eclipseee4j.github.io/jaxb-ri/</url>
         <licenses>
@@ -490,7 +490,7 @@
     <dependency>
         <groupId>org.glassfish.jaxb</groupId>
         <artifactId>jaxbruntime</artifactId>
-        <version>4.0.5</version>
+        <version>4.0.6</version>
         <scope>compile</scope>
         <url>https://eclipseee4j.github.io/jaxb-ri/</url>
         <licenses>
@@ -503,7 +503,7 @@
     <dependency>
         <groupId>org.glassfish.jaxb</groupId>
         <artifactId>txw2</artifactId>
-        <version>4.0.5</version>
+        <version>4.0.6</version>
         <scope>compile</scope>
         <url>https://eclipseee4j.github.io/jaxb-ri/</url>
         <licenses>
