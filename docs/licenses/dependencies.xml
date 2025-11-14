@@ -3,7 +3,7 @@
     <dependency>
         <groupId>berlin.yuna</groupId>
         <artifactId>typemap</artifactId>
-        <version>2025.10.2850708</version>
+        <version>2025.11.3050708</version>
         <scope>compile</scope>
         <url>https://github.com/YunaBraska/typemap</url>
         <licenses>
@@ -555,7 +555,7 @@
     <dependency>
         <groupId>org.eclipse.angus</groupId>
         <artifactId>angusactivation</artifactId>
-        <version>2.0.2</version>
+        <version>2.0.3</version>
         <scope>runtime</scope>
         <url>https://github.com/eclipseee4j/angus-activation/angus-activation</url>
         <licenses>

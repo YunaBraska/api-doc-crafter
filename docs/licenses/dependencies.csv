@@ -1,5 +1,5 @@
 "Line","Group","Artifact","Version","Scope","URL","Licenses"
-"berlin.yuna:typemap:2025.10.2850708","berlin.yuna","typemap","2025.10.2850708","compile","https://github.com/YunaBraska/typemap","Apache License 2.0"
+"berlin.yuna:typemap:2025.11.3050708","berlin.yuna","typemap","2025.11.3050708","compile","https://github.com/YunaBraska/typemap","Apache License 2.0"
 "com.fasterxml.jackson.core:jacksonannotations:2.19.0","com.fasterxml.jackson.core","jacksonannotations","2.19.0","compile","https://github.com/FasterXML/jackson","Apache License 2.0"
 "com.fasterxml.jackson.core:jacksoncore:2.19.0","com.fasterxml.jackson.core","jacksoncore","2.19.0","compile","https://github.com/FasterXML/jacksoncore","Apache License 2.0"
 "com.fasterxml.jackson.core:jacksondatabind:2.19.0","com.fasterxml.jackson.core","jacksondatabind","2.19.0","compile","https://github.com/FasterXML/jackson","Apache License 2.0"
@@ -39,4 +39,4 @@
 "org.slf4j:slf4japi:1.7.36","org.slf4j","slf4japi","1.7.36","compile","http://www.slf4j.org","MIT 1"
 "org.slf4j:slf4jjcl:1.7.36","org.slf4j","slf4jjcl","1.7.36","compile","http://www.slf4j.org","MIT 1"
 "org.yaml:snakeyaml:2.4","org.yaml","snakeyaml","2.4","compile","https://bitbucket.org/snakeyaml/snakeyaml","Apache License 2.0"
-"org.eclipse.angus:angusactivation:2.0.2","org.eclipse.angus","angusactivation","2.0.2","runtime","https://github.com/eclipseee4j/angus-activation/angus-activation","EDL 1.0"
+"org.eclipse.angus:angusactivation:2.0.3","org.eclipse.angus","angusactivation","2.0.3","runtime","https://github.com/eclipseee4j/angus-activation/angus-activation","EDL 1.0"

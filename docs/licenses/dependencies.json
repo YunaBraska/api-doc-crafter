@@ -1,9 +1,9 @@
 [
     {
-        "line": "berlin.yuna:typemap:2025.10.2850708",
+        "line": "berlin.yuna:typemap:2025.11.3050708",
         "group": "berlin.yuna",
         "artifact": "typemap",
-        "version": "2025.10.2850708",
+        "version": "2025.11.3050708",
         "scope": "compile",
         "url": "https://github.com/YunaBraska/typemap",
         "licenses": [
@@ -688,10 +688,10 @@
         ]
     },
     {
-        "line": "org.eclipse.angus:angusactivation:2.0.2",
+        "line": "org.eclipse.angus:angusactivation:2.0.3",
         "group": "org.eclipse.angus",
         "artifact": "angusactivation",
-        "version": "2.0.2",
+        "version": "2.0.3",
         "scope": "runtime",
         "url": "https://github.com/eclipseee4j/angus-activation/angus-activation",
         "licenses": [
