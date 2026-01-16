@@ -2,3 +2,9 @@
 
 | Name | Version | Limited | Scope |
 | ---- | ------- | ------- | ----- |
+| Apache License | 2.0 | false | compile |
+| Apache | 2.0 | false | compile |
+| EDL | 1.0 | false | compile |
+| LGPL | 3 | true | compile |
+| MIT | 1 | false | compile |
+| EDL | 1.0 | false | runtime |

@@ -18,9 +18,9 @@ This makes it particularly useful for generating documentation from code and exc
 [![Size][size_shield]][size_shield]
 ![Label][label_shield]
 
-[![c_license_count](https://img.shields.io/badge/licenses-0-4c1?style=flat-square)](docs/licenses/licenses.csv)
-[![c_license_count_limited](https://img.shields.io/badge/licenses_limited-0-4c1?style=flat-square)](docs/licenses/licenses.csv)
-[![c_dependency_count](https://img.shields.io/badge/dependencies-0-4c1?style=flat-square)](docs/licenses/dependencies.csv)
+[![c_license_count](https://img.shields.io/badge/licenses-5-97CA00?style=flat-square)](docs/licenses/licenses.csv)
+[![c_license_count_limited](https://img.shields.io/badge/licenses_limited-1-4c1?style=flat-square)](docs/licenses/licenses.csv)
+[![c_dependency_count](https://img.shields.io/badge/dependencies-41-fe7d37?style=flat-square)](docs/licenses/dependencies.csv)
 _sorry for so many third party libs, it comes all from the swagger parser 🤷‍♀️ - many deps are excluded_
 
 ![Example](src/test/resources/example_01.png)
