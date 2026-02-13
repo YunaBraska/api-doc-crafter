@@ -3,7 +3,7 @@
     <dependency>
         <groupId>berlin.yuna</groupId>
         <artifactId>typemap</artifactId>
-        <version>2026.01.0250714</version>
+        <version>2026.02.0330742</version>
         <scope>compile</scope>
         <url>https://github.com/YunaBraska/typemap</url>
         <licenses>
@@ -438,7 +438,7 @@
     <dependency>
         <groupId>jakarta.xml.bind</groupId>
         <artifactId>jakarta.xml.bindapi</artifactId>
-        <version>4.0.4</version>
+        <version>4.0.5</version>
         <scope>compile</scope>
         <url>https://github.com/jakartaee/jaxbapi/jakarta.xml.bind-api</url>
         <licenses>

@@ -1,9 +1,9 @@
 [
     {
-        "line": "berlin.yuna:typemap:2026.01.0250714",
+        "line": "berlin.yuna:typemap:2026.02.0330742",
         "group": "berlin.yuna",
         "artifact": "typemap",
-        "version": "2026.01.0250714",
+        "version": "2026.02.0330742",
         "scope": "compile",
         "url": "https://github.com/YunaBraska/typemap",
         "licenses": [
@@ -544,10 +544,10 @@
         ]
     },
     {
-        "line": "jakarta.xml.bind:jakarta.xml.bindapi:4.0.4",
+        "line": "jakarta.xml.bind:jakarta.xml.bindapi:4.0.5",
         "group": "jakarta.xml.bind",
         "artifact": "jakarta.xml.bindapi",
-        "version": "4.0.4",
+        "version": "4.0.5",
         "scope": "compile",
         "url": "https://github.com/jakartaee/jaxbapi/jakarta.xml.bind-api",
         "licenses": [

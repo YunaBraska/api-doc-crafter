@@ -1,6 +1,6 @@
 
 Lists of 40 third-party dependencies.
-     (The Apache License, Version 2.0) type-map (berlin.yuna:type-map:2026.01.0250714 - https://github.com/YunaBraska/type-map)
+     (The Apache License, Version 2.0) type-map (berlin.yuna:type-map:2026.02.0330742 - https://github.com/YunaBraska/type-map)
      (The Apache Software License, Version 2.0) Jackson-annotations (com.fasterxml.jackson.core:jackson-annotations:2.19.0 - https://github.com/FasterXML/jackson)
      (The Apache Software License, Version 2.0) Jackson-core (com.fasterxml.jackson.core:jackson-core:2.19.0 - https://github.com/FasterXML/jackson-core)
      (The Apache Software License, Version 2.0) jackson-databind (com.fasterxml.jackson.core:jackson-databind:2.19.0 - https://github.com/FasterXML/jackson)
@@ -31,7 +31,7 @@ Lists of 40 third-party dependencies.
      (Apache License 2.0) swagger-parser-v3 (io.swagger.parser.v3:swagger-parser-v3:2.1.37 - https://github.com/swagger-api/swagger-parser/modules/swagger-parser-v3)
      (EDL 1.0) Jakarta Activation API (jakarta.activation:jakarta.activation-api:2.1.4 - https://github.com/jakartaee/jaf-api)
      (Apache License 2.0) Jakarta Bean Validation API (jakarta.validation:jakarta.validation-api:2.0.2 - https://beanvalidation.org)
-     (Eclipse Distribution License - v 1.0) Jakarta XML Binding API (jakarta.xml.bind:jakarta.xml.bind-api:4.0.4 - https://github.com/jakartaee/jaxb-api/jakarta.xml.bind-api)
+     (Eclipse Distribution License - v 1.0) Jakarta XML Binding API (jakarta.xml.bind:jakarta.xml.bind-api:4.0.5 - https://github.com/jakartaee/jaxb-api/jakarta.xml.bind-api)
      (Apache License, Version 2.0) Joda-Time (joda-time:joda-time:2.10.5 - https://www.joda.org/joda-time/)
      (Apache-2.0) Apache Commons Lang (org.apache.commons:commons-lang3:3.17.0 - https://commons.apache.org/proper/commons-lang/)
      (Eclipse Distribution License - v 1.0) JAXB Core (org.glassfish.jaxb:jaxb-core:4.0.6 - https://eclipse-ee4j.github.io/jaxb-ri/)
