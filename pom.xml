@@ -6,7 +6,7 @@
 
     <groupId>berlin.yuna</groupId>
     <artifactId>api-doc-crafter</artifactId>
-    <version>2026.03.0722048</version>
+    <version>2026.03.0792046</version>
     <packaging>jar</packaging>
 
     <name>api-doc-crafter</name>
@@ -42,7 +42,7 @@
         <type-map.version>2026.02.0530728</type-map.version>
         <swagger-parser.version>2.1.39</swagger-parser.version>
         <!-- PROD overrides old version from swagger -->
-        <jaxb-runtime.version>4.0.6</jaxb-runtime.version>
+        <jaxb-runtime.version>4.0.7</jaxb-runtime.version>
         <jakarta.xml.bind-api.version>4.0.5</jakarta.xml.bind-api.version>
         <!-- TEST -->
         <junit.version>6.0.3</junit.version>
