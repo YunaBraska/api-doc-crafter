@@ -201,7 +201,55 @@ jobs:
       - name: "🏗️ Build [${{runner.os}}/${{runner.arch}}]"
         shell: cmd
         run: |
+          for /f "usebackq tokens=*" %%I in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set "VSINSTALL=%%I"
+          if not defined VSINSTALL (
+            echo Visual Studio C++ build tools were not found.
+            exit /b 1
+          )
+          if not exist "%VSINSTALL%\VC\Auxiliary\Build\vcvars64.bat" (
+            echo vcvars64.bat was not found in "%VSINSTALL%".
+            exit /b 1
+          )
+          call "%VSINSTALL%\VC\Auxiliary\Build\vcvars64.bat"
           ${{ steps.java_info.outputs.cmd_build }} -Pnative
+      - name: "🧪 Smoke test [${{runner.os}}/${{runner.arch}}]"
+        shell: pwsh
+        run: |
+          $fixture = Join-Path $env:RUNNER_TEMP "api-doc-crafter-smoke"
+          $output = Join-Path $env:RUNNER_TEMP "api-doc-crafter-smoke-output"
+          New-Item -ItemType Directory -Force -Path $fixture, $output | Out-Null
+          @'
+          {
+            "openapi": "3.0.0",
+            "info": {
+              "title": "Smoke API",
+              "version": "1.0.0"
+            },
+            "paths": {
+              "/health": {
+                "get": {
+                  "responses": {
+                    "200": {
+                      "description": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+          '@ | Set-Content -Path (Join-Path $fixture "smoke.json") -Encoding UTF8
+          $env:adc_work_dir = $fixture
+          $env:adc_output_dir = $output
+          & ".\target\${{ github.event.repository.name }}.native.exe"
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+          if (!(Test-Path (Join-Path $output "index.html"))) {
+            throw "Missing generated index.html"
+          }
+          if (!(Get-ChildItem -Path $output -Filter "*.json")) {
+            throw "Missing generated OpenAPI JSON"
+          }
       - name: "📝 Set filename [${{ github.event.repository.name }}-${{runner.os}}-${{ runner.arch }}-${{ inputs.version || steps.java_info.outputs.project_version }}.exe]"
         id: "artifact"
         shell: sh
@@ -240,4 +288,3 @@ jobs:
           tag: ${{ needs.linux.outputs.version }}
           name: ${{ needs.linux.outputs.version }}
           artifacts: ${{ github.event.repository.name }}-*.native,${{ github.event.repository.name }}-*.exe,${{ github.event.repository.name }}-*.jar
-
