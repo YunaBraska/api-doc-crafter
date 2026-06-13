@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>api-doc-crafter</name>
-    <url>https://github.com/YunaBraska/type-map</url>
+    <url>https://github.com/YunaBraska/api-doc-crafter</url>
 
     <scm>
         <connection>scm:git:ssh://git@github.com/YunaBraska/api-doc-crafter.git</connection>

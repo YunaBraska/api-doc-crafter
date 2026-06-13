@@ -187,7 +187,6 @@ public class Processor {
                 !enableObjectMapper ? null : parseWith("Json." + safeJsonMapper.getClass().getSimpleName(), p -> safeJsonMapper.readValue(Files.readString(p), OpenAPI.class), filePath),
                 !enableObjectMapper ? null : parseWith("Yaml." + safeYamlMapper.getClass().getSimpleName(), p -> safeYamlMapper.readValue(Files.readString(p), OpenAPI.class), filePath)
             )
-            .parallel()
             .filter(Objects::nonNull)
             .filter(pr -> pr.api() != null && pr.jsonSize() > 20) // 20 == empty OpenAPI file
             .max(Comparator.comparingInt(ParseResult::jsonSize))

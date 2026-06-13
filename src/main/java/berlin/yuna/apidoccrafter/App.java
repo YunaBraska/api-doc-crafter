@@ -47,7 +47,16 @@ import static java.util.Optional.ofNullable;
 public class App {
 
     public static void main(final String[] args) {
-        config().putAll(readConfigs()); // can't be done in static block because native executable will freeze it
+        config().clear();
+        if (isSimpleHelpArg(args)) {
+            printUsage();
+            return;
+        }
+        config().putAll(readConfigs(args)); // can't be done in static block because native executable will freeze it
+        if (config().asBooleanOpt("help").orElse(false) || config().asBooleanOpt("h").orElse(false)) {
+            printUsage();
+            return;
+        }
         final Path inputDir = parseWorkDir(config().asString(WORK_DIR));
         final Path outputDir = parseOutputDir(config().asString(OUTPUT_DIR), inputDir);
         final String fileIncludes = config().asString(FILE_INCLUDES);
@@ -75,6 +84,35 @@ public class App {
 
         // TODO: find non resolvable components in other API files and merge these references
         HtmlGenerator.generateHtml(sortByString(mergedApis, pathOpenAPIEntry -> displayName(pathOpenAPIEntry.getKey(), pathOpenAPIEntry.getValue())), outputDir);
+    }
+
+    private static boolean isSimpleHelpArg(final String[] args) {
+        return args != null && Stream.of(args)
+            .filter(Objects::nonNull)
+            .map(String::trim)
+            .anyMatch(arg -> "-h".equals(arg) || "--help".equals(arg));
+    }
+
+    private static void printUsage() {
+        System.out.println("""
+            api-doc-crafter
+
+            Usage:
+              java -jar api-doc-crafter.jar --adc_work_dir="<input-dir>" --adc_output_dir="<output-dir>"
+              api-doc-crafter --adc_work_dir="<input-dir>" --adc_file_includes="**/*.yaml"
+
+            Common options:
+              -h, --help                      Show this help message
+              --adc_work_dir <path>           Directory containing OpenAPI files
+              --adc_output_dir <path>         Directory for generated HTML, JSON, YAML, and static assets
+              --adc_file_includes <glob>      Include files by glob, separated by :: or |
+              --adc_file_excludes <glob>      Exclude files by glob, separated by :: or |
+              --adc_max_deep <number>         Maximum directory depth to scan
+              --adc_enable_object_mapper      Enable extra Jackson parsing fallback
+              --adc_enable_custom_info        Override OpenAPI info/contact/license/server/tag metadata
+
+            Non-GitHub Action usage keeps the adc_ prefix used by action inputs.
+            """);
     }
 
     private static void downloadRemoteOpenApiFiles(final Path inputDir, final int maxDeep) {
