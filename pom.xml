@@ -6,7 +6,7 @@
 
     <groupId>berlin.yuna</groupId>
     <artifactId>api-doc-crafter</artifactId>
-    <version>2026.07.1982103</version>
+    <version>2026.08.2192051</version>
     <packaging>jar</packaging>
 
     <name>api-doc-crafter</name>
@@ -40,14 +40,14 @@
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
         <!-- PROD -->
         <type-map.version>2026.07.1941015</type-map.version>
-        <swagger-parser.version>2.1.45</swagger-parser.version>
+        <swagger-parser.version>2.1.46</swagger-parser.version>
         <!-- PROD overrides old version from swagger -->
         <jaxb-runtime.version>4.0.9</jaxb-runtime.version>
         <jakarta.xml.bind-api.version>4.0.5</jakarta.xml.bind-api.version>
         <!-- TEST -->
-        <junit.version>6.1.2</junit.version>
+        <junit.version>6.1.3</junit.version>
         <assertj.version>3.27.7</assertj.version>
-        <junit-launcher.version>6.1.2</junit-launcher.version>
+        <junit-launcher.version>6.1.3</junit-launcher.version>
         <!-- BUILD -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-scm-plugin.version>1.11.2</maven-scm-plugin.version>
