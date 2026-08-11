@@ -1,35 +1,53 @@
 {
-  "openapi" : "3.0.1",
+  "components" : {
+    "schemas" : {
+      "Game" : {
+        "properties" : {
+          "genre" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "releaseDate" : {
+            "format" : "date",
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      }
+    }
+  },
   "info" : {
-    "title" : "Games API",
     "description" : "API to manage video games and developers.",
+    "title" : "Games API",
     "version" : "1.0.0"
   },
-  "servers" : [ {
-    "url" : "https://api.games.example.com/v1"
-  } ],
+  "openapi" : "3.0.1",
   "paths" : {
     "/games" : {
       "get" : {
-        "summary" : "Get all games",
         "responses" : {
           "200" : {
-            "description" : "A list of games",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
                   "items" : {
                     "$ref" : "#/components/schemas/Game"
-                  }
+                  },
+                  "type" : "array"
                 }
               }
-            }
+            },
+            "description" : "A list of games"
           }
-        }
+        },
+        "summary" : "Get all games"
       },
       "post" : {
-        "summary" : "Add a new game",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -43,57 +61,39 @@
           "201" : {
             "description" : "Game created"
           }
-        }
+        },
+        "summary" : "Add a new game"
       }
     },
     "/games/{id}" : {
       "get" : {
-        "summary" : "Retrieve a specific game",
         "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
           "explode" : false,
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         } ],
         "responses" : {
           "200" : {
-            "description" : "Game details",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Game"
                 }
               }
-            }
+            },
+            "description" : "Game details"
           }
-        }
+        },
+        "summary" : "Retrieve a specific game"
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "Game" : {
-        "type" : "object",
-        "properties" : {
-          "genre" : {
-            "type" : "string"
-          },
-          "id" : {
-            "type" : "string"
-          },
-          "releaseDate" : {
-            "type" : "string",
-            "format" : "date"
-          },
-          "title" : {
-            "type" : "string"
-          }
-        }
-      }
-    }
-  }
+  "servers" : [ {
+    "url" : "https://api.games.example.com/v1"
+  } ]
 }

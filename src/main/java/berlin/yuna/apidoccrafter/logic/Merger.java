@@ -63,7 +63,7 @@ import static java.util.Optional.ofNullable;
  * <ul>
  *     <li>unchecked = generics sometimes causes a bit of headache</li>
  *     <li>S106 = System.out.println is used - That is okay as it's not a production code</li>
- *     <li>S1874 && deprecation = deprecated methods should be supported until the next major release</li>
+ *     <li>S1874 &amp;&amp; deprecation = deprecated methods should be supported until the next major release</li>
  * </ul>
  */
 @SuppressWarnings({"unchecked", "java:S106", "java:S1874", "deprecation"})

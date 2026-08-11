@@ -147,9 +147,10 @@ public class Processor {
      * @return A map of file paths to OpenAPI objects.
      */
     public static Map<Path, OpenAPI> readOpenApiFiles(final Path inputDir, final boolean enableObjectMapper, final int maxDeep, final String includePattern, final String excludePattern) {
-        final Map<Path, OpenAPI> result = new HashMap<>();
+        final Map<Path, OpenAPI> result = new TreeMap<>();
         try (final Stream<Path> files = Files.walk(inputDir, maxDeep)) {
-            files.filter(Files::isRegularFile)
+            files.sorted()
+                .filter(Files::isRegularFile)
                 .filter(path -> path.toString().endsWith(".yml") || path.toString().endsWith(".yaml") || path.toString().endsWith(".json"))
                 .filter(path -> includePattern == null || matchesGlob(path, includePattern))
                 .filter(path -> excludePattern == null || !matchesGlob(path, excludePattern))
