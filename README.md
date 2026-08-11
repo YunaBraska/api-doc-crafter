@@ -164,18 +164,12 @@ Set `enable_custom_info=true` to activate this feature.
     * Build Arch: `docker buildx build --platform linux/amd64 -f Dockerfile_Native .`
     * Extract file: `docker buildx build --platform linux/amd64 -f Dockerfile_Native --target export . --output target`
 
-### Deployment & Releases
+### Releases
 
-Everything is automated using GitHub Actions
-Released files pattern: `api-doc-crafter-<os>-<arch>-<version>.native` (api-doc-crafter-linux-amd64-2025.0.1.native)
+Pull requests build and test the project. Merges publish a snapshot to Maven Central, GitHub Packages, and GHCR. A
+manual release publishes the final JAR, sources, Javadoc, runnable fat JAR, and native assets.
 
-* [java_build.yml](.github/workflows/java_build.yml) updates versions &
-  triggers [github_release.yml](.github/workflows/github_release.yml)
-* [github_release.yml](.github/workflows/github_release.yml) builds & releases native executables
-  using [Dockerfile_Native.yml](Dockerfile_Native)
-    * Graalvm only supports AMD64, ARM64
-* [github_docker.yml](.github/workflows/github_docker.yml) builds multi arch docker image with released binaries, after
-  a new release is created
+Native asset pattern: `api-doc-crafter-<os>-<arch>-<version>.native`.
 
 ### Classes
 
@@ -186,9 +180,9 @@ Released files pattern: `api-doc-crafter-<os>-<arch>-<version>.native` (api-doc-
 * [HtmlGenerator.java](src/main/java/berlin/yuna/apidoccrafter/logic/HtmlGenerator.java) You guessed it, it generates HTML files
 * [Processor.java](src/main/java/berlin/yuna/apidoccrafter/logic/Processor.java) Orchestrates the reading, grouping, and merging of OpenAPI files
 
-[build_shield]: https://github.com/YunaBraska/api-doc-crafter/actions/workflows/test_workflow.yml/badge.svg
+[build_shield]: https://github.com/YunaBraska/api-doc-crafter/actions/workflows/build-pr.yml/badge.svg
 
-[build_link]: https://github.com/europace/api-doc-crafter/actions/workflows/test_workflow.yml
+[build_link]: https://github.com/YunaBraska/api-doc-crafter/actions/workflows/build-pr.yml
 
 [maintainable_shield]: https://img.shields.io/codeclimate/maintainability/YunaBraska/api-doc-crafter?style=flat-square
 
