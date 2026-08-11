@@ -4,6 +4,7 @@ import berlin.yuna.typemap.logic.ArgsDecoder;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -48,7 +49,8 @@ public class Util {
         .configure(JsonParser.Feature.ALLOW_COMMENTS, true)
         .configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true)
         .configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
-        .configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true);
+        .configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true)
+        .configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
 
     public static final ObjectMapper safeYamlMapper = Yaml.mapper().copy()
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -58,7 +60,8 @@ public class Util {
         .configure(JsonParser.Feature.ALLOW_COMMENTS, true)
         .configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true)
         .configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
-        .configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true);
+        .configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true)
+        .configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
 
     /**
      * Matches a string against a glob pattern.
