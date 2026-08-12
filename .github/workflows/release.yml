@@ -51,7 +51,7 @@ jobs:
     needs:
       - release
       - native
-    if: ${{ always() && !cancelled() && needs.release.result == 'success' && needs.native.result == 'success' && inputs.maven_central }}
+    if: ${{ always() && !cancelled() && needs.release.result == 'success' && needs.native.result == 'success' }}
     permissions:
       actions: read
       contents: read
@@ -68,7 +68,7 @@ jobs:
     needs:
       - release
       - native
-    if: ${{ always() && !cancelled() && needs.release.result == 'success' && needs.native.result == 'success' && inputs.github_packages }}
+    if: ${{ always() && !cancelled() && needs.release.result == 'success' && needs.native.result == 'success' }}
     permissions:
       actions: read
       contents: read
@@ -80,7 +80,7 @@ jobs:
     needs:
       - release
       - native
-    if: ${{ always() && !cancelled() && needs.release.result == 'success' && needs.native.result == 'success' && inputs.docker }}
+    if: ${{ always() && !cancelled() && needs.release.result == 'success' && needs.native.result == 'success' }}
     permissions:
       actions: read
       packages: write
