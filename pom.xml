@@ -10,6 +10,7 @@
     <packaging>jar</packaging>
 
     <name>api-doc-crafter</name>
+    <description>Merge, clean, filter, and render OpenAPI documentation.</description>
     <url>https://github.com/YunaBraska/api-doc-crafter</url>
 
     <scm>
