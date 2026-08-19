@@ -42,7 +42,7 @@ jobs:
     if: ${{ always() && !cancelled() && needs.release.result == 'success' }}
     permissions:
       contents: read
-    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_build_native.yml@44e7a7b0a933c8adc6e2f14732a3018a863edd4c
+    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_build_native.yml@bb9fb186103ecbaaabdf92f8b56eef151b223be6
     with:
       ref: ${{ needs.release.outputs.commit_sha }}
       version: ${{ needs.release.outputs.version }}
@@ -84,7 +84,7 @@ jobs:
     permissions:
       actions: read
       packages: write
-    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_publish_docker.yml@3b2831f382fb95382784ea029881a32cbc1b8450
+    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_publish_docker.yml@bb9fb186103ecbaaabdf92f8b56eef151b223be6
     with:
       version: ${{ needs.release.outputs.version }}
 
