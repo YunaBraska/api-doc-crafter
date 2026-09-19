@@ -2,11 +2,11 @@
 # Oracle Images: https://github.com/graalvm/container/tree/master/graalvm-community
 FROM debian:bookworm-slim AS graalvm_setup
 ENV GRAALVM_HOME="/usr/local/graalvm"
-ENV JAVA_VERSION="21"
+ENV JAVA_VERSION="25"
 
 # Releases: https://github.com/graalvm/graalvm-ce-builds/releases/
-ENV AMD64="https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_linux-x64_bin.tar.gz"
-ENV ARM64="https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_linux-aarch64_bin.tar.gz"
+ENV AMD64="https://github.com/graalvm/graalvm-ce-builds/releases/download/graal-25.3.4.1/graalvm-community-jdk-25i3-25.0.4.1_linux-x64_bin.tar.gz"
+ENV ARM64="https://github.com/graalvm/graalvm-ce-builds/releases/download/graal-25.3.4.1/graalvm-community-jdk-25i3-25.0.4.1_linux-aarch64_bin.tar.gz"
 
 # Prerequisites: https://www.graalvm.org/latest/reference-manual/native-image/#prerequisites
 # locales && locales-all: https://github.com/oracle/graal/issues/8792#issuecomment-2189166038 (java commands such as Path.resolve() fail without it when locating special chars in the path)
