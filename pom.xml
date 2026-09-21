@@ -58,7 +58,7 @@
         <maven-jar-plugin.version>3.5.1</maven-jar-plugin.version>
         <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.6.0</maven-surefire-plugin.version>
-        <native-image-maven-plugin.version>1.1.12</native-image-maven-plugin.version>
+        <native-image-maven-plugin.version>1.1.13</native-image-maven-plugin.version>
         <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
         <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
     </properties>
