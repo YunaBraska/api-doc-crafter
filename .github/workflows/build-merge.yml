@@ -33,7 +33,7 @@ jobs:
     permissions:
       contents: read
       packages: read
-    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_release.yml@036626606065b3b64488ef0611d63713abdcf70c
+    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_release.yml@ef0944f5455ea2fe71f2cc1046617f721d1fdddf
     with:
       semver_strategy: snapshot
       dry_run: ${{ github.event_name == 'workflow_dispatch' && (inputs.maven_central != true || inputs.github_packages != true || inputs.docker != true) }}
@@ -44,7 +44,7 @@ jobs:
     if: ${{ always() && !cancelled() && needs.release.result == 'success' }}
     permissions:
       contents: read
-    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_build_native.yml@036626606065b3b64488ef0611d63713abdcf70c
+    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_build_native.yml@ef0944f5455ea2fe71f2cc1046617f721d1fdddf
     with:
       ref: ${{ needs.release.outputs.commit_sha }}
       version: ${{ needs.release.outputs.version }}
@@ -59,7 +59,7 @@ jobs:
       contents: read
       deployments: write
       packages: read
-    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_publish_central.yml@d751b9e8431d7511cc335ea7d05af6d2b481c2dc
+    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_publish_central.yml@ef0944f5455ea2fe71f2cc1046617f721d1fdddf
     secrets:
       CENTRAL_USER: ${{ secrets.CENTRAL_USER }}
       CENTRAL_PASS: ${{ secrets.CENTRAL_PASS }}
@@ -76,7 +76,7 @@ jobs:
       contents: read
       deployments: write
       packages: write
-    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_publish_github_packages.yml@036626606065b3b64488ef0611d63713abdcf70c
+    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_publish_github_packages.yml@ef0944f5455ea2fe71f2cc1046617f721d1fdddf
 
   docker:
     needs:
@@ -86,6 +86,6 @@ jobs:
     permissions:
       actions: read
       packages: write
-    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_publish_docker.yml@036626606065b3b64488ef0611d63713abdcf70c
+    uses: YunaBraska/YunaBraska/.github/workflows/wc_java_publish_docker.yml@ef0944f5455ea2fe71f2cc1046617f721d1fdddf
     with:
       version: ${{ needs.release.outputs.version }}
