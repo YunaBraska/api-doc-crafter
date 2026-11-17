@@ -23,3 +23,8 @@ updates:
       maven-dependencies:
         patterns:
           - "*"
+    ignore:
+      # ClassGraph 6 requires Java 25. This product's public baseline is Java 21.
+      - dependency-name: "io.github.classgraph:classgraph"
+        versions:
+          - "[6.0.0,)"
